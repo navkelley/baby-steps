@@ -17,6 +17,13 @@
   },
   "homepage": "https://github.com/navkelley/baby-steps#readme",
   "dependencies": {
+    "babel": "^6.5.2",
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.2.0"
   }
 }
