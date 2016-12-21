@@ -1,0 +1,17 @@
+language: node_js
+node_js: node
+services:
+- mongodb
+addons:
+  apt:
+    sources:
+    - mongodb-3.2-precise
+    packages:
+    - mongodb-org-server
+deploy:
+  provider: heroku
+  api_key:
+    secure: ZlfgMygXM+b7KeJftVPnoEeaZrzDWUjs0JzMCfonw3PgHKrZvGNLuaEBwvXb3Qvw1wwQUS/0kRTpqf8vXWwtwPh8FTCD2jFH3n+PzM09hKaVt8SzSH/3acR/oYHMkPdxKd3HsGe7KW3gMICNbPCvwTe+qVoZ43wHBVgkAT6krSQldiZtrVLmq0JlT8mCFMiLBUuXftlYGxzAMgWZGwmSQ/HX8ezAvjibUY920bpSZrtqoh6oUznDLXoFnV9BElvPiSL98A4S9V0rd6y/FY3CLPtkXjSfLf+tsHvyVv+AXyik0BIS0/uOaI1PawL47WAUPQK24mabS966IjZeZWGlglOdzP3t83AcRxaFdKw0loLpVxz48Jch6+DcFhADyYSYqPlK9Btqx/ygFeIuCZtJ+0YeiIc1nKk6opGlJH5kRYEqyufLJzPla1QRo0QTOpDwffq4I/6NgpAIioULnhtBf4YSZ6OLjCdkaH5Zjdi+wUnA9HX5eoTfsyOdTiFZoxz2srofz6TYe0bpxk10UebxdYt9fmBHn4ttH8RnpIdhRZUxASBCDJWrPH5NuQcds5SxUy5stkQgIfPLAvYZlallrKuXi2UQJL0p46+ouaP68mJDM0Yfy6mLz8mkPcaJUvPZg5Nn49fNCzD7IZ6GQWm1X3odymFaeSKSNEC9FhlnjzM=
+  app: baby-steps
+  on:
+    repo: navkelley/baby-steps
