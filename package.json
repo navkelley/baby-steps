@@ -4,7 +4,8 @@
   "description": "app to track baby/children milestones and moments",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
