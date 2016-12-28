@@ -1,5 +1,5 @@
-//import * as nav from "nav.js"; 
-
+/* Toggle between adding and removing the 
+"responsive" class to topnav when the user clicks on the icon */
 function toggleNav() {
     var nav = document.getElementById("myTopnav");
     if (nav.className === "topnav") {
@@ -8,3 +8,5 @@ function toggleNav() {
         nav.className = "topnav";
     }
 }
+
+//export {toggleNav};
