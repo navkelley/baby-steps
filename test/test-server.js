@@ -23,7 +23,7 @@ describe('Baby Steps', function() {
 
 	it('should reach dashboard', function(done) {
 		chai.request(app)
-		.get('/dashboard.html')
+		.get('/dashboard')
 		.end(function(err, res) {
 			res.should.have.status(200);
 			res.should.be.html; 
@@ -33,7 +33,7 @@ describe('Baby Steps', function() {
 
 	it('should reach milestones', function(done) {
 		chai.request(app)
-		.get('/milestones.html')
+		.get('/milestones')
 		.end(function(err, res) {
 			res.should.have.status(200);
 			res.should.be.html;
@@ -43,7 +43,7 @@ describe('Baby Steps', function() {
 
 	it('should reach forum', function(done) {
 		chai.request(app)
-		.get('/forum.html')
+		.get('/forum')
 		.end(function(err, res) {
 			res.should.have.status(200);
 			res.should.be.html;
@@ -53,7 +53,7 @@ describe('Baby Steps', function() {
 
 	it('should reach user account', function(done) {
 		chai.request(app)
-		.get('/user-account.html')
+		.get('/user-account')
 		.end(function(err, res) {
 			res.should.have.status(200);
 			res.should.be.html;
