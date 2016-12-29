@@ -7,4 +7,19 @@
 h1 {
     text-align: center; 
 }
-
+#narrative, #weight, #length, #headCir {
+    display: inline-block;
+    position: absolute; 
+}
+#weight {
+    left: 35%;
+}
+#length {
+    left: 60%;
+}
+#headCir {
+    left:80%;
+}
+#narrative-entry, #weight-entry, #length-entry, #headCir-entry {
+    border: 2px solid black;
+}
