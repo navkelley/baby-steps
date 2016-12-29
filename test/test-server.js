@@ -16,7 +16,47 @@ describe('Baby Steps', function() {
 		.get('/')
 		.end(function(err, res) {
 			res.should.have.status(200); 
-			res.should.have.be.html;
+			res.should.be.html;
+			done();
+		});
+	});
+
+	it('should reach dashboard', function(done) {
+		chai.request(app)
+		.get('/dashboard.html')
+		.end(function(err, res) {
+			res.should.have.status(200);
+			res.should.be.html; 
+			done();
+		});
+	});
+
+	it('should reach milestones', function(done) {
+		chai.request(app)
+		.get('/milestones.html')
+		.end(function(err, res) {
+			res.should.have.status(200);
+			res.should.be.html;
+			done();
+		});
+	});
+
+	it('should reach forum', function(done) {
+		chai.request(app)
+		.get('/forum.html')
+		.end(function(err, res) {
+			res.should.have.status(200);
+			res.should.be.html;
+			done();
+		});
+	});
+
+	it('should reach user account', function(done) {
+		chai.request(app)
+		.get('/user-account.html')
+		.end(function(err, res) {
+			res.should.have.status(200);
+			res.should.be.html;
 			done();
 		});
 	});
