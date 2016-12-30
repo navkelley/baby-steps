@@ -26,4 +26,7 @@ h1 {
 #narrative-entry, #weight-entry, #length-entry, #headCir-entry {
     border: 2px solid black;
 }
-
+#narrInput {
+  width: 550px;
+  height: 100px;
+}
