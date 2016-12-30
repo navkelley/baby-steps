@@ -11,18 +11,7 @@ h1 {
     display: inline-block;
     position: absolute; 
 }
-#narrative {
-    left: 5%;
-}
-#weight {
-    left: 40%;
-}
-#length {
-    left: 60%;
-}
-#headCir {
-    left:80%;
-}
+
 #narrative-entry, #weight-entry, #length-entry, #headCir-entry {
     border: 2px solid black;
 }
