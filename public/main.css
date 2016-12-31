@@ -7,4 +7,14 @@
 h1 {
     text-align: center; 
 }
+#narrative, #weight, #length, #headCir {
+    display: inline-block;
+    position: absolute; 
+}
 
+#narrative-entry, #weight-entry, #length-entry, #headCir-entry {
+    border: 2px solid black;
+}
+textarea {
+    
+}

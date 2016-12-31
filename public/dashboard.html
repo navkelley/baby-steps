@@ -6,6 +6,7 @@
         <!--script and links-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="float-grid.css">
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="../radialprogress/radialprogress/lib/d3.min.js"></script>
@@ -30,10 +31,10 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="dashboard.html">Dashboard<span class="sr-only">(current)</span></a></li>
-                        <li><a href="milestones.html">Milestones</a></li>
-                        <li><a href="forum.html">Forum</a></li>
-                        <li><a href="user-account.html">Account</a></li>
+                        <li class="active"><a href="dashboard">Dashboard<span class="sr-only">(current)</span></a></li>
+                        <li><a href="milestones">Milestones &amp Achievements</a></li>
+                        <li><a href="forum">Forum</a></li>
+                        <li><a href="user-account">Account</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Logout</a></li>
@@ -41,6 +42,126 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-        <h1>Dashboard</h1>
+        <div class="page-header">
+            <h1>Dashboard</h1>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-3">
+                    <div id="narrative">
+                        <h4>Last Logged Narrative</h4>
+                        <div id="narrative-entry"></div>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn" data-toggle="modal" data-target="#narrModal"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="narrModal" tabindex="-1" role="dialog" aria-labelledby="narrModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="narrModalLabel">Narrative Entry</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label for="narrative-title"></label>
+                                        <p>Title of Narrative:<input type="text" placeholder="Fun activity, bad day, etc" required></p>
+                                        <label for="narrative-log"></label>
+                                        <p>Date: <input type="date" class="datePicker" required></p>
+                                        <textarea id="narrInput" placeholder="Add any thoughts, comments, concerns about your baby here" required></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                    </div><!-- /.narrative -->
+                </div><!-- /.col-3 -->
+                <div class="col-xs-3">
+                    <div id="weight">
+                        <h4>Weight</h4>
+                        <div id="weight-entry"></div>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn" data-toggle="modal" data-target="#weightModal"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="weightModal" tabindex="-1" role="dialog" aria-labelledby="weightModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="weightModalLabel">Weight Entry</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label for="weight-log"></label>
+                                        <p>Date: <input type="date" class="datePicker" required></p>
+                                        <p>Enter Weight: <input type="number" min="1"> lbs<input type="number" min="0" max="16" required> oz</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                    </div><!-- /.weight -->
+                </div><!-- /. col-3 -->
+                <div class="col-xs-3">
+                    <div id="length">
+                        <h4>Length</h4>
+                        <div id="length-entry"></div>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn" data-toggle="modal" data-target="#lengthModal"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="lengthModal" tabindex="-1" role="dialog" aria-labelledby="lengthModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="lengthModalLabel">Length Entry</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label for="length-log"></label>
+                                        <p>Date: <input type="date" class="datePicker" required></p>
+                                        <p>Enter Length: <input type="number" min="1" required> inches</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                    </div><!-- /.length -->
+                </div><!-- /.col-3 -->
+                <div class="col-xs-3">
+                    <div id="headCir">
+                        <h4>Head Circumference</h4>
+                        <div id="headCir-entry"></div>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn" data-toggle="modal" data-target="#headCirModal"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="headCirModal" tabindex="-1" role="dialog" aria-labelledby="headCirModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="headCirModalLabel">Head Circumference Entry</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label for="head-circum-log"></label>
+                                        <p>Date: <input type="date" class="datePicker" required></p>
+                                        <p>Enter Head Circumference: <input type="number" min="1" required> inches</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                    </div><!-- /.headCir -->
+                </div><!-- /. col-3 -->
+            </div><!-- /. row-->
+        </div><!-- /.container-fluid -->
     </body>
 </html>
