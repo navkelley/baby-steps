@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
+    "babel-polyfill": "^6.20.0",
     "babel-preset-env": "^1.1.4",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",

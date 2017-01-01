@@ -55,27 +55,27 @@
                         <button type="button" class="btn" data-toggle="modal" data-target="#narrModal"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
                         <!-- Modal -->
                         <div class="modal fade" id="narrModal" tabindex="-1" role="dialog" aria-labelledby="narrModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="narrModalLabel">Narrative Entry</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="narrForm">
+                            <form id="narrForm">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="narrModalLabel">Narrative Entry</h4>
+                                        </div>
+                                        <div class="modal-body">
                                             <label for="narrative-title"></label>
                                             <p>Title of Narrative:<input type="text" placeholder="Fun activity, bad day, etc" required></p>
                                             <label for="narrative-log"></label>
-                                            <p>Date: <input type="date" class="datePicker" required></p>
+                                            <p>Date: <input type="date" class="datePicker" id="narrDate" required></p>
                                             <textarea id="narrInput" placeholder="Add any thoughts, comments, concerns about your baby here" required></textarea>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </form>
                         </div><!-- /.modal -->
                     </div><!-- /.narrative -->
                 </div><!-- /.col-3 -->
