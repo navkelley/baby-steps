@@ -1,3 +1,4 @@
+import "babel-register";
 var mock_narratives = {
     "narratives": [
         {
@@ -74,3 +75,11 @@ var mock_headCir = {
         },
     ]
 };
+
+function getDate(date) {
+    for (let i of mock_narratives) {
+        console.log(i); 
+    }
+}
+getDate();
+  
