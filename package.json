@@ -37,11 +37,12 @@
   },
   "homepage": "https://github.com/navkelley/baby-steps#readme",
   "dependencies": {
-    "babel": "^6.5.2",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "jquery": "^3.1.1"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-polyfill": "^6.20.0",
     "babel-preset-env": "^1.1.4",
@@ -49,6 +50,7 @@
     "babel-preset-stage-0": "^6.16.0",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "chokidar-cli": "^1.2.0",
     "less": "^2.7.1",
     "less-plugin-clean-css": "^1.5.1",
     "mocha": "^3.2.0",
