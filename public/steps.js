@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-    require("babel-register");
-    require("babel-polyfill");
+    var babel = require("babel-register");
+    var polyfill = require("babel-polyfill");
 
     const mock_data = {
         "narratives": [
