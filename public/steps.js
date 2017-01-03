@@ -82,5 +82,13 @@ $(document).ready(function() {
         let narrTitle = $("#narrTitle").val();
         mock_data.narratives.push({"title": narrTitle, "date": narrDate, "text": narrative});
     });
+
+    $("#weightForm").submit(function(e) {
+        e.preventDefault();
+        let weightDate = $("#weightDate").val();
+        let wLbs = $("#wLbs").val();
+        let wOz = $("#wOz").val(); 
+        mock_data.weight.push({"date": weightDate, "weight": wLbs + "lbs " + wOz + "oz"}); 
+    });
 });
   
