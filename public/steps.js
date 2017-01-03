@@ -97,5 +97,12 @@ $(document).ready(function() {
         let length = $("#lengthInput").val();
         mock_data.length.push({"date": lengthDate, "length": length + " inches"});
     });
+
+    $("#headCirForm").submit(function(e) {
+        e.preventDefault();
+        let hDate = $("#headCirDate").val();
+        let headCir = $("#headCirInput").val();
+        mock_data.headCir.push({"date": hDate, "headCir": headCir + " inches"});
+    });
 });
   
