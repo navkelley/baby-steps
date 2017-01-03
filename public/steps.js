@@ -90,5 +90,12 @@ $(document).ready(function() {
         let wOz = $("#wOz").val(); 
         mock_data.weight.push({"date": weightDate, "weight": wLbs + "lbs " + wOz + "oz"}); 
     });
+
+    $("#lengthForm").submit(function(e) {
+        e.preventDefault();
+        let lengthDate = $("#lengthDate").val(); 
+        let length = $("#lengthInput").val();
+        mock_data.length.push({"date": lengthDate, "length": length + " inches"});
+    });
 });
   
