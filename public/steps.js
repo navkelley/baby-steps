@@ -85,6 +85,8 @@ $(document).ready(function() {
 
     const resetForm = (form) => {
         $(form).find("input:text, textarea").val("");
+        $('input[type=date]')[0].value = "";
+
     };
 
     $("#narrForm").submit(function(e) {
@@ -103,7 +105,7 @@ $(document).ready(function() {
         let wLbs = $("#wLbs").val();
         let wOz = $("#wOz").val(); 
         mock_data.weight.push({"date": weightDate, "weight": wLbs + "lbs " + wOz + "oz"});
-        $("#weightForm").reset();
+        resetForm("#weightForm");
     });
 
     $("#lengthForm").submit(function(e) {
@@ -111,6 +113,7 @@ $(document).ready(function() {
         let lengthDate = $("#lengthDate").val(); 
         let length = $("#lengthInput").val();
         mock_data.length.push({"date": lengthDate, "length": length + " inches"});
+        resetForm("#lengthForm");
     });
 
     $("#headCirForm").submit(function(e) {
@@ -118,6 +121,7 @@ $(document).ready(function() {
         let hDate = $("#headCirDate").val();
         let headCir = $("#headCirInput").val();
         mock_data.headCir.push({"date": hDate, "headCir": headCir + " inches"});
+        resetForm("#headCirForm");
     });
 });
   
