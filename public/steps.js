@@ -75,12 +75,26 @@ $(document).ready(function() {
         ]
     };
 
+    const displayData = () => {
+        for (let i of mock_data) {
+            if (i == "narratives") {
+                $("#narrative-entry").append("<p>" + i -1 + "</p>");
+            }
+        }
+    };
+
+    const resetForm = (form) => {
+        $(form).find("input:text, textarea").val("");
+    };
+
     $("#narrForm").submit(function(e) {
         e.preventDefault(); 
         let narrDate = $("#narrDate").val();
         let narrative = $("#narrInput").val();
         let narrTitle = $("#narrTitle").val();
         mock_data.narratives.push({"title": narrTitle, "date": narrDate, "text": narrative});
+        console.log(mock_data.narratives);
+        resetForm("#narrForm"); 
     });
 
     $("#weightForm").submit(function(e) {
@@ -88,7 +102,8 @@ $(document).ready(function() {
         let weightDate = $("#weightDate").val();
         let wLbs = $("#wLbs").val();
         let wOz = $("#wOz").val(); 
-        mock_data.weight.push({"date": weightDate, "weight": wLbs + "lbs " + wOz + "oz"}); 
+        mock_data.weight.push({"date": weightDate, "weight": wLbs + "lbs " + wOz + "oz"});
+        $("#weightForm").reset();
     });
 
     $("#lengthForm").submit(function(e) {
