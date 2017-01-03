@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-    var babel = require("babel-register");
-    var polyfill = require("babel-polyfill");
+    //var babel = require("babel-register");
+    //var polyfill = require("babel-polyfill");
 
     const mock_data = {
         "narratives": [
@@ -75,20 +75,14 @@ $(document).ready(function() {
         ]
     };
 
-    //function to get date
-    getDate = (date) => {
-        for (let i of mock_data.narratives) {
-            console.log(i); 
-        }
-    };
-
-    getDate();
-
     $("#narrForm").submit(function(e) {
         e.preventDefault(); 
         let narrDate = $("#narrDate").val();
         let narrative = $("#narrInput").val();
-        console.log(narrative, narrDate); 
+        let narrTitle = $("#narrTitle").val();
+        mock_data.narratives.push({"title": narrTitle, "date": narrDate, "text": narrative});
+        console.log(narrative, narrDate, narrTitle); 
+        console.log(mock_data.narratives);
     });
 });
   
