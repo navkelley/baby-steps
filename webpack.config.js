@@ -4,12 +4,12 @@ var webpack = require('webpack');
 
 var packageData = require('./package.json');
 
-var filename = [packageData.name, packageData.version, 'js'];
+var filename = ["bundle.js"];
 
 module.exports = {
-    entry: path.resolve(__dirname, packageData.main),
+    entry: "./public/steps.js",
     output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, 'bundle'),
         filename: filename.join('.'),
     },
     devtool: 'source-map',

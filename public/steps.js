@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-    //var babel = require("babel-register");
-    //var polyfill = require("babel-polyfill");
+    var babel = require("babel-register");
+    var polyfill = require("babel-polyfill");
 
     const mock_data = {
         "narratives": [
@@ -76,9 +76,11 @@ $(document).ready(function() {
     };
 
     const displayData = () => {
-        for (let i of mock_data) {
+        for (let i of mock_data.narratives) {
             if (i == "narratives") {
-                $("#narrative-entry").append("<p>" + i -1 + "</p>");
+                $("#narrative-entry").append("<p>" + mock_data.narratives[mock_data.narratives.length -1]
+                 + "</p>");
+                console.log(i);
             }
         }
     };
@@ -96,7 +98,7 @@ $(document).ready(function() {
         let narrTitle = $("#narrTitle").val();
         mock_data.narratives.push({"title": narrTitle, "date": narrDate, "text": narrative});
         console.log(mock_data.narratives);
-        resetForm("#narrForm"); 
+        resetForm("#narrForm");  
     });
 
     $("#weightForm").submit(function(e) {
@@ -122,6 +124,6 @@ $(document).ready(function() {
         let headCir = $("#headCirInput").val();
         mock_data.headCir.push({"date": hDate, "headCir": headCir + " inches"});
         resetForm("#headCirForm");
-    });
+    }); 
 });
   
