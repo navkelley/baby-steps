@@ -2,7 +2,7 @@
   "name": "baby-steps",
   "version": "1.0.0",
   "description": "app to track baby/children milestones and moments",
-  "main": "js/steps.js",
+  "main": "steps.js",
   "scripts": {
     "test": "mocha",
     "start": "node server.js",
@@ -45,7 +45,6 @@
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-polyfill": "^6.20.0",
-    "babel-preset-env": "^1.1.4",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-stage-0": "^6.16.0",
     "chai": "^3.5.0",
