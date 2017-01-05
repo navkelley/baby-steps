@@ -1,0 +1,23 @@
+#login {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 50%;
+  padding: 15px;
+}
+h1 {
+  text-align: center;
+}
+#narrative,
+#weight,
+#length,
+#headCir {
+  display: inline-block;
+  position: absolute;
+}
+#narrative-entry,
+#weight-entry,
+#length-entry,
+#headCir-entry {
+  border: 2px solid black;
+}
+/*# sourceMappingURL=baby-steps.1.0.0.css.map */
