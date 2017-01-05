@@ -81,6 +81,14 @@ $(document).ready(function() {
 
         }
     };
+    /*function displayData() {
+        for(var i = 0, i < mock_data.narratives.length, i++) {
+            let date = mock_data.narratives[i].date;
+            console.log(date);
+            console.log(i);
+            $("#narrative-entry").html(date);
+        }
+    }*/
 
     const resetForm = (form) => {
         $(form).find("input:text, textarea").val("");
