@@ -7,7 +7,7 @@ app.use(express.static('public'));
 //define route to login page
 app.route('/') 
 	.get(function(req, res) {
-	res.sendFile(path.join(__dirname + '/index.hmtl'))
+	res.sendFile(path.join(__dirname + '/index.html'))
 })
 //define route to main dashboard
 app.route('/dashboard')
