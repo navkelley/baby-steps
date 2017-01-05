@@ -73,12 +73,12 @@ $(document).ready(function() {
     };
 
     const displayData = () => {
-        for (let i of mock_data.narratives) {
-            if (i == "narratives") {
-                $("#narrative-entry").append("<p>" + mock_data.narratives[mock_data.narratives.length -1]
-                 + "</p>");
-                console.log(i);
-            }
+        for(let i of mock_data.narratives) {
+            let date = mock_data.narratives[1].date;
+            console.log(i);
+            console.log(date);
+            $("#narrative-entry").html(date);
+
         }
     };
 
@@ -95,8 +95,9 @@ $(document).ready(function() {
         let narrTitle = $("#narrTitle").val();
         mock_data.narratives.push({"title": narrTitle, "date": narrDate, "text": narrative});
         console.log(mock_data.narratives);
-        displayData();
-        resetForm("#narrForm");  
+        resetForm("#narrForm");
+        $("#narrModal").modal("toggle"); 
+        displayData(); 
     });
 
     $("#weightForm").submit(function(e) {
@@ -105,7 +106,9 @@ $(document).ready(function() {
         let wLbs = $("#wLbs").val();
         let wOz = $("#wOz").val(); 
         mock_data.weight.push({"date": weightDate, "weight": wLbs + "lbs " + wOz + "oz"});
+        console.log(mock_data.weight);
         resetForm("#weightForm");
+        $("#weightModal").modal("toggle");
     });
 
     $("#lengthForm").submit(function(e) {
@@ -114,6 +117,7 @@ $(document).ready(function() {
         let length = $("#lengthInput").val();
         mock_data.length.push({"date": lengthDate, "length": length + " inches"});
         resetForm("#lengthForm");
+        $("#lengthModal").modal("toggle");
     });
 
     $("#headCirForm").submit(function(e) {
@@ -122,6 +126,7 @@ $(document).ready(function() {
         let headCir = $("#headCirInput").val();
         mock_data.headCir.push({"date": hDate, "headCir": headCir + " inches"});
         resetForm("#headCirForm");
+        $("#headCirModal").modal("toggle");
     }); 
 });
   
