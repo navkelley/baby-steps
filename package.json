@@ -12,7 +12,7 @@
     "clean": "rm -rf public",
     "build:html": "npm run clean:html && cp src/html/*.html public/",
     "watch:html": "npm run build:html && chokidar src/html/*.html -c 'npm run build:html'",
-    "clean:html": "rm -f build/index.html",
+    "clean:html": "rm -f public/index.html",
     "build:css": "npm run build:css:unminified && npm run build:css:minified",
     "watch:css": "npm run watch:css:unminified & npm run watch:css:minified",
     "clean:css": "npm run clean:css:unminified && npm run clean:css:minified",
