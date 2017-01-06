@@ -107,6 +107,18 @@
 	        record += data.narratives[data.narratives.length - 1].title + "<br>";
 	        record += data.narratives[data.narratives.length - 1].text + "<br>";
 	        $("#narrative-entry").append(record);
+	
+	        var weightRecord = data.weight[data.weight.length - 1].date + "<br>";
+	        weightRecord += data.weight[data.weight.length - 1].weight + "<br>";
+	        $("#weight-entry").append(weightRecord);
+	
+	        var lengthRecord = data.length[data.length.length - 1].date + "<br>";
+	        lengthRecord += data.length[data.length.length - 1].length + "<br>";
+	        $("#length-entry").append(lengthRecord);
+	
+	        var headCirRecord = data.headCir[data.headCir.length - 1].date + "<br>";
+	        headCirRecord += data.headCir[data.headCir.length - 1].headCir + "<br>";
+	        $("#headCir-entry").append(headCirRecord);
 	    };
 	
 	    var resetForm = function resetForm(form) {
@@ -120,7 +132,6 @@
 	        var narrative = $("#narrInput").val();
 	        var narrTitle = $("#narrTitle").val();
 	        data.narratives.push({ "title": narrTitle, "date": narrDate, "text": narrative });
-	        console.log(data.narratives);
 	        resetForm("#narrForm");
 	        $("#narrModal").modal("toggle");
 	        displayData();
@@ -132,9 +143,9 @@
 	        var wLbs = $("#wLbs").val();
 	        var wOz = $("#wOz").val();
 	        data.weight.push({ "date": weightDate, "weight": wLbs + "lbs " + wOz + "oz" });
-	        console.log(data.weight);
 	        resetForm("#weightForm");
 	        $("#weightModal").modal("toggle");
+	        displayData();
 	    });
 	
 	    $("#lengthForm").submit(function (e) {
@@ -144,6 +155,7 @@
 	        data.length.push({ "date": lengthDate, "length": length + " inches" });
 	        resetForm("#lengthForm");
 	        $("#lengthModal").modal("toggle");
+	        displayData();
 	    });
 	
 	    $("#headCirForm").submit(function (e) {
@@ -153,6 +165,7 @@
 	        data.headCir.push({ "date": hDate, "headCir": headCir + " inches" });
 	        resetForm("#headCirForm");
 	        $("#headCirModal").modal("toggle");
+	        displayData();
 	    });
 	});
 
