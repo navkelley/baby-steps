@@ -19,5 +19,6 @@ h1 {
 #length-entry,
 #headCir-entry {
   border: 2px solid black;
+  min-height: 24px;
 }
 /*# sourceMappingURL=baby-steps.1.0.0.css.map */

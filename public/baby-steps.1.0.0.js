@@ -48,7 +48,7 @@
 	
 	$(document).ready(function () {
 	
-	    var mock_data = {
+	    var data = {
 	        "narratives": [{
 	            "title": "First night home",
 	            "date": "10/08/2016",
@@ -103,41 +103,11 @@
 	    };
 	
 	    var displayData = function displayData() {
-	        var date = new Map([mock_data.narratives.date]);
-	        var _iteratorNormalCompletion = true;
-	        var _didIteratorError = false;
-	        var _iteratorError = undefined;
-	
-	        try {
-	            for (var _iterator = date[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	                var entry = _step.value;
-	
-	                console.log(date);
-	                $("#narrative-entry").html(date);
-	            }
-	        } catch (err) {
-	            _didIteratorError = true;
-	            _iteratorError = err;
-	        } finally {
-	            try {
-	                if (!_iteratorNormalCompletion && _iterator.return) {
-	                    _iterator.return();
-	                }
-	            } finally {
-	                if (_didIteratorError) {
-	                    throw _iteratorError;
-	                }
-	            }
-	        }
+	        var record = data.narratives[data.narratives.length - 1].date + "<br>";
+	        record += data.narratives[data.narratives.length - 1].title + "<br>";
+	        record += data.narratives[data.narratives.length - 1].text + "<br>";
+	        $("#narrative-entry").append(record);
 	    };
-	    /*function displayData() {
-	        for(var i = 0, i < mock_data.narratives.length, i++) {
-	            let date = mock_data.narratives[i].date;
-	            console.log(date);
-	            console.log(i);
-	            $("#narrative-entry").html(date);
-	        }
-	    }*/
 	
 	    var resetForm = function resetForm(form) {
 	        $(form).find("input:text, textarea").val("");
@@ -149,8 +119,8 @@
 	        var narrDate = $("#narrDate").val();
 	        var narrative = $("#narrInput").val();
 	        var narrTitle = $("#narrTitle").val();
-	        mock_data.narratives.push({ "title": narrTitle, "date": narrDate, "text": narrative });
-	        console.log(mock_data.narratives);
+	        data.narratives.push({ "title": narrTitle, "date": narrDate, "text": narrative });
+	        console.log(data.narratives);
 	        resetForm("#narrForm");
 	        $("#narrModal").modal("toggle");
 	        displayData();
@@ -161,8 +131,8 @@
 	        var weightDate = $("#weightDate").val();
 	        var wLbs = $("#wLbs").val();
 	        var wOz = $("#wOz").val();
-	        mock_data.weight.push({ "date": weightDate, "weight": wLbs + "lbs " + wOz + "oz" });
-	        console.log(mock_data.weight);
+	        data.weight.push({ "date": weightDate, "weight": wLbs + "lbs " + wOz + "oz" });
+	        console.log(data.weight);
 	        resetForm("#weightForm");
 	        $("#weightModal").modal("toggle");
 	    });
@@ -171,7 +141,7 @@
 	        e.preventDefault();
 	        var lengthDate = $("#lengthDate").val();
 	        var length = $("#lengthInput").val();
-	        mock_data.length.push({ "date": lengthDate, "length": length + " inches" });
+	        data.length.push({ "date": lengthDate, "length": length + " inches" });
 	        resetForm("#lengthForm");
 	        $("#lengthModal").modal("toggle");
 	    });
@@ -180,7 +150,7 @@
 	        e.preventDefault();
 	        var hDate = $("#headCirDate").val();
 	        var headCir = $("#headCirInput").val();
-	        mock_data.headCir.push({ "date": hDate, "headCir": headCir + " inches" });
+	        data.headCir.push({ "date": hDate, "headCir": headCir + " inches" });
 	        resetForm("#headCirForm");
 	        $("#headCirModal").modal("toggle");
 	    });
