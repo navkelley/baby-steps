@@ -73,9 +73,8 @@ $(document).ready(function() {
     };
 
     const displayData = () => {
-        for(let i of mock_data.narratives) {
-            let date = mock_data.narratives[1].date;
-            console.log(i);
+        let date = new Map([mock_data.narratives.date]);
+        for(let entry of date) {
             console.log(date);
             $("#narrative-entry").html(date);
 

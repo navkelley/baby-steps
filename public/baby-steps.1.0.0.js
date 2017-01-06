@@ -103,16 +103,15 @@
 	    };
 	
 	    var displayData = function displayData() {
+	        var date = new Map([mock_data.narratives.date]);
 	        var _iteratorNormalCompletion = true;
 	        var _didIteratorError = false;
 	        var _iteratorError = undefined;
 	
 	        try {
-	            for (var _iterator = mock_data.narratives[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	                var i = _step.value;
+	            for (var _iterator = date[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                var entry = _step.value;
 	
-	                var date = mock_data.narratives[1].date;
-	                console.log(i);
 	                console.log(date);
 	                $("#narrative-entry").html(date);
 	            }
