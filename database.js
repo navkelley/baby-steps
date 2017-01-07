@@ -168,7 +168,7 @@ MongoClient.connect('mongodb://localhost/', function(err, db) {
         });
     };
 
-    let del = function(name, content) {
+    let del = function() {
         let narrQuery = {
             title: title
         };
