@@ -29,9 +29,9 @@ if (require.main === module) {
             console.error(err);
         }
     });
-}
+};
 
-let Item = require('./models/item')
+let Item = require('./models/item');
 
 //use app.route to be able to reduce redunancy and typos
 //define route to login page
@@ -39,6 +39,7 @@ app.route('/')
 	.get(function(req, res) {
 	res.sendFile(path.join(__dirname + '/index.html'));
 });
+
 //define route to main dashboard
 app.route('/dashboard') 
 	.get(function(req, res) {
@@ -51,7 +52,7 @@ app.route('/dashboard')
 	        }
 	        res.json(items);
 	    });
-	});
+	}),
 
 	.post(function(req, res) {
 		Item.create({
@@ -64,7 +65,7 @@ app.route('/dashboard')
             });
         }
         res.status(201).json(item);
-    });
+    }),
 
     .put(function(req, res) {
     	Item.update(
@@ -79,7 +80,7 @@ app.route('/dashboard')
 	        }
         	res.status(200).json(item);
         });
-    });
+    }),
 
     .delete(function(req, res) {
     	Item.remove(
@@ -90,18 +91,20 @@ app.route('/dashboard')
             });
         }
         res.status(200).json(item);
-    });  
+    }),  
 
 //define route to milestones and achievements
 app.route('/milestones')
 	.get(function(req, res) {
 		res.sendFile(path.join(__dirname + '/public/milestones.html'));
 });
+
 //define route to user forum 
 app.route('/forum')
 	.get(function(req, res) {
 		res.sendFile(path.join(__dirname + '/public/forum.html'));
 });
+
 //define route to user account settings 
 app.route('/user-account')
 	.get(function(req, res) {
