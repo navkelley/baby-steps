@@ -1,12 +1,20 @@
-var MongoClient = require('mongodb').MongoClient;
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/');
 
 
-MongoClient.connect('mongodb://localhost/', function(err, db) {
-    if (err) {
-        console.error(err);
-        db.close();
-        return;
-    }
+mongoose.connection.on('error', function(err) {
+    console.error('Could not connect.  Error:', err);
+});
+
+mongoose.connection.once('open', function() {
+   var snippetSchema = mongoose.Schema({
+       name: {type: String, unique: true},
+       content: String
+    });//TODO: fix for all db collections
+
+    var Snippet = mongoose.model('Snippet', snippetSchema);
+});
     
     let measurements = db.collection('measurements');
     let narratives = db.collection('narrative');
