@@ -52,7 +52,7 @@ app.route('/dashboard')
 	        }
 	        res.json(items);
 	    });
-	}),
+	})
 
 	.post(function(req, res) {
 		Item.create({
