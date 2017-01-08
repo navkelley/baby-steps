@@ -31,7 +31,7 @@ if (require.main === module) {
     });
 };
 
-let Items = require('./models/items');
+let Items = require('./src/models/items');
 
 //use app.route to be able to reduce redunancy and typos
 //define route to login page
