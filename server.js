@@ -29,21 +29,22 @@ if (require.main === module) {
             console.error(err);
         }
     });
-}
+};
 
-let Item = require('./models/item')
+let Items = require('./src/models/items');
 
 //use app.route to be able to reduce redunancy and typos
 //define route to login page
 app.route('/') 
 	.get(function(req, res) {
-	res.sendFile(path.join(__dirname + '/index.html'));
-});
+		res.sendFile(path.join(__dirname + '/index.html'));
+	});
+
 //define route to main dashboard
-app.route('/dashboard') {
+app.route('/dashboard') 
 	.get(function(req, res) {
 		res.sendFile(path.join(__dirname + '/public/dashboard.html'));
-		Item.find(function(err, items) {
+		Items.find(function(err, items) {
 	        if (err) {
 	            return res.status(500).json({
 	                message: 'Internal Server Error'
@@ -51,23 +52,24 @@ app.route('/dashboard') {
 	        }
 	        res.json(items);
 	    });
-	});
+	})
 
 	.post(function(req, res) {
-		Item.create({
+		Items.create({
 			//not sure about this, as all fields are different 
-        title: req.body.title
-    }, function(err, item) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        }
-        res.status(201).json(item);
-    });
+        	title: req.body.title
+    	}, function(err, item) {
+        	if (err) {
+            	return res.status(500).json({
+                	message: 'Internal Server Error'
+            	});
+        	}
+        	res.status(201).json(item);
+    	})
+    })
 
     .put(function(req, res) {
-    	Item.update(
+    	Items.update(
 	        {_id: req.params.id},
 	        //not sure about this, as all fields are different
 	        {title: req.body.title},
@@ -79,29 +81,32 @@ app.route('/dashboard') {
 	        }
         	res.status(200).json(item);
         });
-    });
+    })
 
     .delete(function(req, res) {
-    	Item.remove(
+    	Items.remove(
         {_id: req.params.id}, function(err, item) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        }
-        res.status(200).json(item);
-    });  
+	        if (err) {
+	            return res.status(500).json({
+	                message: 'Internal Server Error'
+	            });
+	        }
+	        res.status(200).json(item);
+	    }) 
+	})
 
 //define route to milestones and achievements
 app.route('/milestones')
 	.get(function(req, res) {
 		res.sendFile(path.join(__dirname + '/public/milestones.html'));
 });
+
 //define route to user forum 
 app.route('/forum')
 	.get(function(req, res) {
 		res.sendFile(path.join(__dirname + '/public/forum.html'));
 });
+
 //define route to user account settings 
 app.route('/user-account')
 	.get(function(req, res) {
