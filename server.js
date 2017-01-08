@@ -65,7 +65,7 @@ app.route('/dashboard')
             });
         }
         res.status(201).json(item);
-    }),
+    })
 
     .put(function(req, res) {
     	Item.update(
@@ -80,7 +80,7 @@ app.route('/dashboard')
 	        }
         	res.status(200).json(item);
         });
-    }),
+    })
 
     .delete(function(req, res) {
     	Item.remove(
@@ -91,7 +91,7 @@ app.route('/dashboard')
             });
         }
         res.status(200).json(item);
-    }),  
+    }) 
 
 //define route to milestones and achievements
 app.route('/milestones')
