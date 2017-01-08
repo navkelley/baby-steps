@@ -40,7 +40,7 @@ app.route('/')
 	res.sendFile(path.join(__dirname + '/index.html'));
 });
 //define route to main dashboard
-app.route('/dashboard') {
+app.route('/dashboard') 
 	.get(function(req, res) {
 		res.sendFile(path.join(__dirname + '/public/dashboard.html'));
 		Item.find(function(err, items) {
