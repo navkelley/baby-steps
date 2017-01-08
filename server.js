@@ -31,7 +31,7 @@ if (require.main === module) {
     });
 };
 
-let Item = require('./models/item');
+let Items = require('./models/items');
 
 //use app.route to be able to reduce redunancy and typos
 //define route to login page
@@ -44,7 +44,7 @@ app.route('/')
 app.route('/dashboard') 
 	.get(function(req, res) {
 		res.sendFile(path.join(__dirname + '/public/dashboard.html'));
-		Item.find(function(err, items) {
+		Items.find(function(err, items) {
 	        if (err) {
 	            return res.status(500).json({
 	                message: 'Internal Server Error'
@@ -55,7 +55,7 @@ app.route('/dashboard')
 	})
 
 	.post(function(req, res) {
-		Item.create({
+		Items.create({
 			//not sure about this, as all fields are different 
         	title: req.body.title
     	}, function(err, item) {
@@ -69,7 +69,7 @@ app.route('/dashboard')
     })
 
     .put(function(req, res) {
-    	Item.update(
+    	Items.update(
 	        {_id: req.params.id},
 	        //not sure about this, as all fields are different
 	        {title: req.body.title},
@@ -84,7 +84,7 @@ app.route('/dashboard')
     })
 
     .delete(function(req, res) {
-    	Item.remove(
+    	Items.remove(
         {_id: req.params.id}, function(err, item) {
 	        if (err) {
 	            return res.status(500).json({
