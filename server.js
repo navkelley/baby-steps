@@ -32,7 +32,7 @@ if (require.main === module) {
 };
 
 let Items = require('./src/models/items');
-
+console.log(Items);
 //use app.route to be able to reduce redunancy and typos
 //define route to login page
 app.route('/') 
