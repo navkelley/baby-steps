@@ -37,8 +37,8 @@ let Item = require('./models/item');
 //define route to login page
 app.route('/') 
 	.get(function(req, res) {
-	res.sendFile(path.join(__dirname + '/index.html'));
-});
+		res.sendFile(path.join(__dirname + '/index.html'));
+	});
 
 //define route to main dashboard
 app.route('/dashboard') 
@@ -57,14 +57,15 @@ app.route('/dashboard')
 	.post(function(req, res) {
 		Item.create({
 			//not sure about this, as all fields are different 
-        title: req.body.title
-    }, function(err, item) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        }
-        res.status(201).json(item);
+        	title: req.body.title
+    	}, function(err, item) {
+        	if (err) {
+            	return res.status(500).json({
+                	message: 'Internal Server Error'
+            	});
+        	}
+        	res.status(201).json(item);
+    	})
     })
 
     .put(function(req, res) {
