@@ -86,13 +86,14 @@ app.route('/dashboard')
     .delete(function(req, res) {
     	Item.remove(
         {_id: req.params.id}, function(err, item) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        }
-        res.status(200).json(item);
-    }) 
+	        if (err) {
+	            return res.status(500).json({
+	                message: 'Internal Server Error'
+	            });
+	        }
+	        res.status(200).json(item);
+	    }) 
+	})
 
 //define route to milestones and achievements
 app.route('/milestones')
