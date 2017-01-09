@@ -1,9 +1,9 @@
-let express = require('express');
-let bodyParser = require('body-parser');
-let mongoose = require('mongoose'); 
-let config = require('./config');
-let app = express();
-let path = require('path');
+var express = require('express');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose'); 
+var config = require('./config');
+var app = express();
+var path = require('path');
 
 app.use(bodyParser.json()); 
 app.use(express.static('public'));
@@ -29,10 +29,10 @@ if (require.main === module) {
             console.error(err);
         }
     });
-};
+}
 
 let Items = require('./src/models/items');
-console.log(Items);
+
 //use app.route to be able to reduce redunancy and typos
 //define route to login page
 app.route('/') 
@@ -65,7 +65,7 @@ app.route('/dashboard')
             	});
         	}
         	res.status(201).json(item);
-    	})
+    	});
     })
 
     .put(function(req, res) {
@@ -92,8 +92,8 @@ app.route('/dashboard')
 	            });
 	        }
 	        res.status(200).json(item);
-	    }) 
-	})
+	    }); 
+	});
 
 //define route to milestones and achievements
 app.route('/milestones')
