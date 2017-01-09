@@ -29,7 +29,7 @@ if (require.main === module) {
             console.error(err);
         }
     });
-};
+}
 
 let Items = require('./src/models/items');
 
@@ -65,7 +65,7 @@ app.route('/dashboard')
             	});
         	}
         	res.status(201).json(item);
-    	})
+    	});
     })
 
     .put(function(req, res) {
@@ -92,8 +92,8 @@ app.route('/dashboard')
 	            });
 	        }
 	        res.status(200).json(item);
-	    }) 
-	})
+	    }); 
+	});
 
 //define route to milestones and achievements
 app.route('/milestones')
@@ -122,5 +122,3 @@ app.use('*', function(req, res) {
 exports.app = app;
 exports.runServer = runServer;
 
-app.listen(process.env.PORT || 8080);
-console.log('Connected on port 8080');
