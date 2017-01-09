@@ -1,9 +1,9 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose'); 
-var config = require('./config');
-var app = express();
-var path = require('path');
+let express = require('express');
+let bodyParser = require('body-parser');
+let mongoose = require('mongoose'); 
+let config = require('./config');
+let app = express();
+let path = require('path');
 
 app.use(bodyParser.json()); 
 app.use(express.static('public'));
@@ -122,5 +122,3 @@ app.use('*', function(req, res) {
 exports.app = app;
 exports.runServer = runServer;
 
-app.listen(process.env.PORT || 8081);
-console.log('Connected on port 8081');
