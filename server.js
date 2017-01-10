@@ -1,9 +1,9 @@
-let express = require('express');
-let bodyParser = require('body-parser');
-let mongoose = require('mongoose'); 
-let config = require('./config');
-let app = express();
-let path = require('path');
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose'); 
+const config = require('./config');
+const app = express();
+const path = require('path');
 
 app.use(bodyParser.json()); 
 app.use(express.static('public'));
@@ -31,26 +31,28 @@ if (require.main === module) {
     });
 }
 
-let Items = require('./src/models/items');
+const Narrative = require('./src/models/narrative');
+const Measurement = require('./src/models/measurement');
+const User = require('./src/models/user');
 
 //use app.route to be able to reduce redunancy and typos
 //define route to login page
 app.route('/') 
 	.get(function(req, res) {
-		res.sendFile(path.join(__dirname + '/index.html'));
+		res.sendFile(path.join(__dirname + '/public/index.html'));
 	});
 
 //define route to main dashboard
 app.route('/dashboard') 
 	.get(function(req, res) {
-		res.sendFile(path.join(__dirname + '/public/dashboard.html'));
-		Items.find(function(err, items) {
+		//res.sendFile(path.join(__dirname + '/public/dashboard.html'));
+		Narrative.find(function(err, narrative) {
 	        if (err) {
 	            return res.status(500).json({
 	                message: 'Internal Server Error'
 	            });
 	        }
-	        res.json(items);
+	        res.json(narrative);
 	    });
 	})
 

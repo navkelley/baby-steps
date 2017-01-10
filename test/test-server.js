@@ -1,16 +1,18 @@
-var chai = require('chai');
-var chaiHttp = require('chai-http');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 
-var server = require('../server.js');
+const server = require('../server.js');
 
-var should = chai.should();
-var expect = chai.expect;
-var app = server.app;
+const should = chai.should();
+const expect = chai.expect;
+const app = server.app;
 
 
 chai.use(chaiHttp);
 
-describe('Baby Steps', function() {
+const mongoose = require('mongoose');
+
+describe('reach html pages', function() {
 	it('should reach root and have html', function(done) {
 		chai.request(app)
 		.get('/')
