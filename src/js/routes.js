@@ -93,3 +93,5 @@ app.use('*', (req, res) => {
         message: 'Not Found'
     });
 }); 
+
+//TODO: need to add router, export to use in server.js
