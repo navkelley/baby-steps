@@ -60,8 +60,8 @@ app.route('/dashboard/narratives')
         });
     });
 
-	.post(function(req, res) {
-		Items.create({
+	.post((req, res) => {
+		Narrative.create({
 			//not sure about this, as all fields are different 
         	title: req.body.title
     	}, function(err, item) {
@@ -75,7 +75,7 @@ app.route('/dashboard/narratives')
     })
 
     .put(function(req, res) {
-    	Items.update(
+    	Narrative.update(
 	        {_id: req.params.id},
 	        //not sure about this, as all fields are different
 	        {title: req.body.title},
@@ -90,7 +90,7 @@ app.route('/dashboard/narratives')
     })
 
     .delete(function(req, res) {
-    	Items.remove(
+    	Narrative.remove(
         {_id: req.params.id}, function(err, item) {
 	        if (err) {
 	            return res.status(500).json({
