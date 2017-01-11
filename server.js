@@ -45,21 +45,20 @@ app.route('/')
 //define route to main dashboard
 app.route('/dashboard') 
 	.get(function(req, res) {
-		//TODO: figure out another way to deliver file without html--compete with find
-		//res.sendFile(path.join(__dirname + '/public/dashboard.html'));
-		Narrative.find(function(err, narrative) {
-			Measurement.find((err, narrative) => {	
-		        if (err) {
-		            return res.status(500).json({
-		                message: 'Internal Server Error'
-		            });
-		        }
-		        res.json("Hello World");
-		    });
-		    res.json("This is working!");
-		    //only outputs last .json response
-	    });
-	})
+		res.sendFile(path.join(__dirname + '/public/dashboard.html'));
+	});
+
+app.route('/dashboard/narratives')
+    .get((req,res) => {
+        Narrative.find((err, narrative) => {
+            if(err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            res.json("Hello World testing route");
+        });
+    });
 
 	.post(function(req, res) {
 		Items.create({
