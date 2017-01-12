@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 	});
 
 //define route to main dashboard
-router.get('/dashboard', () => {
+router.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/dashboard.html'));
 });//not working
 
@@ -79,20 +79,17 @@ router.route('/dashboard/narratives/:id')
 	});
 
 //define route to milestones and achievements
-router.route('/milestones')
-	.get(function(req, res) {
+router.get('/milestones', (req, res) => {
 		res.sendFile(path.join(__dirname + '/public/milestones.html'));
 });
 
 //define route to user forum 
-router.route('/forum')
-	.get(function(req, res) {
+router.get('/forum',(req, res) => {
 		res.sendFile(path.join(__dirname + '/public/forum.html'));
 });
 
 //define route to user account settings 
-router.route('/user-account')
-	.get(function(req, res) {
+router.get('/user-account',(req, res) => {
 		res.sendFile(path.join(__dirname + '/public/user-account.html'));
 });
 
@@ -103,4 +100,4 @@ router.use('*', (req, res) => {
 }); 
 
 module.exports = router; 
-//TODO: need to add router, export to use in server.js
+//end

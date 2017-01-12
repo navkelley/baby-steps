@@ -10,6 +10,9 @@ app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
+//bring in routes 
+app.use('/', router);
+
 const runServer = (callback) => {
     mongoose.connect(config.DATABASE_URL, function(err) {
         if (err && callback) {
@@ -33,7 +36,5 @@ if (require.main === module) {
     });
 }
 
-app.use('/', router);
- 
 exports.app = app;
 exports.runServer = runServer;
