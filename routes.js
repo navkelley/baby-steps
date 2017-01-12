@@ -32,23 +32,20 @@ router.get('/dashboard/narratives', (req,res) => {
                     message: 'Internal Server Error'
                 });
             }
-            res.json(narrative);
+            res.status(200).json(narrative);
         });
-    })
-
-//not working
-	.post((req, res) => {
-		Narrative.create({
-        	title: req.body.title,
-    	}, function(err, item) {
-        	if (err) {
-            	return res.status(500).json({
-                	message: 'Internal Server Error'
-            	});
-        	}
-        	res.status(201).json("Hello World");
-    	});
     });
+
+router.post('/dashboard/narratives', (req, res) => {
+		Narrative.create({
+        	title: req.body.title
+    	}, function(err, narrative) {
+        	if (err) {
+            	return res.status(500).json(err);
+        	}
+        	res.status(201).json(narrative);
+    	});
+});
 
 router.route('/dashboard/narratives/:id')
     .put((req, res) => {

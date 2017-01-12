@@ -71,7 +71,7 @@ $(document).ready(function() {
             },
         ]
     };
-
+    //will need to make ajax request to db 
     const displayData = () => {
         let record = data.narratives[data.narratives.length-1].date + "<br>";
         record += data.narratives[data.narratives.length-1].title + "<br>";
