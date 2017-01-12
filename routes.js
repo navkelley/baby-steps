@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 //define route to main dashboard
 router.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/dashboard.html'));
-});//not working
+});
 
 router.get('/dashboard/narratives', (req,res) => {
         Narrative.find((err, narrative) => {
@@ -41,36 +41,37 @@ router.post('/dashboard/narratives', (req, res) => {
         	title: req.body.title
     	}, function(err, narrative) {
         	if (err) {
-            	return res.status(500).json(err);
+            	return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
         	}
         	res.status(201).json(narrative);
     	});
 });
 
 router.put('/dashboard/narratives/:id',(req, res) => {
-    	Narrative.update({
-            _id: req.params.id,
-	        title: req.body.title,
-	        content: req.body.content,
-	        upsert: true}, function (err, item) {
+    	Narrative.update(
+            {_id: req.params.id},
+	        {title: req.body.title, content: req.body.content},
+	        {upsert: true}, function (err, narrative) {
 	        if (err) {
 	            return res.status(500).json({
-	                message: 'Internal Server Error'
-	            });
+                    message: 'Internal Server Error'
+                });
 	        }
-        	res.status(200).json("Hello world put working");
+        	res.status(200).json(narrative);
         });
     })
 
-    .delete((req, res) => {
+    .delete('/dashboard/narratives/:id', (req, res) => {
     	Narrative.remove(
-        {_id: req.params.id}, function(err, item) {
+        {_id: req.params.id}, function(err, narrative) {
 	        if (err) {
 	            return res.status(500).json({
-	                message: 'Internal Server Error'
-	            });
+                    message: 'Internal Server Error'
+                });
 	        }
-	        res.status(200).json("hello world hello hello");
+	        res.status(200).json(narrative);
 	    }); 
 	});
 
