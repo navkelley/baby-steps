@@ -47,8 +47,7 @@ router.post('/dashboard/narratives', (req, res) => {
     	});
 });
 
-router.route('/dashboard/narratives/:id')
-    .put((req, res) => {
+router.put('/dashboard/narratives/:id',(req, res) => {
     	Narrative.update({
             _id: req.params.id,
 	        title: req.body.title,
