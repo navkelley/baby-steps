@@ -4,8 +4,10 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const app = express();
 const path = require('path');
+const router = require('./routes');
 
 app.use(bodyParser.json()); 
+//app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
 const runServer = (callback) => {
@@ -30,6 +32,8 @@ if (require.main === module) {
         }
     });
 }
+
+app.use('/', router);
  
 exports.app = app;
 exports.runServer = runServer;

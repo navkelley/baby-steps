@@ -2,35 +2,37 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose'); 
 const config = require('./config');
-const app = express();
+const router = express.Router();
 const path = require('path');
 
 const Narrative = require('./src/models/narrative');
 const Measurement = require('./src/models/measurement');
 const User = require('./src/models/user');
 
-//use app.route to be able to reduce redunancy and typos
+// middleware that is specific to this router
+router.use(function timeLog (req, res, next) {
+  console.log('Time: ', Date.now());
+  next();
+});
+
 //define route to home page
-app.route('/') 
-	.get((req, res) => {
+router.get('/', (req, res) => {
 		res.sendFile(path.join(__dirname + '/public/index.html'));
 	});
 
 //define route to main dashboard
-app.route('/dashboard') 
-	.get((req, res) => {
-		res.sendFile(path.join(__dirname + '/public/dashboard.html'));
-	});
+router.get('/dashboard', () => {
+    res.sendFile(path.join(__dirname + '/public/dashboard.html'));
+});
 
-app.route('/dashboard/narratives')
-    .get((req,res) => {
+router.get('/dashboard/narratives', (req,res) => {
         Narrative.find((err, narrative) => {
             if(err) {
                 return res.status(500).json({
                     message: 'Internal Server Error'
                 });
             }
-            res.json("narrative");
+            res.json(narrative);
         });
     })
 
@@ -47,7 +49,7 @@ app.route('/dashboard/narratives')
     	});
     });
 
-app.route('/dashboard/narratives/:id')
+router.route('/dashboard/narratives/:id')
     .put((req, res) => {
     	Narrative.update({
             _id: req.params.id,
@@ -76,27 +78,28 @@ app.route('/dashboard/narratives/:id')
 	});
 
 //define route to milestones and achievements
-app.route('/milestones')
+router.route('/milestones')
 	.get(function(req, res) {
 		res.sendFile(path.join(__dirname + '/public/milestones.html'));
 });
 
 //define route to user forum 
-app.route('/forum')
+router.route('/forum')
 	.get(function(req, res) {
 		res.sendFile(path.join(__dirname + '/public/forum.html'));
 });
 
 //define route to user account settings 
-app.route('/user-account')
+router.route('/user-account')
 	.get(function(req, res) {
 		res.sendFile(path.join(__dirname + '/public/user-account.html'));
 });
 
-app.use('*', (req, res) => {
+router.use('*', (req, res) => {
     res.status(404).json({
         message: 'Not Found'
     });
 }); 
 
+module.exports = router; 
 //TODO: need to add router, export to use in server.js
