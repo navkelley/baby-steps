@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 //define route to main dashboard
 router.get('/dashboard', () => {
     res.sendFile(path.join(__dirname + '/public/dashboard.html'));
-});
+});//not working
 
 router.get('/dashboard/narratives', (req,res) => {
         Narrative.find((err, narrative) => {
@@ -36,6 +36,7 @@ router.get('/dashboard/narratives', (req,res) => {
         });
     })
 
+//not working
 	.post((req, res) => {
 		Narrative.create({
         	title: req.body.title,
