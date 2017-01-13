@@ -3,7 +3,7 @@ const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 const should = chai.should();
 const expect = chai.expect;
-const app = server.app;
+const router = express.Router();
  
  //import files for use 
 const server = require('../server.js');
