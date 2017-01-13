@@ -16,12 +16,24 @@ const timeLog = router.use((req, res, next) => {
   next();
 });
 
-//====================== define route to home page ====================================//
+//====================== define route to home page & deliver ============================//
 router.get('/', (req, res) => {
-		res.sendFile(path.join(__dirname + '/public/index.html'));
+	res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
-//====================== define route to main dashboard ================================//
+//====================== define route to login ================================//
+router.get('/login', (req, res) => {
+    User.find((err, user) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        res.status(200).json(user);
+    });
+});
+
+//====================== define route to main dashboard & deliver ======================//
 router.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/dashboard.html'));
 });
@@ -136,7 +148,7 @@ router.get('/user-account',(req, res) => {
 		res.sendFile(path.join(__dirname + '/public/user-account.html'));
 });
 
-//catch all for routes
+//====================== catch all for routes =======================================//
 router.use('*', (req, res) => {
     res.status(404).json({
         message: 'Not Found'

@@ -50,6 +50,33 @@ describe('reach html pages', () => {
 		});
 	});
 });
+//====================== tests for user routers ===============================//
+describe('users from login', () => {
+	before((done) => {
+        server.runServer(() => {
+            User.create({
+            	username: 'Tiffany', 
+            	password:  
+            },
+            {
+            	username: 'Alex', 
+            	password: 
+            },
+            {
+            	username: 'Joe',
+            	password:
+        	}, () => {
+            	done();
+            });
+        });
+    });
+
+    after((done) => {
+        User.remove(() => {
+            done();
+        });
+    });
+})
 //====================== tests for narratives route ===========================//
 describe('dashboard narratives DB', function () {
 	this.timeout(15000); 
@@ -76,7 +103,7 @@ describe('dashboard narratives DB', function () {
         });
     });
 
-    after(function(done) {
+    after((done) => {
         Narrative.remove(() => {
             done();
         });
@@ -191,7 +218,7 @@ describe('dashboard measurements DB', () => {
         });
     });
 
-    after(function(done) {
+    after((done) => {
         Measurement.remove(() => {
             done();
         });
