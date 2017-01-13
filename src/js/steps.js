@@ -71,7 +71,8 @@ $(document).ready(function() {
             },
         ]
     };
-    //will need to make ajax request to db 
+    //will need to make ajax request to db
+    //change all append to html--make sure select right div!
     const displayData = () => {
         let record = data.narratives[data.narratives.length-1].date + "<br>";
         record += data.narratives[data.narratives.length-1].title + "<br>";
