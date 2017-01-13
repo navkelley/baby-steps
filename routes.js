@@ -12,16 +12,16 @@ const User = require('./src/models/user');
 
 //middleware that is specific to this router
 const timeLog = router.use((req, res, next) => {
-  //console.log('Time: ', Date.now());
+  console.log('Time: ', Date.now());
   next();
 });
 
-//define route to home page
+//====================== define route to home page ====================================//
 router.get('/', (req, res) => {
 		res.sendFile(path.join(__dirname + '/public/index.html'));
-	});
+});
 
-//define route to main dashboard
+//====================== define route to main dashboard ================================//
 router.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/dashboard.html'));
 });
@@ -132,21 +132,22 @@ router.put('/dashboard/measurements/:id',(req, res) => {
     });
 
 
-//define route to milestones and achievements
+//====================== define route to milestones and achievements ===================//
 router.get('/milestones', (req, res) => {
 		res.sendFile(path.join(__dirname + '/public/milestones.html'));
 });
 
-//define route to user forum 
+//====================== define route to user forum ====================================// 
 router.get('/forum',(req, res) => {
 		res.sendFile(path.join(__dirname + '/public/forum.html'));
-});
+});//thinking about getting rid of....
 
-//define route to user account settings 
+//====================== define route to user account settings =========================//
 router.get('/user-account',(req, res) => {
 		res.sendFile(path.join(__dirname + '/public/user-account.html'));
 });
 
+//catch all for routes
 router.use('*', (req, res) => {
     res.status(404).json({
         message: 'Not Found'
