@@ -151,12 +151,10 @@ describe('dashboard narratives DB', () => {
 					res.should.have.status(200);
 					res.should.be.json;
 					res.body.should.be.a('object');
-					res.body.should.have.property('title');
-					//change properties to n, nmodified, ok 
-					//res.body.should.have.property('content');
-					//res.body.title.should.equal('Eating Well');
-					//res.body.content.should.equal('He is eating so much!');
-
+					res.body.should.have.property('n');
+					res.body.should.have.property('nModified');
+					res.body.should.have.property('ok');
+					done();
 				})
 		});
 	});
