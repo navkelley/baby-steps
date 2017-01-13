@@ -101,7 +101,8 @@
 	            "headCir": "16.5 inches"
 	        }]
 	    };
-	
+	    //will need to make ajax request to db
+	    //change all append to html--make sure select right div!
 	    var displayData = function displayData() {
 	        var record = data.narratives[data.narratives.length - 1].date + "<br>";
 	        record += data.narratives[data.narratives.length - 1].title + "<br>";
