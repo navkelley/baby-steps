@@ -159,6 +159,9 @@ describe('dashboard narratives DB', function () {
 				.end((err, res) => {
 					should.equal(err, null);
 					res.should.have.status(200);
+					res.body.should.be.a('object');
+					res.body.should.have.property('n');
+					res.body.should.have.property('ok');
 					done();
 				})
 		});
