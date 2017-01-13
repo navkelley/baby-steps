@@ -62,7 +62,9 @@ describe('reach html pages', () => {
 	});
 });
 //====================== tests for narratives route ===========================//
-describe('dashboard narratives DB', () => {
+describe('dashboard narratives DB', function () {
+	this.timeout(15000);
+	
 	before((done) => {
         server.runServer(() => {
             Narrative.create({
