@@ -51,7 +51,7 @@ describe('reach html pages', () => {
 	});
 });
 //====================== tests for user routers ===============================//
-describe('users from login', () => {
+describe('users from signup', () => {
 	before((done) => {
         server.runServer(() => {
             User.create({
@@ -76,7 +76,7 @@ describe('users from login', () => {
             done();
         });
     });
-})
+})//TODO: need to finish 
 //====================== tests for narratives route ===========================//
 describe('dashboard narratives DB', function () {
 	this.timeout(15000); 
@@ -222,5 +222,5 @@ describe('dashboard measurements DB', () => {
         Measurement.remove(() => {
             done();
         });
-    });
+    });//TODO: need to finish
 });

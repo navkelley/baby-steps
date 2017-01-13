@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 });
 
 //====================== define route to login ================================//
-router.get('/login', (req, res) => {
+router.get('/signup', (req, res) => {
     User.find((err, user) => {
         if (err) {
             return res.status(500).json({
