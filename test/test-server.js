@@ -176,6 +176,7 @@ describe('dashboard narratives DB', () => {
 				})
 		});
 	});
+});
 //====================== tests for measurements route ===========================//
 describe('dashboard measurements DB', () => {
 	before((done) => {
