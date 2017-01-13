@@ -79,8 +79,8 @@ describe('dashboard narratives DB', () => {
             	title: 'Day 3',
             	date: '11/12/16', 
             	content: 'First time using bigger bottle'
-        	}, () => {
-                done();
+        	}, function() {
+            	done();
             });
         });
     });
