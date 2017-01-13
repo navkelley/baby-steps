@@ -39,17 +39,6 @@ describe('reach html pages', () => {
 		});
 	});
 
-	it('should reach milestones', (done) => {
-		chai.request(app)
-		.get('/milestones')
-		.end((err, res) => {
-			should.equal(err, null);
-			res.should.have.status(200);
-			res.should.be.html;
-			done();
-		});
-	});
-
 	it('should reach user account', (done) => {
 		chai.request(app)
 		.get('/user-account')
@@ -160,7 +149,7 @@ describe('dashboard narratives DB', function () {
 				})
 		});
 	});
-//work in progress
+
 	it('should remove a record on delete', (done) => {
 		Narrative.findOne({title: 'Day 2'}, (err, narrative) => {
 			let id = narrative._id;
