@@ -135,12 +135,7 @@ router.put('/dashboard/measurements/:id',(req, res) => {
 //====================== define route to milestones and achievements ===================//
 router.get('/milestones', (req, res) => {
 		res.sendFile(path.join(__dirname + '/public/milestones.html'));
-});
-
-//====================== define route to user forum ====================================// 
-router.get('/forum',(req, res) => {
-		res.sendFile(path.join(__dirname + '/public/forum.html'));
-});//thinking about getting rid of....
+}); 
 
 //====================== define route to user account settings =========================//
 router.get('/user-account',(req, res) => {

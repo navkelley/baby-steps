@@ -1,19 +1,19 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
-
-const server = require('../server.js');
-
 const should = chai.should();
 const expect = chai.expect;
 const app = server.app;
-
+ 
+ //import files for use 
+const server = require('../server.js');
 const Narrative = require('../src/models/narrative');
 const Measurement = require('../src/models/measurement');
 const User = require('../src/models/user');
 
 chai.use(chaiHttp);
 
+//====================== tests to reach all html pages =============================//
 describe('reach html pages', () => {
 	it('should reach root and have html', (done) => {
 		chai.request(app)
@@ -48,17 +48,6 @@ describe('reach html pages', () => {
 		});
 	});
 
-	it('should reach forum', (done) => {
-		chai.request(app)
-		.get('/forum')
-		.end((err, res) => {
-			should.equal(err, null);
-			res.should.have.status(200);
-			res.should.be.html;
-			done();
-		});
-	});
-
 	it('should reach user account', (done) => {
 		chai.request(app)
 		.get('/user-account')
@@ -70,7 +59,7 @@ describe('reach html pages', () => {
 		});
 	});
 });
-
+//====================== tests for narratives route ===========================//
 describe('dashboard narratives DB', () => {
 	before((done) => {
         server.runServer(() => {
@@ -187,4 +176,33 @@ describe('dashboard narratives DB', () => {
 				})
 		});
 	});
+//====================== tests for measurements route ===========================//
+describe('dashboard measurements DB', () => {
+	before((done) => {
+        server.runServer(() => {
+            Measurement.create({
+            	type: 'weight', 
+            	date:'10/12/16', 
+            	content: '12lbs 5oz'
+            },
+            {
+            	type: 'length', 
+            	date: '10/31/16', 
+            	content: '20.2 inches'
+            },
+            {
+            	type: 'headCir',
+            	date: '11/12/16', 
+            	content: '14 inches'
+        	}, () => {
+                done();
+            });
+        });
+    });
+
+    after(function(done) {
+        Measurement.remove(() => {
+            done();
+        });
+    });
 });
