@@ -63,8 +63,8 @@ describe('reach html pages', () => {
 });
 //====================== tests for narratives route ===========================//
 describe('dashboard narratives DB', function () {
-	this.timeout(15000);
-	
+	this.timeout(15000); 
+
 	before((done) => {
         server.runServer(() => {
             Narrative.create({
@@ -81,7 +81,7 @@ describe('dashboard narratives DB', function () {
             	title: 'Day 3',
             	date: '11/12/16', 
             	content: 'First time using bigger bottle'
-        	}, function() {
+        	}, () => {
             	done();
             });
         });
