@@ -132,12 +132,13 @@ router.post('/users', jsonParser, function(req, res) {
                 password: hash
             });
 
-            user.save((err) => {
+            user.save((err, createdUser) => {
                 if (err) {
                     return res.status(500).json({
                         message: 'Internal server error'
                     });
                 }
+                currentUser = createdUser._id;
                 return res.status(201).json({});
             });
         });
@@ -163,6 +164,7 @@ router.get('/dashboard/narratives', (req,res) => {
 
     .post('/dashboard/narratives', (req, res) => {
 		Narrative.create({
+            userId: currentUser,
         	title: req.body.title,
             date: req.body.date,
             content: req.body.content
@@ -222,6 +224,7 @@ router.get('/dashboard/measurements', (req,res) => {
 
     .post('/dashboard/measurements', (req, res) => {
         Measurement.create({
+            userId: currentUser,
             type: req.body.type,
             date: req.body.date,
             content: req.body.content
