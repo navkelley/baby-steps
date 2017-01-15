@@ -151,8 +151,8 @@ router.get('/dashboard', (req, res) => {
 });
 
 //====================== routes for dashboard narratives ==============================//
-router.get('/dashboard/narratives', (req,res) => {
-        Narrative.find((err, narrative) => {
+router.get('/dashboard/narratives/:userId', (req,res) => {
+        Narrative.find({userId: currentUser}, (err, narrative) => {
             if(err) {
                 return res.status(500).json({
                     message: 'Internal Server Error'

@@ -100,7 +100,7 @@ $(document).ready(function() {
     const getNarratives = (search) => {
         console.log(search);
         let params = {
-            //not sure 
+            userId: currentUser 
         }
         let url = "https://evening-hollows-59256"
         $.getJson(url, params, (data) => {
@@ -172,6 +172,6 @@ $(document).ready(function() {
     $("#narrLink").click(() => {
         getRequest(); 
     });
-
+//on submit of login: make post req, return id in res, client save userId 
 });
   
