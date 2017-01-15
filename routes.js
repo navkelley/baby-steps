@@ -134,11 +134,6 @@ router.put('/dashboard/measurements/:id',(req, res) => {
         }); 
     });
 
-//====================== define route to user account settings =========================//
-router.get('/user-account',(req, res) => {
-		res.sendFile(path.join(__dirname + '/public/user-account.html'));
-});
-
 //====================== catch all for routes =======================================//
 router.use('*', (req, res) => {
     res.status(404).json({

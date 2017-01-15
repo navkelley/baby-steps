@@ -38,17 +38,6 @@ describe('reach html pages', () => {
 			done();
 		});
 	});
-
-	it('should reach user account', (done) => {
-		chai.request(app)
-		.get('/user-account')
-		.end((err, res) => {
-			should.equal(err, null);
-			res.should.have.status(200);
-			res.should.be.html;
-			done();
-		});
-	});
 });
 //====================== tests for user routers ===============================//
 describe('users from signup', () => {
