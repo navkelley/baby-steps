@@ -15,23 +15,23 @@ app.use('/', router);
 
 const runServer = (callback) => {
 
-    mongoose.connect('mongodb://localhost/auth').then(function() {
-    User.find(function(err, users) {
-        console.log(users); 
-    });
-    app.listen(process.env.PORT || 8080);
-    });//work in progress 
-
-    mongoose.connect(config.DATABASE_URL, function(err) {
-        if (err && callback) {
-            return callback(err);
-        }
-
-        app.listen(config.PORT, function() {
-            console.log('Listening on localhost:' + config.PORT);
-            if (callback) {
-                callback();
+    mongoose.connect('mongodb://localhost/auth').then(() => {
+        User.find((err, users) => {
+            console.log(users); 
+        }),
+        mongoose.disconnect();
+        //work in progress 
+        mongoose.connect(config.DATABASE_URL, (err) => {
+            if (err && callback) {
+                return callback(err);
             }
+
+            app.listen(config.PORT, () => {
+                console.log('Listening on localhost:' + config.PORT);
+                if (callback) {
+                    callback();
+                }
+            });
         });
     });
 };
