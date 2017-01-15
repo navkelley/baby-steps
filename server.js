@@ -15,11 +15,11 @@ app.use('/', router);
 
 const runServer = (callback) => {
 
-    mongoose.connect('mongodb://localhost/auth').then(() => {
+    /*mongoose.connect('mongodb://localhost/auth').then(() => {
         User.find((err, users) => {
             console.log(users); 
         }),
-        mongoose.disconnect();
+        mongoose.disconnect();*/
         //work in progress 
         mongoose.connect(config.DATABASE_URL, (err) => {
             if (err && callback) {
@@ -33,7 +33,7 @@ const runServer = (callback) => {
                 }
             });
         });
-    });
+    //});
 };
 
 if (require.main === module) {
