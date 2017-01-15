@@ -127,6 +127,35 @@
 	        $('input[type=date]')[0].value = "";
 	    };
 	
+	    var getNarratives = function getNarratives(search) {
+	        console.log(search);
+	        var params = {
+	            //not sure 
+	        };
+	        var url = "https://evening-hollows-59256";
+	        $.getJson(url, params, function (data) {
+	            showNarrs(data);
+	        });
+	    };
+	
+	    var showNarrs = function showNarrs(data) {
+	        /*for (let i = 0; i < db or array? i++) {*/
+	        var entries = "<tr><td>" + /*figure out how to get date, title, content*/+"</td></tr>";
+	        $("#narrative-table").append(entries);
+	        //}
+	    };
+	
+	    var getMeasurements = function getMeasurements(search) {
+	        console.log(search);
+	        var params = {
+	            type: type
+	        };
+	        var url = "https://evening-hollows-59256";
+	        $.getJson(url, params, function (data) {
+	            showResults(data);
+	        });
+	    };
+	
 	    $("#narrForm").submit(function (e) {
 	        e.preventDefault();
 	        var narrDate = $("#narrDate").val();
@@ -167,6 +196,10 @@
 	        resetForm("#headCirForm");
 	        $("#headCirModal").modal("toggle");
 	        displayData();
+	    });
+	
+	    $("#narrLink").click(function () {
+	        getRequest();
 	    });
 	});
 

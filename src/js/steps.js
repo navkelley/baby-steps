@@ -95,7 +95,36 @@ $(document).ready(function() {
     const resetForm = (form) => {
         $(form).find("input:text, textarea").val("");
         $('input[type=date]')[0].value = "";
+    };
 
+    const getNarratives = (search) => {
+        console.log(search);
+        let params = {
+            //not sure 
+        }
+        let url = "https://evening-hollows-59256"
+        $.getJson(url, params, (data) => {
+            showNarrs(data);
+        })
+    };
+
+    const showNarrs = (data) => {
+        /*for (let i = 0; i < db or array? i++) {*/
+        let entries = "<tr><td>" + /*figure out how to get date, title, content*/ + 
+            "</td></tr>"
+        $("#narrative-table").append(entries);
+        //}
+    };
+
+    const getMeasurements = (search) => {
+        console.log(search);
+        let params = {
+            type: type
+        }
+        let url = "https://evening-hollows-59256"
+        $.getJson(url, params, (data) => {
+            showResults(data);
+        })
     };
 
     $("#narrForm").submit(function(e) {
@@ -138,6 +167,11 @@ $(document).ready(function() {
         resetForm("#headCirForm");
         $("#headCirModal").modal("toggle");
         displayData();
-    }); 
+    });
+
+    $("#narrLink").click(() => {
+        getRequest(); 
+    });
+
 });
   
