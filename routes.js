@@ -203,6 +203,11 @@ router.put('/dashboard/narratives/:id',(req, res) => {
 	    }); 
 	});
 
+//====================== route to see all narr entries ============================//
+router.get('/narrative-entries', (req,res) => {
+    res.sendFile(path.join(__dirname + '/public/narrative-entries.html'));
+});
+
 //====================== routes to define dashboard measurements =======================//
 router.get('/dashboard/measurements', (req,res) => {
         Measurement.find((err, measurement) => {
@@ -253,6 +258,20 @@ router.put('/dashboard/measurements/:id',(req, res) => {
             res.status(200).json(measurement);
         }); 
     });
+//====================== route to see all weight entires ============================//
+router.get('/weight-entries', (req,res) => {
+    res.sendFile(path.join(__dirname + '/public/weight-entries.html'));
+});
+
+//====================== route to see all length entries ============================//
+router.get('/length-entries', (req,res) => {
+    res.sendFile(path.join(__dirname + '/public/length-entries.html'));
+});
+
+//====================== route to see all headCir entries ===========================//
+router.get('/headCir-entries', (req,res) => {
+    res.sendFile(path.join(__dirname + '/public/headCir-entries.html'));
+});
 
 //====================== catch all for routes =======================================//
 router.use('*', (req, res) => {
