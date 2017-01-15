@@ -39,7 +39,7 @@ describe('reach html pages', () => {
 		});
 	});
 });
-//====================== tests for user routers ===============================//
+//====================== tests for user routes ===============================//
 describe('users from signup', () => {
 	before((done) => {
         server.runServer(() => {

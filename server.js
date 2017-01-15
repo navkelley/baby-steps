@@ -14,6 +14,14 @@ app.use(express.static('public'));
 app.use('/', router);
 
 const runServer = (callback) => {
+
+    mongoose.connect('mongodb://localhost/auth').then(function() {
+    User.find(function(err, users) {
+        console.log(users); 
+    });
+    app.listen(process.env.PORT || 8080);
+    });//work in progress 
+
     mongoose.connect(config.DATABASE_URL, function(err) {
         if (err && callback) {
             return callback(err);

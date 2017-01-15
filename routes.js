@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const router = express.Router();
 const path = require('path');
+const jsonParser = bodyParser.json();
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const BasicStrategy = require('passport-http').BasicStrategy;
 
 //import models for use 
 const Narrative = require('./src/models/narrative');
@@ -22,7 +26,123 @@ router.get('/', (req, res) => {
 });
 
 //====================== define route for users ================================//
+let strategy = new BasicStrategy((username, password, callback) => {
+    User.findOne({
+        username: username
+    }, (err, user) => {
+        if (err) {
+            callback(err);
+            return;
+        }
 
+        if (!user) {
+            return callback(null, false, {
+                message: 'Incorrect username.'
+            });
+        }
+
+        user.validatePassword(password, function(err, isValid) {
+            if (err) {
+                return callback(err);
+            }
+
+            if (!isValid) {
+                return callback(null, false, {
+                    message: 'Incorrect password.'
+                });
+            }
+            return callback(null, user);
+        });
+    });
+});
+
+passport.use(strategy);
+
+router.use(passport.initialize());
+
+router.get('/hidden', passport.authenticate('basic', {session: false}), (req, res) => {
+    res.json({
+        message: 'Hello World'
+    });
+});
+
+router.post('/users', jsonParser, function(req, res) {
+    if (!req.body) {
+        return res.status(400).json({
+            message: "No request body"
+        });
+    }
+
+    if (!('username' in req.body)) {
+        return res.status(422).json({
+            message: 'Missing field: username'
+        });
+    }
+
+    let username = req.body.username;
+
+    if (typeof username !== 'string') {
+        return res.status(422).json({
+            message: 'Incorrect field type: username'
+        });
+    }
+
+    if (username === '') {
+        return res.status(422).json({
+            message: 'Incorrect field length: username'
+        });
+    }
+
+    if (!('password' in req.body)) {
+        return res.status(422).json({
+            message: 'Missing field: password'
+        });
+    }
+
+    let password = req.body.password;
+
+    if (typeof password !== 'string') {
+        return res.status(422).json({
+            message: 'Incorrect field type: password'
+        });
+    }
+
+    if (password === '') {
+        return res.status(422).json({
+            message: 'Incorrect field length: password'
+        });
+    }
+
+    bcrypt.genSalt(10, (err, salt) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal server error'
+            });
+        }
+
+        bcrypt.hash(password, salt, (err, hash) => {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal server error'
+                });
+            }
+
+            let user = new User({
+                username: username,
+                password: hash
+            });
+
+            user.save((err) => {
+                if (err) {
+                    return res.status(500).json({
+                        message: 'Internal server error'
+                    });
+                }
+                return res.status(201).json({});
+            });
+        });
+    });
+});
 
 //====================== define route to main dashboard & deliver ======================//
 router.get('/dashboard', (req, res) => {
