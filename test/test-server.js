@@ -57,7 +57,7 @@ describe('users from signup', () => {
             User.create({
             	username: 'Tiffany', 
             	password:  
-            },
+            }
             {
             	username: 'Alex', 
             	password: 
