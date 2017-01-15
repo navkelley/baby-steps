@@ -45,15 +45,15 @@ describe('users from signup', () => {
         server.runServer(() => {
             User.create({
             	username: 'Tiffany', 
-            	password: 
+            	password: 'password'
             },
             {
             	username: 'Alex', 
-            	password: 
+            	password: 'password'
             },
             {
             	username: 'Joe',
-            	password: 
+            	password: 'password'
         	}, () => {
             	done();
             });
