@@ -67,9 +67,7 @@ describe('users from signup', () => {
     });
 })//TODO: need to finish 
 //====================== tests for narratives route ===========================//
-describe('dashboard narratives DB', function () {
-	this.timeout(15000); 
-
+describe('dashboard narratives DB', () => {
 	before((done) => {
         server.runServer(() => {
             Narrative.create({
@@ -86,14 +84,14 @@ describe('dashboard narratives DB', function () {
             	title: 'Day 3',
             	date: '11/12/16', 
             	content: 'First time using bigger bottle'
-        	}, () => {
+        	}, function(err) {
             	done();
             });
         });
     });
 
     after((done) => {
-        Narrative.remove(() => {
+        Narrative.remove(function() {
             done();
         });
     });
