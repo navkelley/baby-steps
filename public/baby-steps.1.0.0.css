@@ -26,6 +26,9 @@ h4 {
 #babyE {
   height: 50px;
 }
+#babyElephant {
+  display: inline-block;
+}
 #aMessage {
   color: red;
 }
