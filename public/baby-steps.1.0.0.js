@@ -191,7 +191,7 @@
 	            }),
 	            success: function success(res) {
 	                res.json({ createdUser: createdUser });
-	                var currentUser = _id;
+	                var currentUser = createdUser_id;
 	                console.log(currentUser);
 	            } //work in progress 
 	        });

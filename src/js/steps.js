@@ -162,7 +162,7 @@ $(document).ready(function() {
             }),
             success: function (res) {
                 res.json({createdUser});
-                let currentUser = _id; 
+                let currentUser = createdUser_id; 
                 console.log(currentUser);
             }//work in progress 
         });
