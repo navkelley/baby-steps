@@ -101,25 +101,24 @@
 	            "headCir": "16.5 inches"
 	        }]
 	    };
-	    //will need to make ajax request to db
-	    //change all append to html--make sure select right div!
+	    //will need to make request to db
 	    var displayData = function displayData() {
 	        var record = data.narratives[data.narratives.length - 1].date + "<br>";
 	        record += data.narratives[data.narratives.length - 1].title + "<br>";
 	        record += data.narratives[data.narratives.length - 1].text + "<br>";
-	        $("#narrative-entry").append(record);
+	        $("#narrative-entry").html(record);
 	
 	        var weightRecord = data.weight[data.weight.length - 1].date + "<br>";
 	        weightRecord += data.weight[data.weight.length - 1].weight + "<br>";
-	        $("#weight-entry").append(weightRecord);
+	        $("#weight-entry").html(weightRecord);
 	
 	        var lengthRecord = data.length[data.length.length - 1].date + "<br>";
 	        lengthRecord += data.length[data.length.length - 1].length + "<br>";
-	        $("#length-entry").append(lengthRecord);
+	        $("#length-entry").html(lengthRecord);
 	
 	        var headCirRecord = data.headCir[data.headCir.length - 1].date + "<br>";
 	        headCirRecord += data.headCir[data.headCir.length - 1].headCir + "<br>";
-	        $("#headCir-entry").append(headCirRecord);
+	        $("#headCir-entry").html(headCirRecord);
 	    };
 	
 	    var resetForm = function resetForm(form) {
@@ -130,9 +129,10 @@
 	    var getNarratives = function getNarratives(search) {
 	        console.log(search);
 	        var params = {
-	            //not sure 
+	            userId: currentUser
 	        };
-	        var url = "https://evening-hollows-59256";
+	        //change to heroku web once functional
+	        var url = "localhost:8080";
 	        $.getJson(url, params, function (data) {
 	            showNarrs(data);
 	        });
@@ -148,13 +148,31 @@
 	    var getMeasurements = function getMeasurements(search) {
 	        console.log(search);
 	        var params = {
+	            userId: currentUser,
 	            type: type
 	        };
-	        var url = "https://evening-hollows-59256";
+	        //change to heroku web once functional
+	        var url = "/measurements";
 	        $.getJson(url, params, function (data) {
 	            showResults(data);
 	        });
 	    };
+	
+	    $("#login").submit(function (e) {
+	        e.preventDefault();
+	        $.ajax({
+	            type: "GET",
+	            url: '/',
+	            error: function error() {
+	                alert("An error has occurred.");
+	            },
+	            datatype: 'jsonp',
+	            success: function success(data) {
+	                var currentUser = user._id;
+	                console.log(currentUser);
+	            }
+	        });
+	    });
 	
 	    $("#narrForm").submit(function (e) {
 	        e.preventDefault();
@@ -199,8 +217,9 @@
 	    });
 	
 	    $("#narrLink").click(function () {
-	        getRequest();
+	        getNarratives();
 	    });
+	    //on submit of login: make post req, return id in res, client save userId 
 	});
 
 /***/ }

@@ -20,9 +20,9 @@ const timeLog = router.use((req, res, next) => {
   next();
 });
 
-//====================== define route to home page & deliver ============================//
-router.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname + '/public/index.html'));
+//====================== define route for sign up page ========================//
+router.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/signup.html'));
 });
 
 //====================== define route for users ================================//
@@ -60,10 +60,8 @@ passport.use(strategy);
 
 router.use(passport.initialize());
 
-router.get('/hidden', passport.authenticate('basic', {session: false}), (req, res) => {
-    res.json({
-        message: 'Hello World'
-    });
+router.get('/', passport.authenticate('basic', {session: false}), (req, res) => {
+    res.redirect('/dashboard/' + req.user.username);
 });
 
 router.post('/users', jsonParser, function(req, res) {
@@ -139,7 +137,7 @@ router.post('/users', jsonParser, function(req, res) {
                     });
                 }
                 currentUser = createdUser._id;
-                return res.status(201).json({});
+                return res.status(201).json({createdUser});
             });
         });
     });

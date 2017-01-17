@@ -71,25 +71,24 @@ $(document).ready(function() {
             },
         ]
     };
-    //will need to make ajax request to db
-    //change all append to html--make sure select right div!
+    //will need to make request to db
     const displayData = () => {
         let record = data.narratives[data.narratives.length-1].date + "<br>";
         record += data.narratives[data.narratives.length-1].title + "<br>";
         record += data.narratives[data.narratives.length-1].text + "<br>";
-        $("#narrative-entry").append(record);
+        $("#narrative-entry").html(record);
 
         let weightRecord = data.weight[data.weight.length-1].date + "<br>";
         weightRecord += data.weight[data.weight.length-1].weight + "<br>";
-        $("#weight-entry").append(weightRecord);
+        $("#weight-entry").html(weightRecord);
 
         let lengthRecord = data.length[data.length.length-1].date + "<br>";
         lengthRecord += data.length[data.length.length-1].length + "<br>";
-        $("#length-entry").append(lengthRecord);
+        $("#length-entry").html(lengthRecord);
 
         let headCirRecord = data.headCir[data.headCir.length-1].date + "<br>";
         headCirRecord += data.headCir[data.headCir.length-1].headCir + "<br>";
-        $("#headCir-entry").append(headCirRecord);
+        $("#headCir-entry").html(headCirRecord);
     };
     
     const resetForm = (form) => {
@@ -102,7 +101,8 @@ $(document).ready(function() {
         let params = {
             userId: currentUser 
         }
-        let url = "https://evening-hollows-59256"
+        //change to heroku web once functional
+        let url = "localhost:8080"
         $.getJson(url, params, (data) => {
             showNarrs(data);
         })
@@ -119,13 +119,31 @@ $(document).ready(function() {
     const getMeasurements = (search) => {
         console.log(search);
         let params = {
+            userId: currentUser,
             type: type
         }
-        let url = "https://evening-hollows-59256"
+        //change to heroku web once functional
+        let url = "/measurements"
         $.getJson(url, params, (data) => {
             showResults(data);
         })
     };
+
+    $("#login").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "GET",
+            url:'/',
+            error: function() {
+                alert("An error has occurred.");
+            },
+            datatype: 'jsonp',
+            success: function(data) {
+                let currentUser = user._id;
+                console.log(currentUser);
+            },
+        }); 
+    });
 
     $("#narrForm").submit(function(e) {
         e.preventDefault(); 
@@ -170,7 +188,7 @@ $(document).ready(function() {
     });
 
     $("#narrLink").click(() => {
-        getRequest(); 
+        getNarratives(); 
     });
 //on submit of login: make post req, return id in res, client save userId 
 });

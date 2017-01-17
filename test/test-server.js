@@ -45,15 +45,15 @@ describe('users from signup', () => {
         server.runServer(() => {
             User.create({
             	username: 'Tiffany', 
-            	password: 'password'
+            	password: 'password1'
             },
             {
             	username: 'Alex', 
-            	password: 'password'
+            	password: 'password2'
             },
             {
             	username: 'Joe',
-            	password: 'password'
+            	password: 'password3'
         	}, () => {
             	done();
             });
@@ -65,6 +65,17 @@ describe('users from signup', () => {
             done();
         });
     });
+
+    it('should create a new user and hash the password', () => {
+    	chai.request(app)
+    	.post('/users')
+    	.end(req, res) => {
+    		should.equal(err, null);
+    		res.should.be.json;
+    		
+
+    	}
+    })
 })//TODO: need to finish 
 //====================== tests for narratives route ===========================//
 describe('dashboard narratives DB', () => {
@@ -96,7 +107,7 @@ describe('dashboard narratives DB', () => {
         });
     });
 
-	it('should get all narratives', (done) =>{
+	it('should get all narratives', (done) => {
 		chai.request(app)
 			.get('/dashboard/narratives')
 			.end((err,res) => {

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.ObjectId; 
 
 const NarrativeSchema = mongoose.Schema({
-	userId: {type: ObjectId, required: false},
+	userId: {type: ObjectId, required: true},
     title: {type: String, unique: true, required: true},
     date: Date,
 	content: String
