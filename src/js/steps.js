@@ -125,13 +125,25 @@ $(document).ready(function() {
             userId: currentUser,
             type: type
         }
-        //change to heroku web once functional
+        //change to heroku web once functional?
         let url = "/measurements"
         $.getJson(url, params, (data) => {
             showResults(data);
         })
     };
 
+    //verify both password fields match
+    const checkPassword = (password) => {
+        let pass1 = $("#password").val();
+        let pass2 = $("#verifyPassword").val();
+        if (pass1 === pass2) {
+            $("#passwordMessage").append("<p id='PassMatch'>Passwords Match!</p>")
+        }
+        else {
+            $("#passwordMessage").append("<p id='PassMatch'>Passwords Do Not Match!</p>")
+        }
+    }
+    //grab user id and go to individual's dashboard----work in progress
     $("#login").submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -150,6 +162,7 @@ $(document).ready(function() {
 
     $("#sign-up").submit(function(e) {
         e.preventDefault();
+        checkPassword();
         let username = $("#userEmail").val();
         let password = $("#password").val();
         $.ajax({
@@ -160,6 +173,9 @@ $(document).ready(function() {
                 username: username,
                 password: password
             }),
+            error: function() {
+                $("#accountMessage").append("<p id='aMessage>Account could not be created.</p>")
+            },
             success: function (res) {
                 res.json({createdUser});
                 let currentUser = createdUser_id; 

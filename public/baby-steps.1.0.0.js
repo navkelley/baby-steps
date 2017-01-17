@@ -154,13 +154,24 @@
 	            userId: currentUser,
 	            type: type
 	        };
-	        //change to heroku web once functional
+	        //change to heroku web once functional?
 	        var url = "/measurements";
 	        $.getJson(url, params, function (data) {
 	            showResults(data);
 	        });
 	    };
 	
+	    //verify both password fields match
+	    var checkPassword = function checkPassword(password) {
+	        var pass1 = $("#password").val();
+	        var pass2 = $("#verifyPassword").val();
+	        if (pass1 === pass2) {
+	            $("#passwordMessage").append("<p id='PassMatch'>Passwords Match!</p>");
+	        } else {
+	            $("#passwordMessage").append("<p id='PassMatch'>Passwords Do Not Match!</p>");
+	        }
+	    };
+	    //grab user id and go to individual's dashboard----work in progress
 	    $("#login").submit(function (e) {
 	        e.preventDefault();
 	        $.ajax({
@@ -179,6 +190,7 @@
 	
 	    $("#sign-up").submit(function (e) {
 	        e.preventDefault();
+	        checkPassword();
 	        var username = $("#userEmail").val();
 	        var password = $("#password").val();
 	        $.ajax({
@@ -189,6 +201,9 @@
 	                username: username,
 	                password: password
 	            }),
+	            error: function error() {
+	                $("#accountMessage").append("<p id='aMessage>Account could not be created.</p>");
+	            },
 	            success: function success(res) {
 	                res.json({ createdUser: createdUser });
 	                var currentUser = createdUser_id;

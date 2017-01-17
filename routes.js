@@ -91,12 +91,6 @@ router.post('/users', jsonParser, function(req, res) {
         });
     }
 
-    if (username === username) {
-        return res.status(409).json({
-            message: 'Account already exists'
-        });
-    }
-
     if (!('password' in req.body)) {
         return res.status(422).json({
             message: 'Missing field: password'

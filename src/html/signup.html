@@ -14,47 +14,50 @@
 	<body>
 		<div class="container">
 			<h1>Sign Up for Baby Steps</h1>
-			<form id="sign-up">
-				<div class="form-group row">
-					<label for="firstName" class="col-2 col-form-label">First Name</label>
-			  		<div class="col-10">
-			    		<input class="form-control" type="text" placeholder="Sam" id="firstName">
-			  		</div>
-				</div>
-				<div class="form-group row">
-			  		<label for="lastName" class="col-2 col-form-label">Last Name</label>
-			  		<div class="col-10">
-			    		<input class="form-control" type="text" placeholder="Johnson" id="lastName">
-			  		</div>
-				</div>
-				<div class="form-group row">
-			  		<label for="email" class="col-2 col-form-label">Email</label>
-			  		<div class="col-10">
-			    		<input class="form-control" type="email" placeholder="samj@gmail.com" id="userEmail">
-			  		</div>
-				</div>
-				<div class="form-group row">
-			  		<label for="password" class="col-2 col-form-label">Password</label>
-			  		<div class="col-10">
-			    		<input class="form-control" type="password" id="password">
-			  		</div>
-				</div>
-				<div class="form-group row">
-			  		<label for="verifyPassword" class="col-2 col-form-label">Verify Password</label>
-			  		<div class="col-10">
-			    		<input class="form-control" type="password" id="verifyPassword">
-			  		</div>
-				</div>
-				<div class="form-group row">
-			  		<label for="childName" class="col-2 col-form-label">Child's Name</label>
-			  		<div class="col-10">
-			    		<input class="form-control" type="text" placeholder="Nicole" id="childName">
-			  		</div>
-				</div>
-				<div class="form-group row">
-					<button class="btn btn-success" type="submit" id="submitSignup">Sign Up</button>
-				</div>
-			</form>
+			<div id="accountMessage"></div>
+			<div class="row" id="signup-box">
+				<form id="sign-up">
+					<div class="form-group row">
+						<label for="firstName" class="col-2 col-form-label">First Name</label>
+				  		<div class="col-10">
+				    		<input class="form-control" type="text" placeholder="Sam" id="firstName">
+				  		</div>
+					</div>
+					<div class="form-group row">
+				  		<label for="lastName" class="col-2 col-form-label">Last Name</label>
+				  		<div class="col-10">
+				    		<input class="form-control" type="text" placeholder="Johnson" id="lastName">
+				  		</div>
+					</div>
+					<div class="form-group row">
+				  		<label for="email" class="col-2 col-form-label">Email</label>
+				  		<div class="col-10">
+				    		<input class="form-control" type="email" placeholder="Your email address will be your username" id="userEmail">
+				  		</div>
+					</div>
+					<div class="form-group row">
+				  		<label for="password" class="col-2 col-form-label">Password</label>
+				  		<div class="col-10">
+				    		<input class="form-control" type="password" id="password">
+				  		</div>
+					</div>
+					<div class="form-group row">
+				  		<label for="verifyPassword" class="col-2 col-form-label">Verify Password</label>
+				  		<div class="col-10" id="passwordMessage">
+				    		<input class="form-control" type="password" id="verifyPassword">
+				  		</div>
+					</div>
+					<div class="form-group row">
+				  		<label for="childName" class="col-2 col-form-label">Child's Name</label>
+				  		<div class="col-10">
+				    		<input class="form-control" type="text" placeholder="Nicole" id="childName">
+				  		</div>
+					</div>
+					<div class="form-group row">
+						<button class="btn btn-success" type="submit" id="submitSignup">Sign Up</button>
+					</div>
+				</form>
+			</div><!--row-->
 		</div><!--container-->
 	</body>
 </html>
