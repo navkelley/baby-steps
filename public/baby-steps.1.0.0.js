@@ -101,6 +101,10 @@
 	            "headCir": "16.5 inches"
 	        }]
 	    };
+	
+	    //to hold user id
+	    var currentUser = void 0;
+	
 	    //will need to make request to db
 	    var displayData = function displayData() {
 	        var record = data.narratives[data.narratives.length - 1].date + "<br>";
@@ -127,14 +131,13 @@
 	    };
 	
 	    var getNarratives = function getNarratives(search) {
-	        console.log(search);
-	        var params = {
-	            userId: currentUser
-	        };
-	        //change to heroku web once functional
-	        var url = "localhost:8080";
-	        $.getJson(url, params, function (data) {
-	            showNarrs(data);
+	        $.ajax({
+	            type: "GET",
+	            url: "/narratives/" + currentUser,
+	            contentType: "application/json",
+	            success: function success(res) {
+	                res.json(search);
+	            } //work in progress 
 	        });
 	    };
 	
@@ -171,6 +174,26 @@
 	                var currentUser = user._id;
 	                console.log(currentUser);
 	            }
+	        });
+	    });
+	
+	    $("#sign-up").submit(function (e) {
+	        e.preventDefault();
+	        var username = $("#userEmail").val();
+	        var password = $("#password").val();
+	        $.ajax({
+	            type: "POST",
+	            url: "/users",
+	            contentType: "application/json",
+	            data: JSON.stringify({
+	                username: username,
+	                password: password
+	            }),
+	            success: function success(res) {
+	                res.json({ createdUser: createdUser });
+	                var currentUser = _id;
+	                console.log(currentUser);
+	            } //work in progress 
 	        });
 	    });
 	

@@ -71,6 +71,10 @@ $(document).ready(function() {
             },
         ]
     };
+
+    //to hold user id
+    let currentUser; 
+
     //will need to make request to db
     const displayData = () => {
         let record = data.narratives[data.narratives.length-1].date + "<br>";
@@ -97,15 +101,14 @@ $(document).ready(function() {
     };
 
     const getNarratives = (search) => {
-        console.log(search);
-        let params = {
-            userId: currentUser 
-        }
-        //change to heroku web once functional
-        let url = "localhost:8080"
-        $.getJson(url, params, (data) => {
-            showNarrs(data);
-        })
+        $.ajax({
+            type: "GET",
+            url: "/narratives/" + currentUser,
+            contentType: "application/json",
+            success: function (res) {
+                res.json(search);
+            }//work in progress 
+        });
     };
 
     const showNarrs = (data) => {
@@ -143,6 +146,26 @@ $(document).ready(function() {
                 console.log(currentUser);
             },
         }); 
+    });
+
+    $("#sign-up").submit(function(e) {
+        e.preventDefault();
+        let username = $("#userEmail").val();
+        let password = $("#password").val();
+        $.ajax({
+            type: "POST",
+            url: "/users",
+            contentType: "application/json",
+            data: JSON.stringify({
+                username: username,
+                password: password
+            }),
+            success: function (res) {
+                res.json({createdUser});
+                let currentUser = _id; 
+                console.log(currentUser);
+            }//work in progress 
+        });
     });
 
     $("#narrForm").submit(function(e) {
