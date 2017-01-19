@@ -166,9 +166,9 @@
 	        var pass1 = $("#password").val();
 	        var pass2 = $("#verifyPassword").val();
 	        if (pass1 === pass2) {
-	            $("#passwordMessage").append("<p id='PassMatch'>Passwords Match!</p>");
+	            $("#passwordMessage").html("<p id='PassMatch'>Passwords Match!</p>");
 	        } else {
-	            $("#passwordMessage").append("<p id='PassMatch'>Passwords Do Not Match!</p>");
+	            $("#passwordMessage").html("<p id='PassMatch'>Passwords Do Not Match!</p>");
 	        }
 	    };
 	    //grab user id and go to individual's dashboard----work in progress
@@ -177,13 +177,18 @@
 	        $.ajax({
 	            type: "GET",
 	            url: '/',
+	            contentType: "application/json",
+	            data: JSON.stringify({
+	                username: $("#userEmailLogin").val(),
+	                password: $("#userPassLogin").val()
+	            }),
 	            error: function error() {
 	                alert("An error has occurred.");
 	            },
-	            datatype: 'jsonp',
-	            success: function success(data) {
-	                var currentUser = user._id;
-	                console.log(currentUser);
+	            success: function success(user) {
+	                //currentUser = 
+	                console.log(user);
+	                //location.href = '/dashboard'
 	            }
 	        });
 	    });
@@ -205,10 +210,10 @@
 	                $("#accountMessage").append("<p id='aMessage>Account could not be created.</p>");
 	            },
 	            success: function success(res) {
-	                res.json({ createdUser: createdUser });
-	                var currentUser = createdUser_id;
+	                console.log(res);
+	                currentUser = res.createdUser._id;
 	                console.log(currentUser);
-	            } //work in progress 
+	            }
 	        });
 	    });
 	

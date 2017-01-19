@@ -137,10 +137,10 @@ $(document).ready(function() {
         let pass1 = $("#password").val();
         let pass2 = $("#verifyPassword").val();
         if (pass1 === pass2) {
-            $("#passwordMessage").append("<p id='PassMatch'>Passwords Match!</p>")
+            $("#passwordMessage").html("<p id='PassMatch'>Passwords Match!</p>")
         }
         else {
-            $("#passwordMessage").append("<p id='PassMatch'>Passwords Do Not Match!</p>")
+            $("#passwordMessage").html("<p id='PassMatch'>Passwords Do Not Match!</p>")
         }
     }
     //grab user id and go to individual's dashboard----work in progress
@@ -149,13 +149,18 @@ $(document).ready(function() {
         $.ajax({
             type: "GET",
             url:'/',
+            contentType: "application/json",
+            data: JSON.stringify({
+                username: $("#userEmailLogin").val(),
+                password: $("#userPassLogin").val(), 
+            }),
             error: function() {
                 alert("An error has occurred.");
             },
-            datatype: 'jsonp',
-            success: function(data) {
-                let currentUser = user._id;
-                console.log(currentUser);
+            success: function(user) {
+                //currentUser = 
+                console.log(user);
+                //location.href = '/dashboard'
             },
         }); 
     });
@@ -177,10 +182,10 @@ $(document).ready(function() {
                 $("#accountMessage").append("<p id='aMessage>Account could not be created.</p>")
             },
             success: function (res) {
-                res.json({createdUser});
-                let currentUser = createdUser_id; 
+                console.log(res);
+                currentUser = res.createdUser._id; 
                 console.log(currentUser);
-            }//work in progress 
+            } 
         });
     });
 

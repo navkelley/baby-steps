@@ -60,8 +60,20 @@ passport.use(strategy);
 
 router.use(passport.initialize());
 
-router.get('/', passport.authenticate('basic', {session: false}), (req, res) => {
-    res.redirect('/dashboard/' + req.user.username);
+router.get('/', passport.authenticate('basic', {session: true}), (req, res) => {
+    User.findOne({
+        username: username
+    }, (err, user) => {
+        if (err) {
+            callback(err);
+            return;
+        } 
+        else {
+            return user._id; 
+            console.log(user._id);
+        }
+    console.log('is this working?')
+    res.redirect('/dashboard');
 });
 
 router.post('/users', jsonParser, function(req, res) {
@@ -132,9 +144,7 @@ router.post('/users', jsonParser, function(req, res) {
 
             user.save((err, createdUser) => {
                 if (err) {
-                    return res.status(500).json({
-                        message: 'Internal server error'
-                    });
+                    return res.status(500).json(err);
                 }
                 currentUser = createdUser._id;
                 return res.status(201).json({createdUser});
@@ -145,11 +155,12 @@ router.post('/users', jsonParser, function(req, res) {
 
 //====================== define route to main dashboard & deliver ======================//
 router.get('/dashboard', (req, res) => {
+    console.log('dashboard route hit')
     res.sendFile(path.join(__dirname + '/public/dashboard.html'));
 });
 
 //====================== routes for dashboard narratives ==============================//
-router.get('/dashboard/narratives/:userId', (req,res) => {
+router.get('/dashboard/narratives/:userId', (req, res) => {
         Narrative.find({userId: currentUser}, (err, narrative) => {
             if(err) {
                 return res.status(500).json({
@@ -175,6 +186,7 @@ router.get('/dashboard/narratives/:userId', (req,res) => {
         	res.status(201).json(narrative);
     	});
     });
+});
 
 
 router.put('/dashboard/narratives/:id',(req, res) => {
@@ -202,6 +214,7 @@ router.put('/dashboard/narratives/:id',(req, res) => {
 	        res.status(200).json(narrative);
 	    }); 
 	});
+
 
 //====================== route to see all narr entries ============================//
 router.get('/narrative-entries', (req,res) => {
