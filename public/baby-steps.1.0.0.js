@@ -212,9 +212,8 @@
 	                $("#accountMessage").append("<p id='aMessage>Account could not be created.</p>");
 	            },
 	            success: function success(res) {
-	                console.log(res);
 	                currentUser = res.createdUser._id;
-	                console.log(currentUser);
+	                location.href = '/dashboard';
 	            }
 	        });
 	    });
