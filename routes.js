@@ -7,7 +7,7 @@ const path = require('path');
 const jsonParser = bodyParser.json();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const BasicStrategy = require('passport-http').BasicStrategy;
+const LocalStrategy = require('passport-local').Strategy;
 
 //import models for use 
 const Narrative = require('./src/models/narrative');
@@ -26,55 +26,36 @@ router.get('/signup', (req, res) => {
 });
 
 //====================== define route for users ================================//
-let strategy = new BasicStrategy((username, password, callback) => {
-    User.findOne({
-        username: username
-    }, (err, user) => {
-        if (err) {
-            callback(err);
-            return;
-        }
-
-        if (!user) {
-            return callback(null, false, {
-                message: 'Incorrect username.'
-            });
-        }
-
-        user.validatePassword(password, function(err, isValid) {
-            if (err) {
-                return callback(err);
-            }
-
-            if (!isValid) {
-                return callback(null, false, {
-                    message: 'Incorrect password.'
-                });
-            }
-            return callback(null, user);
-        });
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true
+},
+  function(req, email, password, done) {
+    User.findOneByEmail(email, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
     });
-});
-
-passport.use(strategy);
+  }
+));
 
 router.use(passport.initialize());
 
-router.get('/', passport.authenticate('basic', {session: true}), (req, res) => {
-    User.findOne({
-        username: username
-    }, (err, user) => {
-        if (err) {
-            callback(err);
-            return;
-        } 
-        else {
-            return user._id; 
-            console.log(user._id);
-        }
-    console.log('is this working?')
-    res.redirect('/dashboard');
-});
+router.post('/', passport.authenticate('local', 
+    {failureRedirect: '/'}),
+    function (req, res) {
+        console.log(res)
+        res.redirect('/dashboard');
+    }
+);
+
+
 
 router.post('/users', jsonParser, function(req, res) {
     if (!req.body) {
@@ -186,7 +167,7 @@ router.get('/dashboard/narratives/:userId', (req, res) => {
         	res.status(201).json(narrative);
     	});
     });
-});
+
 
 
 router.put('/dashboard/narratives/:id',(req, res) => {

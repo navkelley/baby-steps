@@ -145,21 +145,23 @@ $(document).ready(function() {
     }
     //grab user id and go to individual's dashboard----work in progress
     $("#login").submit(function(e) {
+        let username = $("#userEmailLogin").val();
+        let password = $("#userPassLogin").val();
         e.preventDefault();
         $.ajax({
-            type: "GET",
-            url:'/',
+            type: "POST",
+            url:'/login',
             contentType: "application/json",
             data: JSON.stringify({
-                username: $("#userEmailLogin").val(),
-                password: $("#userPassLogin").val(), 
+                username: username,
+                password: password 
             }),
             error: function() {
                 alert("An error has occurred.");
             },
-            success: function(user) {
+            success: function(res) {
                 //currentUser = 
-                console.log(user);
+                console.log("hello is this working?");
                 //location.href = '/dashboard'
             },
         }); 
@@ -234,6 +236,5 @@ $(document).ready(function() {
     $("#narrLink").click(() => {
         getNarratives(); 
     });
-//on submit of login: make post req, return id in res, client save userId 
 });
   

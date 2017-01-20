@@ -27,7 +27,7 @@ h4 {
   height: 50px;
 }
 #babyElephant {
-  display: inline-block;
+  display: inline;
 }
 #aMessage {
   color: red;
@@ -43,5 +43,12 @@ h4 {
   /* IE10+ */
   background-image: repeating-linear-gradient(to top left, #f3ef15 0%, #009885 100%);
   background-image: -ms-repeating-linear-gradient(bottom right, #f3ef15 0%, #009885 100%);
+}
+body {
+  min-height: 800px;
+}
+h1,
+h4 {
+  font-family: 'Fontdiner Swanky', cursive;
 }
 /*# sourceMappingURL=baby-steps.1.0.0.css.map */

@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--script and links-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet">
         <link rel="stylesheet" href="baby-steps.1.0.0.min.css">
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -13,22 +14,28 @@
     </head>
     <body>
         <div class="container">
-            <img src="https://elephantspokenhere.files.wordpress.com/2015/08/drawing-of-baby-elephant.png?w=240" alt="babyElephant" id="babyElephant">
-            <h1>Baby Steps</h1>
+            <div class="row">
+                <div class="col-3">
+                    <img src="https://elephantspokenhere.files.wordpress.com/2015/08/drawing-of-baby-elephant.png?w=240" alt="babyElephant" id="babyElephant">
+                </div>
+                <div class="col-6">
+                    <h1>Baby Steps</h1>
+                </div><!--col-->
+            </div><!--row-->
             <div class="row">
                 <div id="login-box" class="col-8">
-                    <form id="login">
+                    <form id="login" action="/login" method="post">
                         <div class="form-group">
-                            <label for="userEmailLogin">Email address:</label>
-                            <input type="email" class="form-control" id="userEmailLogin" placeholder="nicole@babysteps.com">
+                            <label for="userEmailLogin">Username:</label>
+                            <input type="email" class="form-control" id="userEmailLogin" placeholder="nicole@babysteps.com" name="username">
                         </div>
                         <div class="form-group">
                             <label for="userPassLogin">Password:</label>
-                            <input type="password" class="form-control" id="userPassLogin" placeholder="ex.Password234">
+                            <input type="password" class="form-control" id="userPassLogin" placeholder="ex.Password234" name="password">
                             <p><a href="#">Forgot Password?</a></p>
                         </div>
                         <p><a href="/signup">Sign up for Baby Steps</a></p>
-                        <button type="submit" id="login" class="btn btn-success">Login</button>
+                        <button type="submit" id="login" class="btn btn-success" value="Log In">Login</button>
                     </form>
                 </div><!--signup box-->
             </div><!--row-->

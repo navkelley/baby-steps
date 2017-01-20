@@ -5,6 +5,10 @@ const config = require('./config');
 const app = express();
 const path = require('path');
 const router = require('./routes');
+const jsonParser = bodyParser.json();
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 app.use(bodyParser.json()); 
 app.use(express.static('public'));
