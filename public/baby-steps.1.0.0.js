@@ -172,6 +172,7 @@
 	            $("#passwordMessage").html("<p id='PassMatch'>Passwords Do Not Match!</p>");
 	        }
 	    };
+	
 	    //grab user id and go to individual's dashboard----work in progress
 	    $("#login").submit(function (e) {
 	        var username = $("#userEmailLogin").val();
@@ -187,6 +188,7 @@
 	            }),
 	            error: function error() {
 	                alert("An error has occurred.");
+	                location.href = '/';
 	            },
 	            success: function success() {
 	                location.href = 'dashboard';
@@ -211,22 +213,29 @@
 	    $("#sign-up").submit(function (e) {
 	        e.preventDefault();
 	        checkPassword();
-	        var username = $("#userEmail").val();
+	        var firstName = $("#firstName").val();
+	        var lastName = $("#lastName").val();
+	        var name = firstName + lastName;
+	        var username = $("#username").val();
+	        var email = $("#userEmail").val();
 	        var password = $("#password").val();
 	        $.ajax({
 	            type: "POST",
 	            url: "/register",
 	            contentType: "application/json",
 	            data: JSON.stringify({
+	                name: name,
+	                email: email,
 	                username: username,
 	                password: password
 	            }),
 	            error: function error() {
 	                $("#accountMessage").append("<p id='aMessage>Account could not be created.</p>");
 	            },
-	            success: function success(res) {
-	                currentUser = res.createdUser._id;
-	                location.href = '/dashboard';
+	            success: function success(user) {
+	                currentUser = user._id;
+	                console.log(currentUser);
+	                //location.href = '/dashboard'
 	            }
 	        });
 	    });

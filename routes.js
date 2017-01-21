@@ -32,14 +32,14 @@ router.get('/signup', (req, res) => {
 //====================== define route for users to login or register =============//
 // Get Homepage
 router.get('/', ensureAuthenticated, (req, res) => {
-   res.render('index');
+   res.redirect('/dashboard');
 });
 
 function ensureAuthenticated(req, res, next){
    if(req.isAuthenticated()){
       return next();
    } else {
-      res.redirect('/');
+      res.redirect(401, '/');
    }
 };
 
@@ -51,7 +51,7 @@ router.post('/register', (req, res) => {
    let password = req.body.password;
    let verifypassword = req.body.verifypassword;
 
-   console.log(name);
+   console.log("User name:", name);
    console.log(req.body);
    //validation
    req.checkBody('name', 'Name is required').notEmpty();
@@ -59,14 +59,11 @@ router.post('/register', (req, res) => {
    req.checkBody('email', 'Email is not valid').isEmail();
    req.checkBody('username', 'Username is required').notEmpty();
    req.checkBody('password', 'Password is required').notEmpty();
-   req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
    let errors = req.validationErrors();
 
    if(errors) {
-      res.render('signup', {
-         errors:errors
-      });
+     res.json(errors)
    } else {
       let newUser = new User({
          name: name,
@@ -77,9 +74,8 @@ router.post('/register', (req, res) => {
       User.createUser(newUser, (err, user) => {
          if(err) throw err;
          console.log(user);
+         res.json(user);
       });
-      req.flash('success_msg', 'You are registered and can now login');
-      res.redirect('/');
    }
 });
 
@@ -114,7 +110,7 @@ passport.use(new LocalStrategy(
 router.post('/login',
   passport.authenticate('local', {successRedirect:'/dashboard', failureRedirect:'/', failureFlash: true}),
   function(req, res) {
-    res.redirect('dashboard');
+    res.json(user);
   });
 
 router.get('/logout', (req, res) => {
