@@ -190,8 +190,9 @@
 	                alert("An error has occurred.");
 	                location.href = '/';
 	            },
-	            success: function success() {
-	                location.href = 'dashboard';
+	            success: function success(user) {
+	                console.log(user);
+	                //location.href = 'dashboard'
 	            }
 	        });
 	    });
@@ -235,7 +236,7 @@
 	            success: function success(user) {
 	                currentUser = user._id;
 	                console.log(currentUser);
-	                //location.href = '/dashboard'
+	                location.href = '/dashboard';
 	            }
 	        });
 	    });

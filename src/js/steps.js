@@ -162,8 +162,9 @@ $(document).ready(function() {
                 alert("An error has occurred.");
                 location.href = '/'
             },
-            success: function() {
-               location.href = 'dashboard'
+            success: function(user) {
+                console.log(user); 
+               //location.href = 'dashboard'
             },
         }); 
     });

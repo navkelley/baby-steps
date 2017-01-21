@@ -110,6 +110,7 @@ passport.use(new LocalStrategy(
 router.post('/login',
   passport.authenticate('local', {successRedirect:'/dashboard', failureRedirect:'/', failureFlash: true}),
   function(req, res) {
+    console.log(user);
     res.json(user);
   });
 
