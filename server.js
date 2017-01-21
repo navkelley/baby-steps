@@ -15,6 +15,11 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const app = express();
 
+//import models for use 
+const Narrative = require('./src/models/narrative');
+const Measurement = require('./src/models/measurement');
+const User = require('./src/models/user');
+
 //tell app what to use 
 app.use(bodyParser.json()); 
 app.use(express.static('public'));
@@ -52,7 +57,7 @@ app.use(expressValidator({
 }));
 
 // Flash messages
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.locals.sucess_msg = req.flash('sucess_msg');
   res.locals.erro_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
@@ -95,7 +100,11 @@ function closeServer() {
 }
 
 if (require.main === module) {
-  runServer().catch(err => console.error(err));
+    runServer((err) => {
+        if (err) {
+            console.error(err);
+        }
+    });
 };
 
 

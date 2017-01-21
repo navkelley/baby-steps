@@ -29,113 +29,99 @@ router.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/signup.html'));
 });
 
-//====================== define route for users ================================//
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password',
-    passReqToCallback: true
-},
-  function(req, email, password, done) {
-    User.findOneByEmail(email, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
+//====================== define route for users to login or register =============//
+// Get Homepage
+router.get('/', ensureAuthenticated, (req, res) => {
+   res.render('index');
+});
+
+function ensureAuthenticated(req, res, next){
+   if(req.isAuthenticated()){
+      return next();
+   } else {
+      // req.flash('error_msg', 'You are not logged in');
+      res.redirect('/users/login');
+   }
+}
+
+// Register User
+router.post('/register', function(req, res) {
+   let name = req.body.name;
+   let email = req.body.email;
+   let username = req.body.username;
+   let password = req.body.password;
+   let verifypassword = req.body.verifypassword;
+
+   console.log(name);
+   console.log(req.body);
+   //validation
+   req.checkBody('name', 'Name is required').notEmpty();
+   req.checkBody('email', 'Email is required').notEmpty();
+   req.checkBody('email', 'Email is not valid').isEmail();
+   req.checkBody('username', 'Username is required').notEmpty();
+   req.checkBody('password', 'Password is required').notEmpty();
+   req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+
+   let errors = req.validationErrors();
+
+   if(errors) {
+      res.render('signup', {
+         errors:errors
+      });
+   } else {
+      let newUser = new User({
+         name: name,
+         email: email,
+         username: username,
+         password: password
+      });
+      User.createUser(newUser, (err, user) => {
+         if(err) throw err;
+         console.log(user);
+      });
+      req.flash('success_msg', 'You are registered and can now login');
+      res.redirect('/');
+   }
+});
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.getUserByUsername(username, (err, user) => {
+      if(err) throw err;
+      if(!user){
+        return done(null, false, {message: 'Unknown User'});
       }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
-
-router.use(passport.initialize());
-
-router.post('/login', passport.authenticate('local', {successRedirect: '/dashboard', 
-    failureRedirect: '/login', failureFlash: true }),
-    function (req, res) {
-        console.log(res);
-        res.redirect('/dashboard');
-    }
-);
-
-
-
-router.post('/register', jsonParser, function(req, res) {
-    if (!req.body) {
-        return res.status(400).json({
-            message: "No request body"
-        });
-    }
-
-    if (!('username' in req.body)) {
-        return res.status(422).json({
-            message: 'Missing field: username'
-        });
-    }
-
-    let username = req.body.username;
-
-    if (typeof username !== 'string') {
-        return res.status(422).json({
-            message: 'Incorrect field type: username'
-        });
-    }
-
-    if (username === '') {
-        return res.status(422).json({
-            message: 'Incorrect field length: username'
-        });
-    }
-
-    if (!('password' in req.body)) {
-        return res.status(422).json({
-            message: 'Missing field: password'
-        });
-    }
-
-    let password = req.body.password;
-
-    if (typeof password !== 'string') {
-        return res.status(422).json({
-            message: 'Incorrect field type: password'
-        });
-    }
-
-    if (password === '') {
-        return res.status(422).json({
-            message: 'Incorrect field length: password'
-        });
-    }
-
-    bcrypt.genSalt(10, (err, salt) => {
-        if (err) {
-            return res.status(500).json({
-                message: 'Internal server error'
-            });
+      User.comparePassword(password, user.password, (err, isMatch) => {
+        if(err) throw err;
+        if(isMatch) {
+          return done(null, user);
+        } else {
+          return done( null, false, {message: 'Invalid password'});
         }
-
-        bcrypt.hash(password, salt, (err, hash) => {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Internal server error'
-                });
-            }
-
-            let user = new User({
-                username: username,
-                password: hash
-            });
-
-            user.save((err, createdUser) => {
-                if (err) {
-                    return res.status(500).json(err);
-                }
-                currentUser = createdUser._id;
-                return res.status(201).json({createdUser});
-            });
-        });
+      });
     });
+  }));
+
+  passport.serializeUser((user, done) => {
+    done(null, user.id);
+  });
+
+  passport.deserializeUser((id, done) => {
+    User.getUserbyId(id, (err, user) => {
+      done(err, user);
+    });
+  });
+
+router.post('/login',
+  passport.authenticate('local', {successRedirect:'/dashboard', failureRedirect:'/', failureFlash: true}),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+router.get('/logout', (req, res) => {
+   req.logout();
+   req.flash('sucess_msg', 'You are logged out');
+   res.redirect('/');
 });
 
 //====================== define route to main dashboard & deliver ======================//
