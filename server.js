@@ -16,7 +16,6 @@ const exphbs = require('express-handlebars');
 const LocalStrategy = require('passport-local').Strategy;
 
 const app = express();
-const db = mongoose.connection; 
 
 //view engine 
 app.engine('handlebars', expressHandlebars({defaultLayout: 'layout'}));
@@ -35,6 +34,37 @@ app.use(session({
   saveUninitialized: true,
   resave: true
 }));
+
+//passport init
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Express Validator
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      let namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
+// Flash messages
+app.use(function(req, res, next) {
+  res.locals.sucess_msg = req.flash('sucess_msg');
+  res.locals.erro_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
+  next();
+});
 
 let currentUser; 
 
@@ -56,13 +86,24 @@ const runServer = (callback) => {
     });
 };
 
-if (require.main === module) {
-    runServer(function(err) {
+function closeServer() {
+  return mongoose.disconnect().then(() => {
+    return new Promise((resolve, reject) => {
+      console.log('Closing server');
+      server.close(err => {
         if (err) {
-            console.error(err);
+          return reject(err);
         }
+        resolve();
+      });
     });
+  });
 }
+
+if (require.main === module) {
+  runServer().catch(err => console.error(err));
+};
+
 
 exports.app = app;
 exports.runServer = runServer;
