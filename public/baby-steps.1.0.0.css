@@ -51,4 +51,8 @@ h1,
 h4 {
   font-family: 'Fontdiner Swanky', cursive;
 }
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
 /*# sourceMappingURL=baby-steps.1.0.0.css.map */
