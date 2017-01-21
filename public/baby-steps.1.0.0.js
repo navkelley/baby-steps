@@ -188,10 +188,22 @@
 	            error: function error() {
 	                alert("An error has occurred.");
 	            },
-	            success: function success(res) {
-	                //currentUser = 
-	                console.log("hello is this working?");
-	                //location.href = '/dashboard'
+	            success: function success() {
+	                location.href = 'dashboard';
+	            }
+	        });
+	    });
+	
+	    $("#logout").click(function (e) {
+	        e.preventDefault();
+	        $.ajax({
+	            type: "GET",
+	            url: 'logout',
+	            error: function error() {
+	                alert("Please try to logout again.");
+	            },
+	            success: function success() {
+	                location.href = "/";
 	            }
 	        });
 	    });

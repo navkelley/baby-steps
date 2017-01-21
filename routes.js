@@ -39,13 +39,12 @@ function ensureAuthenticated(req, res, next){
    if(req.isAuthenticated()){
       return next();
    } else {
-      // req.flash('error_msg', 'You are not logged in');
-      res.redirect('/users/login');
+      res.redirect('/');
    }
-}
+};
 
 // Register User
-router.post('/register', function(req, res) {
+router.post('/register', (req, res) => {
    let name = req.body.name;
    let email = req.body.email;
    let username = req.body.username;
@@ -115,7 +114,7 @@ passport.use(new LocalStrategy(
 router.post('/login',
   passport.authenticate('local', {successRedirect:'/dashboard', failureRedirect:'/', failureFlash: true}),
   function(req, res) {
-    res.redirect('/');
+    res.redirect('dashboard');
   });
 
 router.get('/logout', (req, res) => {

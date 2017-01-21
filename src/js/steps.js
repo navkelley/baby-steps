@@ -160,12 +160,24 @@ $(document).ready(function() {
             error: function() {
                 alert("An error has occurred.");
             },
-            success: function(res) {
-                //currentUser = 
-                console.log("hello is this working?");
-                //location.href = '/dashboard'
+            success: function() {
+               location.href = 'dashboard'
             },
         }); 
+    });
+
+    $("#logout").click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "GET",
+            url: 'logout',
+            error: function() {
+                alert("Please try to logout again.");
+            },
+            success: function() {
+                location.href = "/"
+            }
+        });
     });
 
     $("#sign-up").submit(function(e) {
