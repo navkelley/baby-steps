@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose'); 
 const config = require('./config');
 const router = express.Router();
@@ -7,6 +8,11 @@ const path = require('path');
 const jsonParser = bodyParser.json();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const session = require('express-session')
+const flash = require('connect-flash');
+const expressValidator = require('express-validator');
+const handlebars = require('handlebars');
+const expressHandlebars = require('express-handlebars');
 const LocalStrategy = require('passport-local').Strategy;
 
 //import models for use 
@@ -47,17 +53,17 @@ passport.use(new LocalStrategy({
 
 router.use(passport.initialize());
 
-router.post('/', passport.authenticate('local', 
-    {failureRedirect: '/'}),
+router.post('/login', passport.authenticate('local', {successRedirect: '/dashboard', 
+    failureRedirect: '/login', failureFlash: true }),
     function (req, res) {
-        console.log(res)
+        console.log(res);
         res.redirect('/dashboard');
     }
 );
 
 
 
-router.post('/users', jsonParser, function(req, res) {
+router.post('/register', jsonParser, function(req, res) {
     if (!req.body) {
         return res.status(400).json({
             message: "No request body"
@@ -136,7 +142,6 @@ router.post('/users', jsonParser, function(req, res) {
 
 //====================== define route to main dashboard & deliver ======================//
 router.get('/dashboard', (req, res) => {
-    console.log('dashboard route hit')
     res.sendFile(path.join(__dirname + '/public/dashboard.html'));
 });
 

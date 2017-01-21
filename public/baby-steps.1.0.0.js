@@ -136,16 +136,17 @@
 	            url: "/narratives/" + currentUser,
 	            contentType: "application/json",
 	            success: function success(res) {
-	                res.json(search);
+	                showNarrs(res);
 	            } //work in progress 
 	        });
 	    };
 	
 	    var showNarrs = function showNarrs(data) {
-	        /*for (let i = 0; i < db or array? i++) {*/
-	        var entries = "<tr><td>" + /*figure out how to get date, title, content*/+"</td></tr>";
+	        var entries = void 0;
+	        for (var i = 0; i < data.length; i++) {
+	            entries = "<tr><td>" + "stuff" + "</td></tr>";
+	        }
 	        $("#narrative-table").append(entries);
-	        //}
 	    };
 	
 	    var getMeasurements = function getMeasurements(search) {
@@ -202,7 +203,7 @@
 	        var password = $("#password").val();
 	        $.ajax({
 	            type: "POST",
-	            url: "/users",
+	            url: "/register",
 	            contentType: "application/json",
 	            data: JSON.stringify({
 	                username: username,
