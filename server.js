@@ -11,15 +11,9 @@ const passport = require('passport');
 const session = require('express-session')
 const flash = require('connect-flash');
 const expressValidator = require('express-validator');
-const handlebars = require('handlebars');
-const exphbs = require('express-handlebars');
 const LocalStrategy = require('passport-local').Strategy;
 
 const app = express();
-
-//view engine 
-app.engine('handlebars', expressHandlebars({defaultLayout: 'layout'}));
-app.set('view engine', 'handlebars');
 
 //tell app what to use 
 app.use(bodyParser.json()); 

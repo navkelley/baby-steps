@@ -11,8 +11,6 @@ const passport = require('passport');
 const session = require('express-session')
 const flash = require('connect-flash');
 const expressValidator = require('express-validator');
-const handlebars = require('handlebars');
-const expressHandlebars = require('express-handlebars');
 const LocalStrategy = require('passport-local').Strategy;
 
 //import models for use 

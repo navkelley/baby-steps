@@ -45,10 +45,15 @@
     "babel-preset-stage-0": "^6.16.0",
     "bcryptjs": "^2.4.0",
     "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.14.2",
+    "express-validator": "^3.1.2",
+    "handlebars": "^4.0.6",
     "jquery": "^3.1.1",
     "mongoose": "^4.7.6",
-    "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "passport-http": "^0.3.0",
     "passport-local": "^1.0.0",
@@ -60,6 +65,7 @@
     "chokidar-cli": "^1.2.0",
     "less": "^2.7.1",
     "less-plugin-clean-css": "^1.5.1",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0"
   }
 }
