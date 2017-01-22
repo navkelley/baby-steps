@@ -173,6 +173,24 @@
 	        }
 	    };
 	
+	    var getUserId = function getUserId(username) {
+	        $.ajax({
+	            type: "POST",
+	            url: "/getUserId",
+	            contentType: "application/json",
+	            data: JSON.stringify({
+	                username: username
+	            }),
+	            error: function error(_error) {
+	                console.log(err);
+	            },
+	            success: function success(user) {
+	                currentUser = user._id;
+	                console.log(user);
+	            }
+	        });
+	    };
+	
 	    //grab user id and go to individual's dashboard----work in progress
 	    $("#login").submit(function (e) {
 	        var username = $("#userEmailLogin").val();
@@ -192,7 +210,8 @@
 	            },
 	            success: function success(user) {
 	                console.log(user);
-	                //location.href = 'dashboard'
+	                getUserId(username);
+	                location.href = 'dashboard';
 	            }
 	        });
 	    });
@@ -231,7 +250,7 @@
 	                password: password
 	            }),
 	            error: function error() {
-	                $("#accountMessage").append("<p id='aMessage>Account could not be created.</p>");
+	                $("#accountMessage").append("<p id='aMessage'>Account could not be created.</p>");
 	            },
 	            success: function success(user) {
 	                currentUser = user._id;

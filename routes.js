@@ -110,9 +110,20 @@ passport.use(new LocalStrategy(
 router.post('/login',
   passport.authenticate('local', {successRedirect:'/dashboard', failureRedirect:'/', failureFlash: true}),
   function(req, res) {
-    console.log(user);
-    res.json(user);
-  });
+});
+
+router.post('/getUserId', (req, res) => {
+    User.getUserByUsername(req.body.username, (err, user) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log(user);
+            res.json(user);
+        }
+    });
+});
+
 
 router.get('/logout', (req, res) => {
    req.logout();

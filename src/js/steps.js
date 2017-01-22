@@ -145,6 +145,24 @@ $(document).ready(function() {
         }
     }
 
+    const getUserId = (username) => {
+        $.ajax({
+            type: "POST",
+            url: "/getUserId",
+            contentType: "application/json",
+            data: JSON.stringify({
+                username: username
+            }),
+            error: (error) => {
+                console.log(err)
+            },
+            success:(user) => {
+                currentUser = user._id;
+                console.log(user);
+            },
+        });
+    };
+
     //grab user id and go to individual's dashboard----work in progress
     $("#login").submit(function(e) {
         let username = $("#userEmailLogin").val();
@@ -158,13 +176,14 @@ $(document).ready(function() {
                 username: username,
                 password: password 
             }),
-            error: function() {
+            error: () => {
                 alert("An error has occurred.");
                 location.href = '/'
             },
-            success: function(user) {
-                console.log(user); 
-               //location.href = 'dashboard'
+            success: (user) => {
+                console.log(user);
+                getUserId(username); 
+                location.href = 'dashboard'
             },
         }); 
     });
@@ -203,7 +222,7 @@ $(document).ready(function() {
                 password: password
             }),
             error: function() {
-                $("#accountMessage").append("<p id='aMessage>Account could not be created.</p>")
+                $("#accountMessage").append("<p id='aMessage'>Account could not be created.</p>")
             },
             success: function (user) {
                 currentUser = user._id;
