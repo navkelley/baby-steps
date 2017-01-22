@@ -33,7 +33,10 @@ $(document).ready(function() {
             type: "GET",
             url: "/narratives/" + currentUser,
             contentType: "application/json",
-            success: function (res) {
+            error: () => {
+                //consider modal for error 
+            },
+            success: (res) => {
                 showNarrs(res);
             }//work in progress 
         });

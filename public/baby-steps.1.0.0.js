@@ -81,6 +81,9 @@
 	            type: "GET",
 	            url: "/narratives/" + currentUser,
 	            contentType: "application/json",
+	            error: function error() {
+	                //consider modal for error 
+	            },
 	            success: function success(res) {
 	                showNarrs(res);
 	            } //work in progress 
