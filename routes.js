@@ -138,19 +138,19 @@ router.get('/dashboard', (req, res) => {
 
 //====================== routes for dashboard narratives ==============================//
 router.get('/dashboard/narratives/:userId', (req, res) => {
-        Narrative.find({userId: currentUser}, (err, narrative) => {
+        Narrative.find({userId: req.params.userId}, (err, narratives) => {
             if(err) {
                 return res.status(500).json({
                     message: 'Internal Server Error'
                 });
             }
-            res.status(200).json(narrative);
+            res.status(200).json(narratives);
         });
     })
 
     .post('/dashboard/narratives', (req, res) => {
 		Narrative.create({
-            userId: currentUser,
+            userId: req.body.userId,//was currentUser
         	title: req.body.title,
             date: req.body.date,
             content: req.body.content
@@ -199,7 +199,7 @@ router.get('/narrative-entries', (req,res) => {
 });
 
 //====================== routes to define dashboard measurements =======================//
-router.get('/dashboard/measurements', (req,res) => {
+router.get('/dashboard/measurements/:userId', (req,res) => {
         Measurement.find((err, measurement) => {
             if(err) {
                 return res.status(500).json({

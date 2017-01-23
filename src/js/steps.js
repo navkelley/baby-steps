@@ -29,14 +29,17 @@ $(document).ready(function() {
     };
 
     const getNarratives = (search) => {
+        console.log("getNarratives function called")
         $.ajax({
             type: "GET",
-            url: "/narratives/" + currentUser,
+            url: "/dashboard/narratives/588688dfcd037306a91c8781",
             contentType: "application/json",
             error: () => {
+                console.log("not working")
                 //consider modal for error 
             },
             success: (res) => {
+                console.log(res)
                 showNarrs(res);
             }//work in progress 
         });
@@ -51,17 +54,61 @@ $(document).ready(function() {
         $("#narrative-table").append(entries);
     };
 
-    const getMeasurements = (search) => {
-        console.log(search);
-        let params = {
-            userId: currentUser,
-            type: type
-        }
-        //change to heroku web once functional?
-        let url = "/measurements"
-        $.getJson(url, params, (data) => {
-            showResults(data);
-        })
+    const getWeight = (search) => {
+        $.ajax({
+            type: "GET",
+            url: "/measurements/:userId",
+            contentType: "application/json",
+            data: JSON.stringify({
+                userId: currentUser,
+                type: weight
+            }),
+            error: () => {
+                console.log("not working")
+                //consider modal for error 
+            },
+            success: (res) => {
+                console.log(res)
+            }//work in progress 
+        });
+    };
+
+    const getLength = (search) => {
+        $.ajax({
+            type: "GET",
+            url: "/measurements/:userId",
+            contentType: "application/json",
+            data: JSON.stringify({
+                userId: currentUser,
+                type: length 
+            }),
+            error: () => {
+                console.log("not working")
+                //consider modal for error 
+            },
+            success: (res) => {
+                console.log(res)
+            }//work in progress 
+        });
+    };
+
+        const getHeadCir = (search) => {
+        $.ajax({
+            type: "GET",
+            url: "/measurements/:userId",
+            contentType: "application/json",
+            data: JSON.stringify({
+                userId: currentUser,
+                type: headCir
+            }),
+            error: () => {
+                console.log("not working")
+                //consider modal for error 
+            },
+            success: (res) => {
+                console.log(res)
+            }//work in progress 
+        });
     };
 
     //verify both password fields match
@@ -93,7 +140,7 @@ $(document).ready(function() {
         });
     };
 
-    //grab user id and go to individual's dashboard----work in progress
+    //grab user id and go to individual's dashboard
     $("#login").submit(function(e) {
         let username = $("#userEmailLogin").val();
         let password = $("#userPassLogin").val();
@@ -203,7 +250,8 @@ $(document).ready(function() {
         displayData();
     });
 
-    $("#narrLink").click(() => {
+    $("#narrLink").on('click', () => {
+        console.log("narrLink clicked")
         getNarratives(); 
     });
 });

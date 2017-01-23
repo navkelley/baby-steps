@@ -77,14 +77,17 @@
 	    };
 	
 	    var getNarratives = function getNarratives(search) {
+	        console.log("getNarratives function called");
 	        $.ajax({
 	            type: "GET",
-	            url: "/narratives/" + currentUser,
+	            url: "/dashboard/narratives/588688dfcd037306a91c8781",
 	            contentType: "application/json",
 	            error: function error() {
+	                console.log("not working");
 	                //consider modal for error 
 	            },
 	            success: function success(res) {
+	                console.log(res);
 	                showNarrs(res);
 	            } //work in progress 
 	        });
@@ -98,16 +101,60 @@
 	        $("#narrative-table").append(entries);
 	    };
 	
-	    var getMeasurements = function getMeasurements(search) {
-	        console.log(search);
-	        var params = {
-	            userId: currentUser,
-	            type: type
-	        };
-	        //change to heroku web once functional?
-	        var url = "/measurements";
-	        $.getJson(url, params, function (data) {
-	            showResults(data);
+	    var getWeight = function getWeight(search) {
+	        $.ajax({
+	            type: "GET",
+	            url: "/measurements/:userId",
+	            contentType: "application/json",
+	            data: JSON.stringify({
+	                userId: currentUser,
+	                type: weight
+	            }),
+	            error: function error() {
+	                console.log("not working");
+	                //consider modal for error 
+	            },
+	            success: function success(res) {
+	                console.log(res);
+	            } //work in progress 
+	        });
+	    };
+	
+	    var getLength = function getLength(search) {
+	        $.ajax({
+	            type: "GET",
+	            url: "/measurements/:userId",
+	            contentType: "application/json",
+	            data: JSON.stringify({
+	                userId: currentUser,
+	                type: length
+	            }),
+	            error: function error() {
+	                console.log("not working");
+	                //consider modal for error 
+	            },
+	            success: function success(res) {
+	                console.log(res);
+	            } //work in progress 
+	        });
+	    };
+	
+	    var getHeadCir = function getHeadCir(search) {
+	        $.ajax({
+	            type: "GET",
+	            url: "/measurements/:userId",
+	            contentType: "application/json",
+	            data: JSON.stringify({
+	                userId: currentUser,
+	                type: headCir
+	            }),
+	            error: function error() {
+	                console.log("not working");
+	                //consider modal for error 
+	            },
+	            success: function success(res) {
+	                console.log(res);
+	            } //work in progress 
 	        });
 	    };
 	
@@ -139,7 +186,7 @@
 	        });
 	    };
 	
-	    //grab user id and go to individual's dashboard----work in progress
+	    //grab user id and go to individual's dashboard
 	    $("#login").submit(function (e) {
 	        var username = $("#userEmailLogin").val();
 	        var password = $("#userPassLogin").val();
@@ -249,7 +296,8 @@
 	        displayData();
 	    });
 	
-	    $("#narrLink").click(function () {
+	    $("#narrLink").on('click', function () {
+	        console.log("narrLink clicked");
 	        getNarratives();
 	    });
 	});

@@ -38,6 +38,22 @@
                         <button type="submit" id="login" class="btn btn-success" value="Log In">Login</button>
                     </form>
                 </div><!--signup box-->
+                <!--modal-->
+                <div class="modal fade" id="loginMessageModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>                   
+                            </div><!--modal-header-->
+                            <div class="modal-body">
+                                <div id="errors"></div>
+                            </div><!--modal-body-->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div><!--modal-footer-->
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
             </div><!--row-->
         </div><!--container-->
     </body>
