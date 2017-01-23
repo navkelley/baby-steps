@@ -61,7 +61,7 @@
                                             <h4 class="modal-title" id="narrModalLabel">All Narrative Entries</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <div id="length-entries">
+                                        <div id="allNarrative-entries">
                                             <table class="table">
                                                 <thead class="thead-inverse">
                                                     <tr>
@@ -70,7 +70,7 @@
                                                         <th>Content</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="length-table">
+                                                <tbody id="allNarrs-table">
                                                 </tbody>
                                             </table>
                                         </div><!--narrative-entries table-->
@@ -117,7 +117,34 @@
                             <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#weightModal"></i>
                         </span>
                         <!--Link to see all entries-->
-                        <p><a href="/weight-entries">See all logged entries</a></p>
+                        <p><a href="#" aria-hidden="true" data-toggle="modal" data-target="#allWeightModal">See all logged entries</a></p>
+                        <div class="modal fade" id="allWeightModal" tabindex="-1" role="dialog" aria-labelledby="allWeightModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="narrModalLabel">All Weight Entries</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="allWeight-entries">
+                                            <table class="table">
+                                                <thead class="thead-inverse">
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Content</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="allWeight-table">
+                                                </tbody>
+                                            </table>
+                                        </div><!--weight-entries table-->
+                                    </div><!--modal-body-->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
                         <div id="weight-entry"></div>
                         <!-- Modal -->
                         <div class="modal fade" id="weightModal" tabindex="-1" role="dialog" aria-labelledby="weightModalLabel">
