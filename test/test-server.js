@@ -34,7 +34,7 @@ describe('reach html pages', () => {
 		.end((err, res) => {
 			should.equal(err, null);
 			res.should.have.status(200);
-			res.should.be.html; 
+			res.should.be.html;
 			done();
 		});
 	});
@@ -68,14 +68,12 @@ describe('users from signup', () => {
 
     it('should create a new user and hash the password', () => {
     	chai.request(app)
-    	.post('/users')
-    	.end(req, res) => {
-    		should.equal(err, null);
-    		res.should.be.json;
-    		
-
-    	}
-    })
+    	   .post('/users')
+    	   .end((req, res) => {
+    	       should.equal(err, null);
+    	       res.should.be.json;
+    	   });
+    });
 })//TODO: need to finish 
 //====================== tests for narratives route ===========================//
 describe('dashboard narratives DB', () => {
