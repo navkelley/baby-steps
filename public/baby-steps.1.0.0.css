@@ -12,7 +12,10 @@ h1 {
 #length-entry,
 #headCir-entry {
   border: 2px solid black;
+  background-color: white;
+  box-shadow: 5px 5px 5px #888888;
   min-height: 24px;
+  padding: 10px;
 }
 h4 {
   display: inline-block;
