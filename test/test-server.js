@@ -9,9 +9,13 @@ const router = express.Router();
  //import files for use 
 const server = require('../server.js');
 const app = server.app;
-const Narrative = require('../src/models/narrative');
-const Measurement = require('../src/models/measurement');
-const User = require('../src/models/user');
+
+//import models for use 
+const Narrative = require('./src/models/narrative');
+const Weight = require('./src/models/weight');
+const Length = require('./src/models/length');
+const HeadCir = require('./src/models/headCir');
+const User = require('./src/models/user');
 
 chai.use(chaiHttp);
 
