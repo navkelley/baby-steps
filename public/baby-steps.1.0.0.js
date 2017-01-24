@@ -103,14 +103,14 @@
 	        console.log("getWeight function called");
 	        $.ajax({
 	            type: "GET",
-	            url: "/weight/" + currentUser,
+	            url: "/dashboard/weight/" + currentUser,
 	            contentType: "application/json",
 	            error: function error() {
 	                console.log("not working");
 	                //consider modal for error 
 	            },
 	            success: function success(res) {
-	                console.log(res);
+	                console.log("weight logs", res);
 	            } //work in progress 
 	        });
 	    };
