@@ -92,6 +92,38 @@
 	            }
 	        });
 	    };
+	
+	    var lastLength = function lastLength(search) {
+	        $.ajax({
+	            type: "GET",
+	            url: "/dashboard/length/" + currentUser,
+	            contentType: "application/json",
+	            error: function error() {
+	                $("#length-entry").html("<p>There was an error with last entry.</p>");
+	            },
+	            success: function success(records) {
+	                var lastRecord = moment(records[records.length - 1].date).format("MMM Do YYYY") + "<br>";
+	                lastRecord += records[records.length - 1].content + "<br>";
+	                $("#length-entry").append(lastRecord);
+	            }
+	        });
+	    };
+	
+	    var lastHeadCir = function lastHeadCir(search) {
+	        $.ajax({
+	            type: "GET",
+	            url: "/dashboard/headCir/" + currentUser,
+	            contentType: "application/json",
+	            error: function error() {
+	                $("#headCir-entry").html("<p>There was an error with last entry.</p>");
+	            },
+	            success: function success(records) {
+	                var lastRecord = moment(records[records.length - 1].date).format("MMM Do YYYY") + "<br>";
+	                lastRecord += records[records.length - 1].content + "<br>";
+	                $("#headCir-entry").append(lastRecord);
+	            }
+	        });
+	    };
 	    //======== get/show all narratives, weight, length, headCir in each modal ======//
 	    var getNarratives = function getNarratives(search) {
 	        $.ajax({
@@ -213,6 +245,8 @@
 	                console.log(currentUser);
 	                lastNarr();
 	                lastWeight();
+	                lastLength();
+	                lastHeadCir();
 	            }
 	        });
 	    };
