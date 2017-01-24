@@ -108,7 +108,6 @@
 	                $("#allWeight-entries").html("<p>There was an error getting all records.</p>");
 	            },
 	            success: function success(res) {
-	                console.log("weight logs", res);
 	                showWeight(res);
 	            }
 	        });
@@ -136,7 +135,6 @@
 	                $("#allLength-entries").html("<p>There was an error getting all records.</p>");
 	            },
 	            success: function success(res) {
-	                console.log(res);
 	                showLength(res);
 	            }
 	        });
@@ -163,7 +161,6 @@
 	                $("#allHeadCir-entries").html("<p>There was an error getting all records.</p>");
 	            },
 	            success: function success(res) {
-	                console.log(res);
 	                showHeadCir(res);
 	            }
 	        });
