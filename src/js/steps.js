@@ -140,6 +140,10 @@ $(document).ready(function() {
         });
     };
 
+    //show and hide html elements
+    $("#dashboard").hide();
+    $("#sign-up").hide();
+
     //grab user id and go to individual's dashboard
     $("#login").submit(function(e) {
         let username = $("#userEmailLogin").val();
@@ -159,7 +163,9 @@ $(document).ready(function() {
             },
             success: (user) => {
                 getUserId(username); 
-                location.href = 'dashboard'
+                $("#login").hide();
+                $("#sign-up").hide();
+                $("#dashboard").show();
             },
         }); 
     });
@@ -173,7 +179,9 @@ $(document).ready(function() {
                 alert("Please try to logout again.");
             },
             success: function() {
-                location.href = "/"
+                $("#dashboard").hide();
+                $("#sign-up").hide(); 
+                $("#login").show(); 
             }
         });
     });
@@ -203,7 +211,9 @@ $(document).ready(function() {
             success: function (user) {
                 currentUser = user._id;
                 console.log(currentUser); 
-                location.href = '/dashboard'
+                $("#sign-up").hide();
+                $("#login").hide(); 
+                $('#dashboard').show();
             } 
         });
     });
@@ -253,5 +263,11 @@ $(document).ready(function() {
     $("#narrLink").on('click', () => {
         getNarratives(); 
     });
+
+    $("#register").on('click', () => {
+        $("#dashboard").hide();
+        $("#login").hide();
+        $("#sign-up").show(); 
+    })
 });
   

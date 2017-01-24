@@ -186,6 +186,10 @@
 	        });
 	    };
 	
+	    //show and hide html elements
+	    $("#dashboard").hide();
+	    $("#sign-up").hide();
+	
 	    //grab user id and go to individual's dashboard
 	    $("#login").submit(function (e) {
 	        var username = $("#userEmailLogin").val();
@@ -205,7 +209,9 @@
 	            },
 	            success: function success(user) {
 	                getUserId(username);
-	                location.href = 'dashboard';
+	                $("#login").hide();
+	                $("#sign-up").hide();
+	                $("#dashboard").show();
 	            }
 	        });
 	    });
@@ -219,7 +225,9 @@
 	                alert("Please try to logout again.");
 	            },
 	            success: function success() {
-	                location.href = "/";
+	                $("#dashboard").hide();
+	                $("#sign-up").hide();
+	                $("#login").show();
 	            }
 	        });
 	    });
@@ -249,7 +257,9 @@
 	            success: function success(user) {
 	                currentUser = user._id;
 	                console.log(currentUser);
-	                location.href = '/dashboard';
+	                $("#sign-up").hide();
+	                $("#login").hide();
+	                $('#dashboard').show();
 	            }
 	        });
 	    });
@@ -298,6 +308,12 @@
 	
 	    $("#narrLink").on('click', function () {
 	        getNarratives();
+	    });
+	
+	    $("#register").on('click', function () {
+	        $("#dashboard").hide();
+	        $("#login").hide();
+	        $("#sign-up").show();
 	    });
 	});
 

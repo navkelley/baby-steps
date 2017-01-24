@@ -44,7 +44,7 @@ h4 {
   background-image: repeating-linear-gradient(to top left, #f3ef15 0%, #009885 100%);
   background-image: -ms-repeating-linear-gradient(bottom right, #f3ef15 0%, #009885 100%);
 }
-body {
+#dashboard {
   min-height: 800px;
 }
 h1,

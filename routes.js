@@ -24,15 +24,15 @@ const timeLog = router.use((req, res, next) => {
   next();
 });
 
-//====================== define route for sign up page ========================//
-router.get('/signup', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/signup.html'));
+//====================== get root and deliver html ============================//
+router.get('/', (req,res) => {
+    res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 //====================== define route for users to login or register =============//
 // Get Homepage
 router.get('/', ensureAuthenticated, (req, res) => {
-   res.redirect('/dashboard');
+   res.redirect('/');
 });
 
 function ensureAuthenticated(req, res, next){
@@ -108,7 +108,7 @@ passport.use(new LocalStrategy(
   });
 
 router.post('/login',
-  passport.authenticate('local', {successRedirect:'/dashboard', failureRedirect:'/', failureFlash: true}),
+  passport.authenticate('local', {successRedirect:'/', failureRedirect:'/', failureFlash: true}),
   function(req, res) {
 });
 
@@ -129,11 +129,6 @@ router.get('/logout', (req, res) => {
    req.logout();
    req.flash('sucess_msg', 'You are logged out');
    res.redirect('/');
-});
-
-//====================== define route to main dashboard & deliver ======================//
-router.get('/dashboard', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/dashboard.html'));
 });
 
 //====================== routes for dashboard narratives ==============================//
@@ -193,12 +188,6 @@ router.put('/dashboard/narratives/:id',(req, res) => {
 	    }); 
 	});
 
-
-//====================== route to see all narr entries ============================//
-router.get('/narrative-entries', (req,res) => {
-    res.sendFile(path.join(__dirname + '/public/narrative-entries.html'));
-});
-
 //====================== routes to define dashboard measurements =======================//
 router.get('/dashboard/measurements/:userId', (req,res) => {
         Measurement.find((err, measurement) => {
@@ -250,20 +239,6 @@ router.put('/dashboard/measurements/:id',(req, res) => {
             res.status(200).json(measurement);
         }); 
     });
-//====================== route to see all weight entires ============================//
-router.get('/weight-entries', (req,res) => {
-    res.sendFile(path.join(__dirname + '/public/weight-entries.html'));
-});
-
-//====================== route to see all length entries ============================//
-router.get('/length-entries', (req,res) => {
-    res.sendFile(path.join(__dirname + '/public/length-entries.html'));
-});
-
-//====================== route to see all headCir entries ===========================//
-router.get('/headCir-entries', (req,res) => {
-    res.sendFile(path.join(__dirname + '/public/headCir-entries.html'));
-});
 
 //====================== catch all for routes =======================================//
 router.use('*', (req, res) => {
