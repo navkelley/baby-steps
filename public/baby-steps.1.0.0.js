@@ -103,11 +103,8 @@
 	        console.log("getWeight function called");
 	        $.ajax({
 	            type: "GET",
-	            url: "/measurements/" + currentUser,
+	            url: "/weight/" + currentUser,
 	            contentType: "application/json",
-	            data: JSON.stringify({
-	                type: "weight"
-	            }),
 	            error: function error() {
 	                console.log("not working");
 	                //consider modal for error 

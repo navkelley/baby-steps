@@ -31,7 +31,7 @@ router.get('/', (req,res) => {
     res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
-//====================== define route for users to login or register =============//
+//====================== define route for users to login, register & logout ===========//
 // Get Homepage
 router.get('/', ensureAuthenticated, (req, res) => {
    res.redirect('/');
@@ -126,7 +126,6 @@ router.post('/getUserId', (req, res) => {
     });
 });
 
-
 router.get('/logout', (req, res) => {
    req.logout();
    req.flash('sucess_msg', 'You are logged out');
@@ -190,61 +189,164 @@ router.put('/dashboard/narratives/:id',(req, res) => {
 	    }); 
 	});
 
-//====================== routes to define dashboard measurements =======================//
-router.get('/dashboard/measurements/:userId/:type', (req,res) => {
-        Measurement.find({
+//====================== routes to define dashboard measurements-weight =======================//
+router.get('/dashboard/weight/:userId', (req,res) => {
+        Weight.find({
             userId: req.params.userId,
-            type: req.params.type
-        }, (err, measurement) => {
+        }, (err, weight) => {
             if(err) {
                 return res.status(500).json({
                     message: 'Internal Server Error'
                 });
             }
-            res.status(200).json(measurement);
+            res.status(200).json(weight);
         });
     })
 
-    .post('/dashboard/measurements', (req, res) => {
-        Measurement.create({
+    .post('/dashboard/weight', (req, res) => {
+        Weight.create({
             userId: req.body.userId,
-            type: req.body.type,
             date: req.body.date,
             content: req.body.content
-        }, (err, measurement) => {
+        }, (err, weight) => {
             if (err) {
                 return res.status(500).json(err);
             }
-            res.status(201).json(measurement);
+            res.status(201).json(weight);
         });
     });
 
-router.put('/dashboard/measurements/:id',(req, res) => {
-        Measurement.update(
+router.put('/dashboard/weight/:id',(req, res) => {
+        Weight.update(
             {_id: req.params.id},
-            {type: req.body.type, content: req.body.content},
-            {upsert: true}, (err, measurement) => {
+            {content: req.body.content},
+            {upsert: true}, (err, weight) => {
             if (err) {
                 return res.status(500).json({
                     message: 'Internal Server Error'
                 });
             }
-            res.status(200).json(measurement);
+            res.status(200).json(weight);
         });
     })
 
-    .delete('/dashboard/measurements/:id', (req, res) => {
-        Measurement.remove(
-        {_id: req.params.id}, function(err, measurement) {
+    .delete('/dashboard/weight/:id', (req, res) => {
+        Weight.remove(
+        {_id: req.params.id}, function(err, weight) {
             if (err) {
                 return res.status(500).json({
                     message: 'Internal Server Error'
                 });
             }
-            res.status(200).json(measurement);
+            res.status(200).json(weight);
         }); 
     });
 
+//====================== routes to define dashboard measurements-length =======================//
+router.get('/dashboard/length/:userId', (req,res) => {
+        Length.find({
+            userId: req.params.userId,
+        }, (err, length) => {
+            if(err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            res.status(200).json(length);
+        });
+    })
+
+    .post('/dashboard/length', (req, res) => {
+        Length.create({
+            userId: req.body.userId,
+            date: req.body.date,
+            content: req.body.content
+        }, (err, length) => {
+            if (err) {
+                return res.status(500).json(err);
+            }
+            res.status(201).json(length);
+        });
+    });
+
+router.put('/dashboard/length/:id',(req, res) => {
+        Length.update(
+            {_id: req.params.id},
+            {content: req.body.content},
+            {upsert: true}, (err, length) => {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            res.status(200).json(length);
+        });
+    })
+
+    .delete('/dashboard/length/:id', (req, res) => {
+        Length.remove(
+        {_id: req.params.id}, function(err, length) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            res.status(200).json(length);
+        }); 
+    });
+
+//====================== routes to define dashboard measurements-headCir ===============//
+router.get('/dashboard/headCir/:userId', (req,res) => {
+        HeadCir.find({
+            userId: req.params.userId,
+        }, (err, headCir) => {
+            if(err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            res.status(200).json(headCir);
+        });
+    })
+
+    .post('/dashboard/headCir', (req, res) => {
+        HeadCir.create({
+            userId: req.body.userId,
+            date: req.body.date,
+            content: req.body.content
+        }, (err, headCir) => {
+            if (err) {
+                return res.status(500).json(err);
+            }
+            res.status(201).json(headCir);
+        });
+    });
+
+router.put('/dashboard/headCir/:id',(req, res) => {
+        HeadCir.update(
+            {_id: req.params.id},
+            {content: req.body.content},
+            {upsert: true}, (err, headCir) => {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            res.status(200).json(headCir);
+        });
+    })
+
+    .delete('/dashboard/headCir/:id', (req, res) => {
+        HeadCir.remove(
+        {_id: req.params.id}, function(err, headCir) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            res.status(200).json(headCir);
+        }); 
+    });
 //====================== catch all for routes =======================================//
 router.use('*', (req, res) => {
     res.status(404).json({
