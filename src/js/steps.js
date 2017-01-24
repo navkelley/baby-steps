@@ -5,31 +5,40 @@ $(document).ready(function() {
     //to hold user id
     let currentUser; 
 
-    //will need to make request to db
-    const displayLastEntry = (data) => {
-        let record = data.narratives[data.narratives.length-1].date + "<br>";
-        record += data.narratives[data.narratives.length-1].title + "<br>";
-        record += data.narratives[data.narratives.length-1].text + "<br>";
+    let narrativeRecords = [];
+    let weightRecords = [];
+    let lengthRecords = [];
+    let headCirRecords = [];
+
+    const displayRecords = (data) => {
+        let narrFormatDate = moment(narrativeRecords[narrativeRecords.length-1].date).format("MMM Do YYYY");
+        let record = narrFormatDate + "<br>";
+        record += narrativeRecords[narrativeRecords.length-1].title + "<br>";
+        record += narrativeRecords[narrativeRecords.length-1].content + "<br>";
         $("#narrative-entry").html(record);
 
-        /*let weightRecord = data.weight[data.weight.length-1].date + "<br>";
-        weightRecord += data.weight[data.weight.length-1].weight + "<br>";
+        let wFormatDate = moment(weightRecords[weightRecords.length-1].date).format("MMM Do YYYY");
+        let weightRecord = wFormatDate + "<br>";
+        weightRecord += weightRecords[weightRecords.length-1].content + "<br>";
         $("#weight-entry").html(weightRecord);
 
-        let lengthRecord = data.length[data.length.length-1].date + "<br>";
-        lengthRecord += data.length[data.length.length-1].length + "<br>";
+        let lFormatDate = moment(lengthRecords[lengthRecords.length-1].date).format("MMM Do YYYY");
+        let lengthRecord = lFormatDate + "<br>";
+        lengthRecord += lengthRecords[lengthRecords.length-1].content + "<br>";
         $("#length-entry").html(lengthRecord);
 
-        let headCirRecord = data.headCir[data.headCir.length-1].date + "<br>";
-        headCirRecord += data.headCir[data.headCir.length-1].headCir + "<br>";
-        $("#headCir-entry").html(headCirRecord);*/
+        let hFormatDate = moment(headCirRecords[headCirRecords.length-1].date).format("MMM Do YYYY");
+        let headCirRecord = hFormatDate + "<br>";
+        headCirRecord += headCirRecords[headCirRecords.length-1].content + "<br>";
+        $("#headCir-entry").html(headCirRecord);
     };
-    
+//============= function to reset entry forms =================//
     const resetForm = (form) => {
         $(form).find("input:text, textarea").val("");
         $('input[type=date]')[0].value = "";
     };
 
+//======== get/show all narratives, weight, length, headCir in each modal ======//
     const getNarratives = (search) => {
         $.ajax({
             type: "GET",
@@ -123,7 +132,7 @@ $(document).ready(function() {
         }
     };
 
-    //verify both password fields match
+//=============== verify both password fields match ===================//
     const checkPassword = (password) => {
         let pass1 = $("#password").val();
         let pass2 = $("#verifyPassword").val();
@@ -135,6 +144,7 @@ $(document).ready(function() {
         }
     };
 
+//=============== get user id for each session ===================//
     const getUserId = (username) => {
         $.ajax({
             type: "POST",
@@ -153,11 +163,11 @@ $(document).ready(function() {
         });
     };
 
-    //show and hide html elements
+//===================== hide divs on startup =============//
     $("#dashboard").hide();
     $("#sign-up").hide();
 
-    //grab user id and go to individual's dashboard
+//================== login/logout and register account  ===================//
     $("#login").submit(function(e) {
         let username = $("#username").val();
         let password = $("#userPassLogin").val();
@@ -232,6 +242,7 @@ $(document).ready(function() {
         });
     });
 
+//========================== form submit listeners =====================//
     $("#narrForm").submit(function(e) {
         e.preventDefault(); 
         let narrDate = $("#narrDate").val();
@@ -250,10 +261,12 @@ $(document).ready(function() {
             error: () => {
                 $("#narrEntry").append("<p>Could not submit log. Please try again.</p>");
             },
-            success: (narrative) => {
+            success: (record) => {
                 resetForm("#narrForm");
-                $("#narrModal").modal("toggle"); 
-                displayLastEntry(narrative);//work in progress 
+                $("#narrModal").modal("toggle");
+                narrativeRecords.push(record);
+                console.log("records array", narrativeRecords);
+                displayRecords(); 
             },
         }); 
     });
@@ -263,30 +276,75 @@ $(document).ready(function() {
         let weightDate = $("#weightDate").val();
         let wLbs = $("#wLbs").val();
         let wOz = $("#wOz").val(); 
-        data.weight.push({"date": weightDate, "weight": wLbs + "lbs " + wOz + "oz"});
-        resetForm("#weightForm");
-        $("#weightModal").modal("toggle");
-        displayData();
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/weight",
+            contentType: "application/json",
+            data: JSON.stringify({
+                userId: currentUser,  
+                date: weightDate, 
+                content: wLbs + wOz
+            }),
+            error: () => {
+                $("#weightEntry").append("<p>Could not submit log. Please try again.</p>");
+            },
+            success: (record) => {
+                resetForm("#weightForm");
+                $("#weightModal").modal("toggle"); 
+                let formatDate = moment(record.date).format("MMM Do YYYY")
+                let displayWeight = formatDate + "<br>" +
+                    record.content + "<br>";
+                $("#weight-entry").html(displayWeight);
+            },
+        }); 
     });
 
     $("#lengthForm").submit(function(e) {
         e.preventDefault();
         let lengthDate = $("#lengthDate").val(); 
         let length = $("#lengthInput").val();
-        data.length.push({"date": lengthDate, "length": length + " inches"});
-        resetForm("#lengthForm");
-        $("#lengthModal").modal("toggle");
-        displayData();
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/length",
+            contentType: "application/json",
+            data: JSON.stringify({
+                userId: currentUser,  
+                date: lengthDate, 
+                content: length
+            }),
+            error: () => {
+                $("#lengthEntry").append("<p>Could not submit log. Please try again.</p>");
+            },
+            success: (narrative) => {
+                resetForm("#lengthForm");
+                $("#lengthModal").modal("toggle"); 
+                displayLastEntry(narrative);//work in progress 
+            },
+        }); 
     });
 
     $("#headCirForm").submit(function(e) {
         e.preventDefault();
         let hDate = $("#headCirDate").val();
         let headCir = $("#headCirInput").val();
-        data.headCir.push({"date": hDate, "headCir": headCir + " inches"});
-        resetForm("#headCirForm");
-        $("#headCirModal").modal("toggle");
-        displayData();
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/headCir",
+            contentType: "application/json",
+            data: JSON.stringify({
+                userId: currentUser,  
+                date: hDate, 
+                content: headCir
+            }),
+            error: () => {
+                $("#headCirEntry").append("<p>Could not submit log. Please try again.</p>");
+            },
+            success: (narrative) => {
+                resetForm("#headCirForm");
+                $("#headCirModal").modal("toggle");
+                displayLastEntry(narrative);//work in progress 
+            },
+        });
     });
 //================== open/close/empty display all modals ===================//
     $("#narrLink").on('click', () => {
