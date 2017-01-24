@@ -6,16 +6,16 @@ const expect = chai.expect;
 const express = require('express');
 const router = express.Router();
  
- //import files for use 
-const server = require('../server.js');
-const app = server.app;
-
-//import models for use 
+ //import models for use 
 const Narrative = require('./src/models/narrative');
 const Weight = require('./src/models/weight');
 const Length = require('./src/models/length');
 const HeadCir = require('./src/models/headCir');
 const User = require('./src/models/user');
+ 
+//import files for use 
+const server = require('../server.js');
+const app = server.app;
 
 chai.use(chaiHttp);
 
@@ -61,7 +61,7 @@ describe('users from signup', () => {
 
     it('should create a new user and hash the password', () => {
     	chai.request(app)
-    	   .post('/users')
+    	   .post('/register')
     	   .end((req, res) => {
     	       should.equal(err, null);
     	       res.should.be.json;
