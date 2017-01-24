@@ -17,7 +17,9 @@ const app = express();
 
 //import models for use 
 const Narrative = require('./src/models/narrative');
-const Measurement = require('./src/models/measurement');
+const Weight = require('./src/models/weight');
+const Length = require('./src/models/length');
+const HeadCir = require('./src/models/headCir');
 const User = require('./src/models/user');
 
 //tell app what to use 
