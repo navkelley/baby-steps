@@ -55,56 +55,82 @@ $(document).ready(function() {
     };
 
     const getWeight = (search) => {
-        console.log("getWeight function called")
         $.ajax({
             type: "GET",
             url: "/dashboard/weight/" + currentUser,
             contentType: "application/json",
             error: () => {
-                console.log("not working")
-                //consider modal for error 
+                $("#allWeight-entries").html("<p>There was an error getting all records.</p>"); 
             },
             success: (res) => {
-                console.log("weight logs", res)
-            }//work in progress 
+                console.log("weight logs", res);
+                showWeight(res);
+            } 
         });
+    };
+
+    const showWeight = (data) => {
+        let entries;
+        for(let weight in data) {
+            let formatDate = moment(data[weight].date).format("MMM Do YYYY");
+            entries = "<tr><td>" + formatDate + "<td>" + data[weight].content + "</td></tr>";
+            $("#allWeight-table").append(entries);
+        }
     };
 
     const getLength = (search) => {
         $.ajax({
             type: "GET",
-            url: "/measurements/" + currentUser,
+            url: "/dashboard/length/" + currentUser,
             contentType: "application/json",
             data: JSON.stringify({
                 userId: currentUser,
                 type: length 
             }),
             error: () => {
-                console.log("not working")
-                //consider modal for error 
+                $("#allLength-entries").html("<p>There was an error getting all records.</p>");
             },
             success: (res) => {
-                console.log(res)
-            }//work in progress 
+                console.log(res);
+                showLength(res);
+            }
         });
+    };
+
+    const showLength = (data) => {
+        let entries;
+        for(let length in data) {
+            let formatDate = moment(data[length].date).format("MMM Do YYYY");
+            entries = "<tr><td>" + formatDate + "<td>" + data[length].content + "</td></tr>";
+            $("#allLength-table").append(entries);
+        }
     };
 
         const getHeadCir = (search) => {
         $.ajax({
             type: "GET",
-            url: "/measurements/" + currentUser,
+            url: "/dashboard/headCir/" + currentUser,
             contentType: "application/json",
             data: JSON.stringify({
                 type: headCir
             }),
             error: () => {
-                console.log("not working")
-                //consider modal for error 
+                $("#allHeadCir-entries").html("<p>There was an error getting all records.</p>");
             },
             success: (res) => {
-                console.log(res)
-            }//work in progress 
+                console.log(res);
+                showHeadCir(res);
+            } 
         });
+    };
+
+    const showHeadCir = (data) => {
+        let entries;
+        for(let headCir in data) {
+            let formatDate = moment(data[headCir].date).format("MMM Do YYYY");
+            entries = "<tr><td>" + formatDate + "<td>" + data[headCir].content + "</td></tr>";
+            $("#allHeadCir-table").append(entries);
+        }
     };
 
     //verify both password fields match
@@ -112,12 +138,12 @@ $(document).ready(function() {
         let pass1 = $("#password").val();
         let pass2 = $("#verifyPassword").val();
         if (pass1 === pass2) {
-            $("#passwordMessage").html("<p id='PassMatch'>Passwords Match!</p>")
+            $("#passwordMessage").html("<p id='PassMatch'>Passwords Match!</p>");
         }
         else {
-            $("#passwordMessage").html("<p id='PassMatch'>Passwords Do Not Match!</p>")
+            $("#passwordMessage").html("<p id='PassMatch'>Passwords Do Not Match!</p>");
         }
-    }
+    };
 
     const getUserId = (username) => {
         $.ajax({
@@ -143,7 +169,7 @@ $(document).ready(function() {
 
     //grab user id and go to individual's dashboard
     $("#login").submit(function(e) {
-        let username = $("#userEmailLogin").val();
+        let username = $("#username").val();
         let password = $("#userPassLogin").val();
         e.preventDefault();
         $.ajax({
@@ -171,12 +197,12 @@ $(document).ready(function() {
         e.preventDefault();
         $.ajax({
             type: "GET",
-            url: 'logout',
+            url: '/logout',
             error: function() {
                 alert("Please try to logout again.");
             },
-            success: function() {
-                delete window.currentUser; 
+            success: function() { 
+                delete window.currentUser;
                 $("#dashboard").hide();
                 $("#sign-up").hide(); 
                 $("#login").show(); 
@@ -272,15 +298,40 @@ $(document).ready(function() {
         $("#headCirModal").modal("toggle");
         displayData();
     });
-
+//================== open/close/empty display all modals ===================//
     $("#narrLink").on('click', () => {
         getNarratives(); 
+    });
+
+    $("#narrClose").on('click', () => {
+        $("#allNarrs-table").empty(); 
     });
 
     $("#weightLink").on('click', () => {
         getWeight(); 
     });
 
+    $("#weightClose").on('click', () => {
+        $("#allWeight-table").empty(); 
+    });
+
+    $("#lengthLink").on('click', () => {
+        getLength(); 
+    });
+
+    $("#lengthClose").on('click', () => {
+        $("#allLength-table").empty(); 
+    });
+
+    $("#headCirLink").on('click', () => {
+        getHeadCir(); 
+    });
+
+    $("#headCirClose").on('click', () => {
+        $("#allHeadCir-table").empty(); 
+    });
+
+//=================== register new account modal =====================//
     $("#register").on('click', () => {
         $("#dashboard").hide();
         $("#login").hide();

@@ -100,56 +100,82 @@
 	    };
 	
 	    var getWeight = function getWeight(search) {
-	        console.log("getWeight function called");
 	        $.ajax({
 	            type: "GET",
 	            url: "/dashboard/weight/" + currentUser,
 	            contentType: "application/json",
 	            error: function error() {
-	                console.log("not working");
-	                //consider modal for error 
+	                $("#allWeight-entries").html("<p>There was an error getting all records.</p>");
 	            },
 	            success: function success(res) {
 	                console.log("weight logs", res);
-	            } //work in progress 
+	                showWeight(res);
+	            }
 	        });
+	    };
+	
+	    var showWeight = function showWeight(data) {
+	        var entries = void 0;
+	        for (var weight in data) {
+	            var formatDate = moment(data[weight].date).format("MMM Do YYYY");
+	            entries = "<tr><td>" + formatDate + "<td>" + data[weight].content + "</td></tr>";
+	            $("#allWeight-table").append(entries);
+	        }
 	    };
 	
 	    var getLength = function getLength(search) {
 	        $.ajax({
 	            type: "GET",
-	            url: "/measurements/" + currentUser,
+	            url: "/dashboard/length/" + currentUser,
 	            contentType: "application/json",
 	            data: JSON.stringify({
 	                userId: currentUser,
 	                type: length
 	            }),
 	            error: function error() {
-	                console.log("not working");
-	                //consider modal for error 
+	                $("#allLength-entries").html("<p>There was an error getting all records.</p>");
 	            },
 	            success: function success(res) {
 	                console.log(res);
-	            } //work in progress 
+	                showLength(res);
+	            }
 	        });
+	    };
+	
+	    var showLength = function showLength(data) {
+	        var entries = void 0;
+	        for (var _length in data) {
+	            var formatDate = moment(data[_length].date).format("MMM Do YYYY");
+	            entries = "<tr><td>" + formatDate + "<td>" + data[_length].content + "</td></tr>";
+	            $("#allLength-table").append(entries);
+	        }
 	    };
 	
 	    var getHeadCir = function getHeadCir(search) {
 	        $.ajax({
 	            type: "GET",
-	            url: "/measurements/" + currentUser,
+	            url: "/dashboard/headCir/" + currentUser,
 	            contentType: "application/json",
 	            data: JSON.stringify({
 	                type: headCir
 	            }),
 	            error: function error() {
-	                console.log("not working");
-	                //consider modal for error 
+	                $("#allHeadCir-entries").html("<p>There was an error getting all records.</p>");
 	            },
 	            success: function success(res) {
 	                console.log(res);
-	            } //work in progress 
+	                showHeadCir(res);
+	            }
 	        });
+	    };
+	
+	    var showHeadCir = function showHeadCir(data) {
+	        var entries = void 0;
+	        for (var _headCir in data) {
+	            var formatDate = moment(data[_headCir].date).format("MMM Do YYYY");
+	            entries = "<tr><td>" + formatDate + "<td>" + data[_headCir].content + "</td></tr>";
+	            $("#allHeadCir-table").append(entries);
+	        }
 	    };
 	
 	    //verify both password fields match
@@ -187,7 +213,7 @@
 	
 	    //grab user id and go to individual's dashboard
 	    $("#login").submit(function (e) {
-	        var username = $("#userEmailLogin").val();
+	        var username = $("#username").val();
 	        var password = $("#userPassLogin").val();
 	        e.preventDefault();
 	        $.ajax({
@@ -215,7 +241,7 @@
 	        e.preventDefault();
 	        $.ajax({
 	            type: "GET",
-	            url: 'logout',
+	            url: '/logout',
 	            error: function error() {
 	                alert("Please try to logout again.");
 	            },
@@ -316,15 +342,40 @@
 	        $("#headCirModal").modal("toggle");
 	        displayData();
 	    });
-	
+	    //================== open/close/empty display all modals ===================//
 	    $("#narrLink").on('click', function () {
 	        getNarratives();
+	    });
+	
+	    $("#narrClose").on('click', function () {
+	        $("#allNarrs-table").empty();
 	    });
 	
 	    $("#weightLink").on('click', function () {
 	        getWeight();
 	    });
 	
+	    $("#weightClose").on('click', function () {
+	        $("#allWeight-table").empty();
+	    });
+	
+	    $("#lengthLink").on('click', function () {
+	        getLength();
+	    });
+	
+	    $("#lengthClose").on('click', function () {
+	        $("#allLength-table").empty();
+	    });
+	
+	    $("#headCirLink").on('click', function () {
+	        getHeadCir();
+	    });
+	
+	    $("#headCirClose").on('click', function () {
+	        $("#allHeadCir-table").empty();
+	    });
+	
+	    //=================== register new account modal =====================//
 	    $("#register").on('click', function () {
 	        $("#dashboard").hide();
 	        $("#login").hide();
