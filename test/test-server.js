@@ -20,24 +20,13 @@ const User = require('./src/models/user');
 chai.use(chaiHttp);
 
 //====================== tests to reach all html pages =============================//
-describe('reach html pages', () => {
+describe('reach html page', () => {
 	it('should reach root and have html', (done) => {
 		chai.request(app)
 		.get('/')
 		.end((err, res) => {
 			should.equal(err, null);
 			res.should.have.status(200); 
-			res.should.be.html;
-			done();
-		});
-	});
-
-	it('should reach dashboard', (done) => {
-		chai.request(app)
-		.get('/dashboard')
-		.end((err, res) => {
-			should.equal(err, null);
-			res.should.have.status(200);
 			res.should.be.html;
 			done();
 		});
