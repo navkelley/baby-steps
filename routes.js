@@ -32,18 +32,17 @@ router.get('/', (req,res) => {
 });
 
 //====================== define route for users to login, register & logout ===========//
-// Get Homepage
 router.get('/', ensureAuthenticated, (req, res) => {
    res.redirect('/');
 });
 
-function ensureAuthenticated(req, res, next){
+function ensureAuthenticated(req, res, next) {
    if(req.isAuthenticated()){
       return next();
    } else {
       res.redirect(401, '/');
    }
-};
+}
 
 // Register User
 router.post('/register', (req, res) => {
@@ -65,7 +64,7 @@ router.post('/register', (req, res) => {
    let errors = req.validationErrors();
 
    if(errors) {
-     res.json(errors)
+     res.json(errors);
    } else {
       let newUser = new User({
          name: name,

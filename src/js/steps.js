@@ -82,10 +82,6 @@ $(document).ready(function() {
             type: "GET",
             url: "/dashboard/length/" + currentUser,
             contentType: "application/json",
-            data: JSON.stringify({
-                userId: currentUser,
-                type: length 
-            }),
             error: () => {
                 $("#allLength-entries").html("<p>There was an error getting all records.</p>");
             },
@@ -109,9 +105,6 @@ $(document).ready(function() {
             type: "GET",
             url: "/dashboard/headCir/" + currentUser,
             contentType: "application/json",
-            data: JSON.stringify({
-                type: headCir
-            }),
             error: () => {
                 $("#allHeadCir-entries").html("<p>There was an error getting all records.</p>");
             },

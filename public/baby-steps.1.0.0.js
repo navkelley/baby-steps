@@ -127,10 +127,6 @@
 	            type: "GET",
 	            url: "/dashboard/length/" + currentUser,
 	            contentType: "application/json",
-	            data: JSON.stringify({
-	                userId: currentUser,
-	                type: length
-	            }),
 	            error: function error() {
 	                $("#allLength-entries").html("<p>There was an error getting all records.</p>");
 	            },
@@ -142,9 +138,9 @@
 	
 	    var showLength = function showLength(data) {
 	        var entries = void 0;
-	        for (var _length in data) {
-	            var formatDate = moment(data[_length].date).format("MMM Do YYYY");
-	            entries = "<tr><td>" + formatDate + "<td>" + data[_length].content + "</td></tr>";
+	        for (var length in data) {
+	            var formatDate = moment(data[length].date).format("MMM Do YYYY");
+	            entries = "<tr><td>" + formatDate + "<td>" + data[length].content + "</td></tr>";
 	            $("#allLength-table").append(entries);
 	        }
 	    };
@@ -154,9 +150,6 @@
 	            type: "GET",
 	            url: "/dashboard/headCir/" + currentUser,
 	            contentType: "application/json",
-	            data: JSON.stringify({
-	                type: headCir
-	            }),
 	            error: function error() {
 	                $("#allHeadCir-entries").html("<p>There was an error getting all records.</p>");
 	            },
@@ -168,9 +161,9 @@
 	
 	    var showHeadCir = function showHeadCir(data) {
 	        var entries = void 0;
-	        for (var _headCir in data) {
-	            var formatDate = moment(data[_headCir].date).format("MMM Do YYYY");
-	            entries = "<tr><td>" + formatDate + "<td>" + data[_headCir].content + "</td></tr>";
+	        for (var headCir in data) {
+	            var formatDate = moment(data[headCir].date).format("MMM Do YYYY");
+	            entries = "<tr><td>" + formatDate + "<td>" + data[headCir].content + "</td></tr>";
 	            $("#allHeadCir-table").append(entries);
 	        }
 	    };
