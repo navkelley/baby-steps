@@ -5,36 +5,45 @@ $(document).ready(function() {
     //to hold user id
     let currentUser; 
 
-    let narrativeRecords = [];
-    let weightRecords = [];
-    let lengthRecords = [];
-    let headCirRecords = [];
-
-    const displayRecords = (data) => {
-        
-        let record = moment(narrativeRecords[narrativeRecords.length-1].date).format("MMM Do YYYY") + "<br>";
-        record += narrativeRecords[narrativeRecords.length-1].title + "<br>";
-        record += narrativeRecords[narrativeRecords.length-1].content + "<br>";
-        $("#narrative-entry").html(record);
-
-        let weightRecord = moment(weightRecords[weightRecords.length-1].date).format("MMM Do YYYY") + "<br>";
-        weightRecord += weightRecords[weightRecords.length-1].content + "<br>";
-        $("#weight-entry").html(weightRecord);
-
-        let lengthRecord = moment(lengthRecords[lengthRecords.length-1].date).format("MMM Do YYYY") + "<br>";
-        lengthRecord += lengthRecords[lengthRecords.length-1].content + "<br>";
-        $("#length-entry").html(lengthRecord);
-
-        let headCirRecord = moment(headCirRecords[headCirRecords.length-1].date).format("MMM Do YYYY") + "<br>";
-        headCirRecord += headCirRecords[headCirRecords.length-1].content + "<br>";
-        $("#headCir-entry").html(headCirRecord);
-    };
 //============= function to reset entry forms =================//
     const resetForm = (form) => {
         $(form).find("input:text, textarea").val("");
         $('input[type=date]')[0].value = "";
     };
 
+//======== get/show last narrative, weight, length, headCir entry =========//
+const lastNarr = (search) => {
+    $.ajax({
+        type: "GET",
+        url: "/dashboard/narratives/" + currentUser,
+        contentType: "application/json",
+        error: () => {
+            $("#narrative-entry").html("<p>There was an error with last entry.</p>");
+        },
+        success: (records) => {
+            let lastRecord = moment(records[records.length-1].date).format("MMM Do YYYY") + "<br>";
+            lastRecord += records[records.length-1].title + "<br>";
+            lastRecord += records[records.length-1].content + "<br>";
+            $("#narrative-entry").append(lastRecord);
+        }
+    });
+};
+
+const lastWeight = (search) => {
+    $.ajax({
+        type: "GET",
+        url: "/dashboard/weight/" + currentUser,
+        contentType: "application/json",
+        error: () => {
+            $("#weight-entry").html("<p>There was an error with last entry.</p>");
+        },
+        success: (records) => {
+            let lastRecord = moment(records[records.length-1].date).format("MMM Do YYYY") + "<br>";
+            lastRecord += records[records.length-1].content + "<br>";
+            $("#weight-entry").append(lastRecord);
+        }
+    });
+};
 //======== get/show all narratives, weight, length, headCir in each modal ======//
     const getNarratives = (search) => {
         $.ajax({
@@ -156,6 +165,8 @@ $(document).ready(function() {
             success:(user) => {
                 currentUser = user._id;
                 console.log(currentUser);
+                lastNarr(); 
+                lastWeight(); 
             },
         });
     };
@@ -182,7 +193,7 @@ $(document).ready(function() {
                 location.href = '/'
             },
             success: (user) => {
-                getUserId(username); 
+                getUserId(username);   
                 $("#login").hide();
                 $("#sign-up").hide();
                 $("#dashboard").show();
@@ -261,9 +272,11 @@ $(document).ready(function() {
             success: (record) => {
                 resetForm("#narrForm");
                 $("#narrModal").modal("toggle");
-                narrativeRecords.push(record);
-                console.log(narrativeRecords);
-                displayRecords(); 
+                console.log(record);
+                let displayNarrative = moment(record.date).format("MMM Do YYYY") + "<br>";
+                displayNarrative += record.title + "<br>";
+                displayNarrative += record.content + "<br>";
+                $("#narrative-entry").append(displayNarrative) 
             },
         }); 
     });
@@ -288,9 +301,9 @@ $(document).ready(function() {
             success: (record) => {
                 resetForm("#weightForm");
                 $("#weightModal").modal("toggle"); 
-                weightRecords.push(record);
-                console.log(weightRecords);
-                displayRecords();
+                let displayWeightRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
+                displayWeightRecord += record.content + "<br>";
+                $("#weight-entry").append(displayWeightRecord);
             },
         }); 
     });
@@ -314,9 +327,9 @@ $(document).ready(function() {
             success: (record) => {
                 resetForm("#lengthForm");
                 $("#lengthModal").modal("toggle"); 
-                lengthRecords.push(record);
-                console.log(lengthRecords);
-                displayRecords();
+                let displayLengthRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
+                displayLengthRecord += record.content + "<br>"
+                $("#length-entry").append(displayLengthRecord);
             },
         }); 
     });
@@ -340,9 +353,9 @@ $(document).ready(function() {
             success: (record) => {
                 resetForm("#headCirForm");
                 $("#headCirModal").modal("toggle");
-                headCirRecords.push(record);
-                console.log(headCirRecords);
-                displayRecords(); 
+                let displayHeadCirRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
+                displayHeadCirRecord += record.content + "<br>";
+                $("#headCir-entry").append(displayHeadCirRecord);
             },
         });
     });
