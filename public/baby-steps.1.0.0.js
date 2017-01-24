@@ -59,24 +59,21 @@
 	    var headCirRecords = [];
 	
 	    var displayRecords = function displayRecords(data) {
-	        var narrFormatDate = moment(narrativeRecords[narrativeRecords.length - 1].date).format("MMM Do YYYY");
-	        var record = narrFormatDate + "<br>";
+	
+	        var record = moment(narrativeRecords[narrativeRecords.length - 1].date).format("MMM Do YYYY") + "<br>";
 	        record += narrativeRecords[narrativeRecords.length - 1].title + "<br>";
 	        record += narrativeRecords[narrativeRecords.length - 1].content + "<br>";
 	        $("#narrative-entry").html(record);
 	
-	        var wFormatDate = moment(weightRecords[weightRecords.length - 1].date).format("MMM Do YYYY");
-	        var weightRecord = wFormatDate + "<br>";
+	        var weightRecord = moment(weightRecords[weightRecords.length - 1].date).format("MMM Do YYYY") + "<br>";
 	        weightRecord += weightRecords[weightRecords.length - 1].content + "<br>";
 	        $("#weight-entry").html(weightRecord);
 	
-	        var lFormatDate = moment(lengthRecords[lengthRecords.length - 1].date).format("MMM Do YYYY");
-	        var lengthRecord = lFormatDate + "<br>";
+	        var lengthRecord = moment(lengthRecords[lengthRecords.length - 1].date).format("MMM Do YYYY") + "<br>";
 	        lengthRecord += lengthRecords[lengthRecords.length - 1].content + "<br>";
 	        $("#length-entry").html(lengthRecord);
 	
-	        var hFormatDate = moment(headCirRecords[headCirRecords.length - 1].date).format("MMM Do YYYY");
-	        var headCirRecord = hFormatDate + "<br>";
+	        var headCirRecord = moment(headCirRecords[headCirRecords.length - 1].date).format("MMM Do YYYY") + "<br>";
 	        headCirRecord += headCirRecords[headCirRecords.length - 1].content + "<br>";
 	        $("#headCir-entry").html(headCirRecord);
 	    };
@@ -311,7 +308,7 @@
 	                resetForm("#narrForm");
 	                $("#narrModal").modal("toggle");
 	                narrativeRecords.push(record);
-	                console.log("records array", narrativeRecords);
+	                console.log(narrativeRecords);
 	                displayRecords();
 	            }
 	        });
@@ -329,7 +326,7 @@
 	            data: JSON.stringify({
 	                userId: currentUser,
 	                date: weightDate,
-	                content: wLbs + wOz
+	                content: wLbs + " lbs " + wOz + " oz"
 	            }),
 	            error: function error() {
 	                $("#weightEntry").append("<p>Could not submit log. Please try again.</p>");
@@ -337,9 +334,9 @@
 	            success: function success(record) {
 	                resetForm("#weightForm");
 	                $("#weightModal").modal("toggle");
-	                var formatDate = moment(record.date).format("MMM Do YYYY");
-	                var displayWeight = formatDate + "<br>" + record.content + "<br>";
-	                $("#weight-entry").html(displayWeight);
+	                weightRecords.push(record);
+	                console.log(weightRecords);
+	                displayRecords();
 	            }
 	        });
 	    });
@@ -355,15 +352,17 @@
 	            data: JSON.stringify({
 	                userId: currentUser,
 	                date: lengthDate,
-	                content: length
+	                content: length + " inches"
 	            }),
 	            error: function error() {
 	                $("#lengthEntry").append("<p>Could not submit log. Please try again.</p>");
 	            },
-	            success: function success(narrative) {
+	            success: function success(record) {
 	                resetForm("#lengthForm");
 	                $("#lengthModal").modal("toggle");
-	                displayLastEntry(narrative); //work in progress 
+	                lengthRecords.push(record);
+	                console.log(lengthRecords);
+	                displayRecords();
 	            }
 	        });
 	    });
@@ -379,15 +378,17 @@
 	            data: JSON.stringify({
 	                userId: currentUser,
 	                date: hDate,
-	                content: headCir
+	                content: headCir + " inches"
 	            }),
 	            error: function error() {
 	                $("#headCirEntry").append("<p>Could not submit log. Please try again.</p>");
 	            },
-	            success: function success(narrative) {
+	            success: function success(record) {
 	                resetForm("#headCirForm");
 	                $("#headCirModal").modal("toggle");
-	                displayLastEntry(narrative); //work in progress 
+	                headCirRecords.push(record);
+	                console.log(headCirRecords);
+	                displayRecords();
 	            }
 	        });
 	    });
