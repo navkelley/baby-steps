@@ -79,17 +79,15 @@
 	    };
 	
 	    var getNarratives = function getNarratives(search) {
-	        console.log("getNarratives function called");
 	        $.ajax({
 	            type: "GET",
-	            url: "/dashboard/narratives/588688dfcd037306a91c8781",
+	            url: "/dashboard/narratives/" + currentUser,
 	            contentType: "application/json",
 	            error: function error() {
 	                console.log("not working");
 	                //consider modal for error 
 	            },
 	            success: function success(res) {
-	                console.log("narratives:", res);
 	                showNarrs(res);
 	            } //work in progress 
 	        });
@@ -98,8 +96,7 @@
 	    var showNarrs = function showNarrs(data) {
 	        var entries = void 0;
 	        for (var narrativeEntry in data) {
-	            var formatDate = moment(data[narrativeEntry].date).format("MMM Do YY");
-	            console.log(data[narrativeEntry]);
+	            var formatDate = moment(data[narrativeEntry].date).format("MMM Do YYYY");
 	            entries = "<tr><td>" + formatDate + "<td>" + data[narrativeEntry].title + "</td>" + "<td>" + data[narrativeEntry].content + "</td></tr>";
 	            $("#allNarrs-table").append(entries);
 	        }

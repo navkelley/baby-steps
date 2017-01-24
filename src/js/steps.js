@@ -31,17 +31,15 @@ $(document).ready(function() {
     };
 
     const getNarratives = (search) => {
-        console.log("getNarratives function called")
         $.ajax({
             type: "GET",
-            url: "/dashboard/narratives/588688dfcd037306a91c8781",
+            url: "/dashboard/narratives/" + currentUser,
             contentType: "application/json",
             error: () => {
                 console.log("not working")
                 //consider modal for error 
             },
             success: (res) => {
-                console.log("narratives:", res)
                 showNarrs(res);
             }//work in progress 
         });
@@ -50,8 +48,7 @@ $(document).ready(function() {
     const showNarrs = (data) => {
         let entries;
         for(let narrativeEntry in data) {
-            let formatDate = moment(data[narrativeEntry].date).format("MMM Do YY");
-            console.log(data[narrativeEntry]);
+            let formatDate = moment(data[narrativeEntry].date).format("MMM Do YYYY");
             entries = "<tr><td>" + formatDate + "<td>" + data[narrativeEntry].title + "</td>" +
                 "<td>" + data[narrativeEntry].content + "</td></tr>";
             $("#allNarrs-table").append(entries);
