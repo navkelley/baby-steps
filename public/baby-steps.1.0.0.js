@@ -84,8 +84,7 @@
 	            url: "/dashboard/narratives/" + currentUser,
 	            contentType: "application/json",
 	            error: function error() {
-	                console.log("not working");
-	                //consider modal for error 
+	                $("#allNarrative-entries").html("<p>There was an error getting all records.</p>");
 	            },
 	            success: function success(res) {
 	                showNarrs(res);
@@ -298,7 +297,6 @@
 	    });
 	
 	    $("#narrLink").on('click', function () {
-	        console.log("narrLink clicked");
 	        getNarratives();
 	    });
 	});
