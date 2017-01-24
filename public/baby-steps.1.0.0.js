@@ -269,8 +269,10 @@
 	                password: password
 	            }),
 	            error: function error() {
-	                alert("An error has occurred.");
-	                location.href = '/';
+	                $("#login-box").append("<p>Could not login. Please try again.</p>");
+	                $("#sign-up").hide();
+	                $("#dashboard").hide();
+	                $("#login").show();
 	            },
 	            success: function success(user) {
 	                getUserId(username);
