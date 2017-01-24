@@ -6,13 +6,13 @@ $(document).ready(function() {
     let currentUser; 
 
     //will need to make request to db
-    const displayData = () => {
+    const displayLastEntry = (data) => {
         let record = data.narratives[data.narratives.length-1].date + "<br>";
         record += data.narratives[data.narratives.length-1].title + "<br>";
         record += data.narratives[data.narratives.length-1].text + "<br>";
         $("#narrative-entry").html(record);
 
-        let weightRecord = data.weight[data.weight.length-1].date + "<br>";
+        /*let weightRecord = data.weight[data.weight.length-1].date + "<br>";
         weightRecord += data.weight[data.weight.length-1].weight + "<br>";
         $("#weight-entry").html(weightRecord);
 
@@ -22,7 +22,7 @@ $(document).ready(function() {
 
         let headCirRecord = data.headCir[data.headCir.length-1].date + "<br>";
         headCirRecord += data.headCir[data.headCir.length-1].headCir + "<br>";
-        $("#headCir-entry").html(headCirRecord);
+        $("#headCir-entry").html(headCirRecord);*/
     };
     
     const resetForm = (form) => {
@@ -40,28 +40,28 @@ $(document).ready(function() {
             },
             success: (res) => {
                 showNarrs(res);
-            }//work in progress 
+            }
         });
     };
 
     const showNarrs = (data) => {
         let entries;
-        for(let narrativeEntry in data) {
-            let formatDate = moment(data[narrativeEntry].date).format("MMM Do YYYY");
-            entries = "<tr><td>" + formatDate + "<td>" + data[narrativeEntry].title + "</td>" +
-                "<td>" + data[narrativeEntry].content + "</td></tr>";
+        for(let narratives in data) {
+            let formatDate = moment(data[narratives].date).format("MMM Do YYYY");
+            entries = "<tr><td>" + formatDate + "<td>" + data[narratives].title + "</td>" +
+                "<td>" + data[narratives].content + "</td></tr>";
             $("#allNarrs-table").append(entries);
         }
     };
 
     const getWeight = (search) => {
+        console.log("getWeight function called")
         $.ajax({
             type: "GET",
-            url: "/measurements/:userId",
+            url: "/measurements/" + currentUser,
             contentType: "application/json",
             data: JSON.stringify({
-                userId: currentUser,
-                type: weight
+                type: "weight"
             }),
             error: () => {
                 console.log("not working")
@@ -95,10 +95,9 @@ $(document).ready(function() {
         const getHeadCir = (search) => {
         $.ajax({
             type: "GET",
-            url: "/measurements/:userId",
+            url: "/measurements/" + currentUser,
             contentType: "application/json",
             data: JSON.stringify({
-                userId: currentUser,
                 type: headCir
             }),
             error: () => {
@@ -136,6 +135,7 @@ $(document).ready(function() {
             },
             success:(user) => {
                 currentUser = user._id;
+                console.log(currentUser);
             },
         });
     };
@@ -179,6 +179,7 @@ $(document).ready(function() {
                 alert("Please try to logout again.");
             },
             success: function() {
+                delete window.currentUser; 
                 $("#dashboard").hide();
                 $("#sign-up").hide(); 
                 $("#login").show(); 
@@ -210,7 +211,7 @@ $(document).ready(function() {
             },
             success: function (user) {
                 currentUser = user._id;
-                console.log(currentUser); 
+                console.log("this user:", currentUser); 
                 $("#sign-up").hide();
                 $("#login").hide(); 
                 $('#dashboard').show();
@@ -223,10 +224,25 @@ $(document).ready(function() {
         let narrDate = $("#narrDate").val();
         let narrative = $("#narrInput").val();
         let narrTitle = $("#narrTitle").val();
-        data.narratives.push({"title": narrTitle, "date": narrDate, "text": narrative});
-        resetForm("#narrForm");
-        $("#narrModal").modal("toggle"); 
-        displayData(); 
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/narratives",
+            contentType: "application/json",
+            data: JSON.stringify({
+                userId: currentUser, 
+                title: narrTitle, 
+                date: narrDate, 
+                content: narrative
+            }),
+            error: () => {
+                $("#narrEntry").append("<p>Could not submit log. Please try again.</p>");
+            },
+            success: (narrative) => {
+                resetForm("#narrForm");
+                $("#narrModal").modal("toggle"); 
+                displayLastEntry(narrative);//work in progress 
+            },
+        }); 
     });
 
     $("#weightForm").submit(function(e) {
@@ -262,6 +278,10 @@ $(document).ready(function() {
 
     $("#narrLink").on('click', () => {
         getNarratives(); 
+    });
+
+    $("#weightLink").on('click', () => {
+        getWeight(); 
     });
 
     $("#register").on('click', () => {

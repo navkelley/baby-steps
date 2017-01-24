@@ -192,7 +192,7 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                     <h4 class="modal-title" id="narrModalLabel">Narrative Entry</h4>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body" id="narrEntry">
                                                 <p>A place for you to write down anything about baby or you! Enter in any thoughts, comments or concerns for reference here:</p>
                                                 <label for="narrative-title">Title of Narrative:</label>
                                                 <input type="text" placeholder="Fun activity, bad day, etc" id="narrTitle" required><br>
@@ -218,7 +218,7 @@
                                 <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#weightModal"></i>
                             </span>
                             <!--Link to see all entries-->
-                            <p><a href="#" aria-hidden="true" data-toggle="modal" data-target="#allWeightModal">See all logged entries</a></p>
+                            <p><a href="#" id="weightLink" aria-hidden="true" data-toggle="modal" data-target="#allWeightModal">See all logged entries</a></p>
                             <div class="modal fade" id="allWeightModal" tabindex="-1" role="dialog" aria-labelledby="allWeightModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">

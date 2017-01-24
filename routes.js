@@ -146,7 +146,7 @@ router.get('/dashboard/narratives/:userId', (req, res) => {
 
     .post('/dashboard/narratives', (req, res) => {
 		Narrative.create({
-            userId: req.body.userId,//was currentUser
+            userId: req.body.userId,
         	title: req.body.title,
             date: req.body.date,
             content: req.body.content
@@ -189,8 +189,11 @@ router.put('/dashboard/narratives/:id',(req, res) => {
 	});
 
 //====================== routes to define dashboard measurements =======================//
-router.get('/dashboard/measurements/:userId', (req,res) => {
-        Measurement.find((err, measurement) => {
+router.get('/dashboard/measurements/:userId/:type', (req,res) => {
+        Measurement.find({
+            userId: req.params.userId,
+            type: req.params.type
+        }, (err, measurement) => {
             if(err) {
                 return res.status(500).json({
                     message: 'Internal Server Error'
@@ -202,7 +205,7 @@ router.get('/dashboard/measurements/:userId', (req,res) => {
 
     .post('/dashboard/measurements', (req, res) => {
         Measurement.create({
-            userId: currentUser,
+            userId: req.body.userId,
             type: req.body.type,
             date: req.body.date,
             content: req.body.content

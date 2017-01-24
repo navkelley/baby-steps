@@ -54,23 +54,21 @@
 	    var currentUser = void 0;
 	
 	    //will need to make request to db
-	    var displayData = function displayData() {
+	    var displayLastEntry = function displayLastEntry(data) {
 	        var record = data.narratives[data.narratives.length - 1].date + "<br>";
 	        record += data.narratives[data.narratives.length - 1].title + "<br>";
 	        record += data.narratives[data.narratives.length - 1].text + "<br>";
 	        $("#narrative-entry").html(record);
 	
-	        var weightRecord = data.weight[data.weight.length - 1].date + "<br>";
-	        weightRecord += data.weight[data.weight.length - 1].weight + "<br>";
+	        /*let weightRecord = data.weight[data.weight.length-1].date + "<br>";
+	        weightRecord += data.weight[data.weight.length-1].weight + "<br>";
 	        $("#weight-entry").html(weightRecord);
-	
-	        var lengthRecord = data.length[data.length.length - 1].date + "<br>";
-	        lengthRecord += data.length[data.length.length - 1].length + "<br>";
+	         let lengthRecord = data.length[data.length.length-1].date + "<br>";
+	        lengthRecord += data.length[data.length.length-1].length + "<br>";
 	        $("#length-entry").html(lengthRecord);
-	
-	        var headCirRecord = data.headCir[data.headCir.length - 1].date + "<br>";
-	        headCirRecord += data.headCir[data.headCir.length - 1].headCir + "<br>";
-	        $("#headCir-entry").html(headCirRecord);
+	         let headCirRecord = data.headCir[data.headCir.length-1].date + "<br>";
+	        headCirRecord += data.headCir[data.headCir.length-1].headCir + "<br>";
+	        $("#headCir-entry").html(headCirRecord);*/
 	    };
 	
 	    var resetForm = function resetForm(form) {
@@ -88,27 +86,27 @@
 	            },
 	            success: function success(res) {
 	                showNarrs(res);
-	            } //work in progress 
+	            }
 	        });
 	    };
 	
 	    var showNarrs = function showNarrs(data) {
 	        var entries = void 0;
-	        for (var narrativeEntry in data) {
-	            var formatDate = moment(data[narrativeEntry].date).format("MMM Do YYYY");
-	            entries = "<tr><td>" + formatDate + "<td>" + data[narrativeEntry].title + "</td>" + "<td>" + data[narrativeEntry].content + "</td></tr>";
+	        for (var narratives in data) {
+	            var formatDate = moment(data[narratives].date).format("MMM Do YYYY");
+	            entries = "<tr><td>" + formatDate + "<td>" + data[narratives].title + "</td>" + "<td>" + data[narratives].content + "</td></tr>";
 	            $("#allNarrs-table").append(entries);
 	        }
 	    };
 	
 	    var getWeight = function getWeight(search) {
+	        console.log("getWeight function called");
 	        $.ajax({
 	            type: "GET",
-	            url: "/measurements/:userId",
+	            url: "/measurements/" + currentUser,
 	            contentType: "application/json",
 	            data: JSON.stringify({
-	                userId: currentUser,
-	                type: weight
+	                type: "weight"
 	            }),
 	            error: function error() {
 	                console.log("not working");
@@ -142,10 +140,9 @@
 	    var getHeadCir = function getHeadCir(search) {
 	        $.ajax({
 	            type: "GET",
-	            url: "/measurements/:userId",
+	            url: "/measurements/" + currentUser,
 	            contentType: "application/json",
 	            data: JSON.stringify({
-	                userId: currentUser,
 	                type: headCir
 	            }),
 	            error: function error() {
@@ -182,6 +179,7 @@
 	            },
 	            success: function success(user) {
 	                currentUser = user._id;
+	                console.log(currentUser);
 	            }
 	        });
 	    };
@@ -225,6 +223,7 @@
 	                alert("Please try to logout again.");
 	            },
 	            success: function success() {
+	                delete window.currentUser;
 	                $("#dashboard").hide();
 	                $("#sign-up").hide();
 	                $("#login").show();
@@ -256,7 +255,7 @@
 	            },
 	            success: function success(user) {
 	                currentUser = user._id;
-	                console.log(currentUser);
+	                console.log("this user:", currentUser);
 	                $("#sign-up").hide();
 	                $("#login").hide();
 	                $('#dashboard').show();
@@ -269,10 +268,25 @@
 	        var narrDate = $("#narrDate").val();
 	        var narrative = $("#narrInput").val();
 	        var narrTitle = $("#narrTitle").val();
-	        data.narratives.push({ "title": narrTitle, "date": narrDate, "text": narrative });
-	        resetForm("#narrForm");
-	        $("#narrModal").modal("toggle");
-	        displayData();
+	        $.ajax({
+	            type: "POST",
+	            url: "/dashboard/narratives",
+	            contentType: "application/json",
+	            data: JSON.stringify({
+	                userId: currentUser,
+	                title: narrTitle,
+	                date: narrDate,
+	                content: narrative
+	            }),
+	            error: function error() {
+	                $("#narrEntry").append("<p>Could not submit log. Please try again.</p>");
+	            },
+	            success: function success(narrative) {
+	                resetForm("#narrForm");
+	                $("#narrModal").modal("toggle");
+	                displayLastEntry(narrative); //work in progress 
+	            }
+	        });
 	    });
 	
 	    $("#weightForm").submit(function (e) {
@@ -308,6 +322,10 @@
 	
 	    $("#narrLink").on('click', function () {
 	        getNarratives();
+	    });
+	
+	    $("#weightLink").on('click', function () {
+	        getWeight();
 	    });
 	
 	    $("#register").on('click', function () {
