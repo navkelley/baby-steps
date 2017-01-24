@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    //import moment for date format
+    let moment = require('moment');
 
     //to hold user id
     let currentUser; 
@@ -39,19 +41,21 @@ $(document).ready(function() {
                 //consider modal for error 
             },
             success: (res) => {
-                console.log(res)
+                console.log("narratives:", res)
                 showNarrs(res);
             }//work in progress 
         });
     };
 
     const showNarrs = (data) => {
-        let entries; 
-        for (let i = 0; i < data.length; i++) {
-            entries = "<tr><td>" + "stuff" + 
-            "</td></tr>"
+        let entries;
+        for(let narrativeEntry in data) {
+            let formatDate = moment(data[narrativeEntry].date).format("MMM Do YY");
+            console.log(data[narrativeEntry]);
+            entries = "<tr><td>" + formatDate + "<td>" + data[narrativeEntry].title + "</td>" +
+                "<td>" + data[narrativeEntry].content + "</td></tr>";
+            $("#allNarrs-table").append(entries);
         }
-        $("#narrative-table").append(entries);
     };
 
     const getWeight = (search) => {
@@ -76,7 +80,7 @@ $(document).ready(function() {
     const getLength = (search) => {
         $.ajax({
             type: "GET",
-            url: "/measurements/:userId",
+            url: "/measurements/" + currentUser,
             contentType: "application/json",
             data: JSON.stringify({
                 userId: currentUser,

@@ -137,6 +137,7 @@ router.get('/dashboard', (req, res) => {
 });
 
 //====================== routes for dashboard narratives ==============================//
+//userId: currentUser previously 
 router.get('/dashboard/narratives/:userId', (req, res) => {
         Narrative.find({userId: req.params.userId}, (err, narratives) => {
             if(err) {

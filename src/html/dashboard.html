@@ -123,7 +123,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="narrModalLabel">All Weight Entries</h4>
+                                            <h4 class="modal-title" id="allWeightModalLabel">All Weight Entries</h4>
                                     </div>
                                     <div class="modal-body">
                                         <div id="allWeight-entries">
@@ -131,7 +131,7 @@
                                                 <thead class="thead-inverse">
                                                     <tr>
                                                         <th>Date</th>
-                                                        <th>Content</th>
+                                                        <th>Weight</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="allWeight-table">
@@ -180,7 +180,34 @@
                             <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#lengthModal"></i>
                         </span>
                         <!--Link to see all entries-->
-                        <p><a href="/length-entries">See all logged entries</a></p>
+                        <p><a href="#" aria-hidden="true" data-toggle="modal" data-target="#allLengthModal">See all logged entries</a></p>
+                        <div class="modal fade" id="allLengthModal" tabindex="-1" role="dialog" aria-labelledby="allLengthModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="allLengthModalLabel">All Length Entries</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="allLength-entries">
+                                            <table class="table">
+                                                <thead class="thead-inverse">
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Length</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="allLength-table">
+                                                </tbody>
+                                            </table>
+                                        </div><!--length-entries table-->
+                                    </div><!--modal-body-->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
                         <div id="length-entry"></div>
                         <!-- Modal -->
                         <div class="modal fade" id="lengthModal" tabindex="-1" role="dialog" aria-labelledby="lengthModalLabel">
@@ -216,7 +243,34 @@
                             <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#headCirModal"></i>
                         </span>
                         <!--Link to see all entries-->
-                        <p><a href="/headCir-entries">See all logged entries</a></p>
+                        <p><a href="#" aria-hidden="true" data-toggle="modal" data-target="#allHeadCirModal">See all logged entries</a></p>
+                        <div class="modal fade" id="allHeadCirModal" tabindex="-1" role="dialog" aria-labelledby="allHeadCirModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="allHeadCirModalLabel">All Length Entries</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="allHeadCir-entries">
+                                            <table class="table">
+                                                <thead class="thead-inverse">
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Head Circumference</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="allHeadCir-table">
+                                                </tbody>
+                                            </table>
+                                        </div><!--headCir-entries table-->
+                                    </div><!--modal-body-->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
                         <div id="headCir-entry"></div>
                         <!-- Modal -->
                         <div class="modal fade" id="headCirModal" tabindex="-1" role="dialog" aria-labelledby="headCirModalLabel">
