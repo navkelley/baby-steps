@@ -58,4 +58,10 @@ a.disabled {
   pointer-events: none;
   cursor: default;
 }
+#narrLink,
+#weightLink,
+#lengthLink,
+#headCirLink {
+  color: white;
+}
 /*# sourceMappingURL=baby-steps.1.0.0.css.map */
