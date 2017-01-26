@@ -8,7 +8,7 @@ const router = require('./routes');
 const jsonParser = bodyParser.json();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const session = require('express-session')
+const session = require('express-session');
 const flash = require('connect-flash');
 const expressValidator = require('express-validator');
 const LocalStrategy = require('passport-local').Strategy;
@@ -107,7 +107,7 @@ if (require.main === module) {
             console.error(err);
         }
     });
-};
+}
 
 
 exports.app = app;
