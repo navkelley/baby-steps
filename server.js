@@ -87,7 +87,7 @@ const runServer = (callback) => {
     });
 };
 
-function closeServer() {
+/*function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
       console.log('Closing server');
@@ -99,7 +99,7 @@ function closeServer() {
       });
     });
   });
-}
+}*/
 
 if (require.main === module) {
     runServer((err) => {
