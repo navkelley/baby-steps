@@ -60,7 +60,7 @@ describe('users from signup', (done) => {
                 email: 'bob@test.com',
                 password: 'testingbabysteps'
            })
-    	   .end((req, res) => {
+    	   .end((err, res) => {
     	       should.equal(err, null);
     	       res.should.be.json;
                res.body.should.be.a('object');
