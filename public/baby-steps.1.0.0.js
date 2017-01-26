@@ -71,7 +71,7 @@
 	                var lastRecord = moment(records[records.length - 1].date).format("MMM Do YYYY") + "<br>";
 	                lastRecord += records[records.length - 1].title + "<br>";
 	                lastRecord += records[records.length - 1].content + "<br>";
-	                $("#narrative-entry").append(lastRecord);
+	                $("#narrative-entry").html(lastRecord);
 	            }
 	        });
 	    };
@@ -87,7 +87,7 @@
 	            success: function success(records) {
 	                var lastRecord = moment(records[records.length - 1].date).format("MMM Do YYYY") + "<br>";
 	                lastRecord += records[records.length - 1].content + "<br>";
-	                $("#weight-entry").append(lastRecord);
+	                $("#weight-entry").html(lastRecord);
 	            }
 	        });
 	    };
@@ -103,7 +103,7 @@
 	            success: function success(records) {
 	                var lastRecord = moment(records[records.length - 1].date).format("MMM Do YYYY") + "<br>";
 	                lastRecord += records[records.length - 1].content + "<br>";
-	                $("#length-entry").append(lastRecord);
+	                $("#length-entry").html(lastRecord);
 	            }
 	        });
 	    };
@@ -119,7 +119,7 @@
 	            success: function success(records) {
 	                var lastRecord = moment(records[records.length - 1].date).format("MMM Do YYYY") + "<br>";
 	                lastRecord += records[records.length - 1].content + "<br>";
-	                $("#headCir-entry").append(lastRecord);
+	                $("#headCir-entry").html(lastRecord);
 	            }
 	        });
 	    };

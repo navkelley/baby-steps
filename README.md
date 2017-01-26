@@ -42,6 +42,12 @@ mocha
 
 The tests included in this application are to ensure that components are functioning properly. Each test runs a before and after hook to pass along data to the DB it then runs async functions to ensure that data is being passed back and forth as required.  
 
+##Sreenshots
+![screenshot](images/bslogin.jpg)
+![screenshot](images/dashboard.jpg)
+![screenshot](images/entryForm.jpg)
+![screenshot](images/showAllModal.jpg)
+
 ## Built With
 
 * [Nodejs](https://nodejs.org/api/documentation.html) - The server framework used
