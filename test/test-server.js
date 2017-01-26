@@ -37,7 +37,7 @@ describe('reach html page', (done) => {
 });
 //====================== tests for user routes ===============================//
 describe('users from signup', (done) => {
-	before((done) => {
+	beforeEach((done) => {
         server.runServer(() => {
             User.create({
             	username: 'Tiffany', 
@@ -50,7 +50,7 @@ describe('users from signup', (done) => {
         });
     });
 
-    after((done) => {
+    afterEach((done) => {
         User.remove(() => {
             done();
         });
