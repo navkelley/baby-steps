@@ -5,10 +5,12 @@ Baby Steps is a project that demonstrates the utilization of server-side logic w
 ### Prerequisites
 
 You will only need to create a user profile in order to utilize the application. However, if you just want to take it for a test run you can use this username and password: 
+
 ```
 Username: test-baby-steps
 Password: password test
 ```
+
 ### Installing
 
 To begin installation of Baby Steps first fork the repo then click the button titled "Clone or download" inside of your version of the repo. 
