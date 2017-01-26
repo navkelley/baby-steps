@@ -1,10 +1,10 @@
-var path = require('path');
+let path = require('path');
 
-var webpack = require('webpack');
+let webpack = require('webpack');
 
-var packageData = require('./package.json');
+let packageData = require('./package.json');
 
-var filename = [packageData.name, packageData.version, 'js'];
+let filename = [packageData.name, packageData.version, 'js'];
 
 module.exports = {
     entry: path.resolve(__dirname, packageData.main),

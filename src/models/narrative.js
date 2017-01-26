@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.ObjectId; 
 
 const NarrativeSchema = mongoose.Schema({
@@ -8,6 +8,6 @@ const NarrativeSchema = mongoose.Schema({
 	content: String
 });
 
-const Narrative = mongoose.model('Narrative', NarrativeSchema);
+const Narrative = mongoose.model("Narrative", NarrativeSchema);
 
 module.exports = Narrative; 
