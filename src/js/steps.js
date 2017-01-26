@@ -7,7 +7,8 @@ $(document).ready(function() {
     let currentUser; 
 
     const resetForm = (form) => {
-        $(form).find("input:text, textarea, input:number").val("");
+        $(form).find("input:text, textarea").val("");
+        $(form).find("input:number").val("");
         $("input[type=date]")[0].value = "";
     };
 
