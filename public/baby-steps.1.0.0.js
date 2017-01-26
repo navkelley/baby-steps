@@ -55,7 +55,7 @@
 	    var currentUser = void 0;
 	
 	    var resetForm = function resetForm(form) {
-	        $(form).find("input:text, textarea").val("");
+	        $(form).find("input:text, textarea, input:number").val("");
 	        $("input[type=date]")[0].value = "";
 	    };
 	
@@ -349,7 +349,7 @@
 	                var displayNarrative = moment(record.date).format("MMM Do YYYY") + "<br>";
 	                displayNarrative += record.title + "<br>";
 	                displayNarrative += record.content + "<br>";
-	                $("#narrative-entry").append(displayNarrative);
+	                $("#narrative-entry").html(displayNarrative);
 	            }
 	        });
 	    });
@@ -376,7 +376,7 @@
 	                $("#weightModal").modal("toggle");
 	                var displayWeightRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
 	                displayWeightRecord += record.content + "<br>";
-	                $("#weight-entry").append(displayWeightRecord);
+	                $("#weight-entry").html(displayWeightRecord);
 	            }
 	        });
 	    });
@@ -402,7 +402,7 @@
 	                $("#lengthModal").modal("toggle");
 	                var displayLengthRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
 	                displayLengthRecord += record.content + "<br>";
-	                $("#length-entry").append(displayLengthRecord);
+	                $("#length-entry").html(displayLengthRecord);
 	            }
 	        });
 	    });
@@ -428,7 +428,7 @@
 	                $("#headCirModal").modal("toggle");
 	                var displayHeadCirRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
 	                displayHeadCirRecord += record.content + "<br>";
-	                $("#headCir-entry").append(displayHeadCirRecord);
+	                $("#headCir-entry").html(displayHeadCirRecord);
 	            }
 	        });
 	    });

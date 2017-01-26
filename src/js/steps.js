@@ -7,7 +7,7 @@ $(document).ready(function() {
     let currentUser; 
 
     const resetForm = (form) => {
-        $(form).find("input:text, textarea").val("");
+        $(form).find("input:text, textarea, input:number").val("");
         $("input[type=date]")[0].value = "";
     };
 
@@ -303,7 +303,7 @@ $(document).ready(function() {
                 let displayNarrative = moment(record.date).format("MMM Do YYYY") + "<br>";
                 displayNarrative += record.title + "<br>";
                 displayNarrative += record.content + "<br>";
-                $("#narrative-entry").append(displayNarrative) 
+                $("#narrative-entry").html(displayNarrative) 
             },
         }); 
     });
@@ -330,7 +330,7 @@ $(document).ready(function() {
                 $("#weightModal").modal("toggle"); 
                 let displayWeightRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
                 displayWeightRecord += record.content + "<br>";
-                $("#weight-entry").append(displayWeightRecord);
+                $("#weight-entry").html(displayWeightRecord);
             },
         }); 
     });
@@ -356,7 +356,7 @@ $(document).ready(function() {
                 $("#lengthModal").modal("toggle"); 
                 let displayLengthRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
                 displayLengthRecord += record.content + "<br>"
-                $("#length-entry").append(displayLengthRecord);
+                $("#length-entry").html(displayLengthRecord);
             },
         }); 
     });
@@ -382,7 +382,7 @@ $(document).ready(function() {
                 $("#headCirModal").modal("toggle");
                 let displayHeadCirRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
                 displayHeadCirRecord += record.content + "<br>";
-                $("#headCir-entry").append(displayHeadCirRecord);
+                $("#headCir-entry").html(displayHeadCirRecord);
             },
         });
     });
