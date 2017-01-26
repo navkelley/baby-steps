@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.ObjectId;
 
 const HeadCirSchema = mongoose.Schema({
@@ -7,6 +7,6 @@ const HeadCirSchema = mongoose.Schema({
     content: String
 });
 
-const HeadCir = mongoose.model('HeadCir', HeadCirSchema);
+const HeadCir = mongoose.model("HeadCir", HeadCirSchema);
 
 module.exports = HeadCir; 

@@ -47,19 +47,18 @@
 	"use strict";
 	
 	$(document).ready(function () {
+	
 	    //import moment for date format
 	    var moment = __webpack_require__(1);
 	
 	    //to hold user id
 	    var currentUser = void 0;
 	
-	    //============= function to reset entry forms =================//
 	    var resetForm = function resetForm(form) {
 	        $(form).find("input:text, textarea").val("");
-	        $('input[type=date]')[0].value = "";
+	        $("input[type=date]")[0].value = "";
 	    };
 	
-	    //======== get/show last narrative, weight, length, headCir entry =========//
 	    var lastNarr = function lastNarr(search) {
 	        $.ajax({
 	            type: "GET",
@@ -124,7 +123,7 @@
 	            }
 	        });
 	    };
-	    //======== get/show all narratives, weight, length, headCir in each modal ======//
+	
 	    var getNarratives = function getNarratives(search) {
 	        $.ajax({
 	            type: "GET",
@@ -217,18 +216,16 @@
 	        }
 	    };
 	
-	    //=============== verify both password fields match ===================//
 	    var checkPassword = function checkPassword(password) {
 	        var pass1 = $("#password").val();
 	        var pass2 = $("#verifyPassword").val();
 	        if (pass1 === pass2) {
-	            $("#passwordMessage").html("<p id='PassMatch'>Passwords Match!</p>");
+	            $("#passwordMessage").html("<p>Passwords Match!</p>");
 	        } else {
-	            $("#passwordMessage").html("<p id='PassMatch'>Passwords Do Not Match!</p>");
+	            $("#passwordMessage").html("<p>Passwords Do Not Match!</p>");
 	        }
 	    };
 	
-	    //=============== get user id for each session ===================//
 	    var getUserId = function getUserId(username) {
 	        $.ajax({
 	            type: "POST",
@@ -242,7 +239,6 @@
 	            },
 	            success: function success(user) {
 	                currentUser = user._id;
-	                console.log(currentUser);
 	                lastNarr();
 	                lastWeight();
 	                lastLength();
@@ -251,18 +247,16 @@
 	        });
 	    };
 	
-	    //===================== hide divs on startup =============//
 	    $("#dashboard").hide();
 	    $("#sign-up").hide();
 	
-	    //================== login/logout and register account  ===================//
 	    $("#login").submit(function (e) {
+	        e.preventDefault();
 	        var username = $("#username").val();
 	        var password = $("#userPassLogin").val();
-	        e.preventDefault();
 	        $.ajax({
 	            type: "POST",
-	            url: '/login',
+	            url: "/login",
 	            contentType: "application/json",
 	            data: JSON.stringify({
 	                username: username,
@@ -287,8 +281,8 @@
 	        e.preventDefault();
 	        $.ajax({
 	            type: "GET",
-	            url: '/logout',
-	            error: function error() {
+	            url: "/logout",
+	            error: function error(_error2) {
 	                alert("Please try to logout again.");
 	            },
 	            success: function success() {
@@ -324,15 +318,13 @@
 	            },
 	            success: function success(user) {
 	                currentUser = user._id;
-	                console.log("this user:", currentUser);
 	                $("#sign-up").hide();
 	                $("#login").hide();
-	                $('#dashboard').show();
+	                $("#dashboard").show();
 	            }
 	        });
 	    });
 	
-	    //========================== form submit listeners =====================//
 	    $("#narrForm").submit(function (e) {
 	        e.preventDefault();
 	        var narrDate = $("#narrDate").val();
@@ -354,7 +346,6 @@
 	            success: function success(record) {
 	                resetForm("#narrForm");
 	                $("#narrModal").modal("toggle");
-	                console.log(record);
 	                var displayNarrative = moment(record.date).format("MMM Do YYYY") + "<br>";
 	                displayNarrative += record.title + "<br>";
 	                displayNarrative += record.content + "<br>";
@@ -441,41 +432,40 @@
 	            }
 	        });
 	    });
-	    //================== open/close/empty display all modals ===================//
-	    $("#narrLink").on('click', function () {
+	
+	    $("#narrLink").on("click", function () {
 	        getNarratives();
 	    });
 	
-	    $("#narrClose").on('click', function () {
+	    $("#narrClose").on("click", function () {
 	        $("#allNarrs-table").empty();
 	    });
 	
-	    $("#weightLink").on('click', function () {
+	    $("#weightLink").on("click", function () {
 	        getWeight();
 	    });
 	
-	    $("#weightClose").on('click', function () {
+	    $("#weightClose").on("click", function () {
 	        $("#allWeight-table").empty();
 	    });
 	
-	    $("#lengthLink").on('click', function () {
+	    $("#lengthLink").on("click", function () {
 	        getLength();
 	    });
 	
-	    $("#lengthClose").on('click', function () {
+	    $("#lengthClose").on("click", function () {
 	        $("#allLength-table").empty();
 	    });
 	
-	    $("#headCirLink").on('click', function () {
+	    $("#headCirLink").on("click", function () {
 	        getHeadCir();
 	    });
 	
-	    $("#headCirClose").on('click', function () {
+	    $("#headCirClose").on("click", function () {
 	        $("#allHeadCir-table").empty();
 	    });
 	
-	    //=================== register new account modal =====================//
-	    $("#register").on('click', function () {
+	    $("#register").on("click", function () {
 	        $("#dashboard").hide();
 	        $("#login").hide();
 	        $("#sign-up").show();

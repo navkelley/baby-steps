@@ -8,12 +8,10 @@ const path = require('path');
 const jsonParser = bodyParser.json();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const session = require('express-session')
+const session = require('express-session');
 const flash = require('connect-flash');
 const expressValidator = require('express-validator');
 const LocalStrategy = require('passport-local').Strategy;
-
-//import models for use 
 const Narrative = require('./src/models/narrative');
 const Weight = require('./src/models/weight');
 const Length = require('./src/models/length');
@@ -26,58 +24,52 @@ const timeLog = router.use((req, res, next) => {
   next();
 });
 
-//====================== get root and deliver html ============================//
 router.get('/', (req,res) => {
     res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
-//====================== define route for users to login, register & logout ===========//
 router.get('/', ensureAuthenticated, (req, res) => {
    res.redirect('/');
 });
 
 function ensureAuthenticated(req, res, next) {
-   if(req.isAuthenticated()){
-      return next();
-   } else {
-      res.redirect(401, '/');
-   }
+  if(req.isAuthenticated()){
+    return next();
+  } else {
+    res.redirect(401, '/');
+  }
 }
 
-// Register User
 router.post('/register', (req, res) => {
-   let name = req.body.name;
-   let email = req.body.email;
-   let username = req.body.username;
-   let password = req.body.password;
-   let verifypassword = req.body.verifypassword;
+  let name = req.body.name;
+  let email = req.body.email;
+  let username = req.body.username;
+  let password = req.body.password;
+  let verifypassword = req.body.verifypassword;
 
-   console.log("User name:", name);
-   console.log(req.body);
-   //validation
-   req.checkBody('name', 'Name is required').notEmpty();
-   req.checkBody('email', 'Email is required').notEmpty();
-   req.checkBody('email', 'Email is not valid').isEmail();
-   req.checkBody('username', 'Username is required').notEmpty();
-   req.checkBody('password', 'Password is required').notEmpty();
+  //validation
+  req.checkBody('name', 'Name is required').notEmpty();
+  req.checkBody('email', 'Email is required').notEmpty();
+  req.checkBody('email', 'Email is not valid').isEmail();
+  req.checkBody('username', 'Username is required').notEmpty();
+  req.checkBody('password', 'Password is required').notEmpty();
 
-   let errors = req.validationErrors();
+  let errors = req.validationErrors();
 
-   if(errors) {
-     res.json(errors);
-   } else {
-      let newUser = new User({
-         name: name,
-         email: email,
-         username: username,
-         password: password
-      });
-      User.createUser(newUser, (err, user) => {
-         if(err) throw err;
-         console.log(user);
-         res.json(user);
-      });
-   }
+  if(errors) {
+    res.json(errors);
+  } else {
+    let newUser = new User({
+      name: name,
+      email: email,
+      username: username,
+      password: password
+    });
+    User.createUser(newUser, (err, user) => {
+      if(err) throw err;
+        res.json(user);
+    });
+  }
 });
 
 passport.use(new LocalStrategy(
@@ -119,7 +111,6 @@ router.post('/getUserId', (req, res) => {
             console.log(err);
         }
         else {
-            console.log(user);
             res.json(user);
         }
     });
@@ -130,9 +121,7 @@ router.get('/logout', (req, res) => {
    req.flash('sucess_msg', 'You are logged out');
    res.redirect('/');
 });
-
-//====================== routes for dashboard narratives ==============================//
-//userId: currentUser previously 
+ 
 router.get('/dashboard/narratives/:userId', (req, res) => {
         Narrative.find({userId: req.params.userId}, (err, narratives) => {
             if(err) {
@@ -146,10 +135,10 @@ router.get('/dashboard/narratives/:userId', (req, res) => {
 
     .post('/dashboard/narratives', (req, res) => {
 		Narrative.create({
-            userId: req.body.userId,
+          userId: req.body.userId,
         	title: req.body.title,
-            date: req.body.date,
-            content: req.body.content
+          date: req.body.date,
+          content: req.body.content
         }, (err, narrative) => {
         	if (err) {
             	return res.status(500).json({
@@ -160,11 +149,9 @@ router.get('/dashboard/narratives/:userId', (req, res) => {
     	});
     });
 
-
-
 router.put('/dashboard/narratives/:id',(req, res) => {
     	Narrative.update(
-            {_id: req.params.id},
+          {_id: req.params.id},
 	        {title: req.body.title, content: req.body.content},
 	        {upsert: true}, (err, narrative) => {
 	        if (err) {
@@ -182,13 +169,12 @@ router.put('/dashboard/narratives/:id',(req, res) => {
 	        if (err) {
 	            return res.status(500).json({
                     message: 'Internal Server Error'
-                });
+              });
 	        }
 	        res.status(200).json(narrative);
 	    }); 
 	});
 
-//====================== routes to define dashboard measurements-weight =======================//
 router.get('/dashboard/weight/:userId', (req,res) => {
         Weight.find({
             userId: req.params.userId,
@@ -241,7 +227,6 @@ router.put('/dashboard/weight/:id',(req, res) => {
         }); 
     });
 
-//====================== routes to define dashboard measurements-length =======================//
 router.get('/dashboard/length/:userId', (req,res) => {
         Length.find({
             userId: req.params.userId,
@@ -294,7 +279,6 @@ router.put('/dashboard/length/:id',(req, res) => {
         }); 
     });
 
-//====================== routes to define dashboard measurements-headCir ===============//
 router.get('/dashboard/headCir/:userId', (req,res) => {
         HeadCir.find({
             userId: req.params.userId,
@@ -346,7 +330,7 @@ router.put('/dashboard/headCir/:id',(req, res) => {
             res.status(200).json(headCir);
         }); 
     });
-//====================== catch all for routes =======================================//
+
 router.use('*', (req, res) => {
     res.status(404).json({
         message: 'Not Found'
@@ -354,4 +338,3 @@ router.use('*', (req, res) => {
 }); 
 
 module.exports = router; 
-//end

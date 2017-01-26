@@ -4,16 +4,12 @@ const mongoose = require('mongoose');
 const should = chai.should();
 const expect = chai.expect;
 const express = require('express');
-const router = express.Router();
- 
- //import models for use 
+const router = express.Router(); 
 const Narrative = require('../src/models/narrative');
 const Weight = require('../src/models/weight');
 const Length = require('../src/models/length');
 const HeadCir = require('../src/models/headCir');
-const User = require('../src/models/user');
- 
-//import files for use 
+const User = require('../src/models/user'); 
 const server = require('../server.js');
 const app = server.app;
 
@@ -22,7 +18,6 @@ let currentUser = "58884612fe59a04aeb6ce5fb";
 
 chai.use(chaiHttp);
 
-//====================== tests to reach all html pages =============================//
 describe('reach html page', (done) => {
 	it('should reach root and have html', (done) => {
 		chai.request(app)
@@ -35,9 +30,9 @@ describe('reach html page', (done) => {
 		});
 	});
 });
-//====================== tests for user routes ===============================//
+
 describe('users from signup', (done) => {
-	beforeEach((done) => {
+	before((done) => {
         server.runServer(() => {
             User.create({
             	username: 'Tiffany', 
@@ -50,7 +45,7 @@ describe('users from signup', (done) => {
         });
     });
 
-    afterEach((done) => {
+    after((done) => {
         User.remove(() => {
             done();
         });
@@ -85,7 +80,6 @@ describe('users from signup', (done) => {
     });
 });
 
-//====================== tests for narratives route ===========================//
 describe('dashboard narratives DB', (done) => {
 	before((done) => {
         server.runServer(() => {
@@ -204,7 +198,7 @@ describe('dashboard narratives DB', (done) => {
 		});
 	});
 });
-//====================== tests for weight route ===========================//
+
 describe('dashboard measurements for weight', (done) => {
 	before((done) => {
         server.runServer(() => {
@@ -317,7 +311,6 @@ describe('dashboard measurements for weight', (done) => {
     }); 
 });
 
-//====================== tests for length route ===========================//
 describe('dashboard measurements for length', (done) => {
     before((done) => {
         server.runServer(() => {
@@ -424,7 +417,6 @@ describe('dashboard measurements for length', (done) => {
     }); 
 });
 
-//====================== tests for headCir route ===========================//
 describe('dashboard measurements for head circumference', (done) => {
     before((done) => {
         server.runServer(() => {

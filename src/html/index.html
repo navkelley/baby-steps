@@ -10,8 +10,6 @@
         <link rel="stylesheet" href="baby-steps.1.0.0.min.css">
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <!--<script src="../radialprogress/radialprogress/lib/d3.min.js"></script>
-        <script src="../radialprogress/radialprogress/lib/vizuly_core.min.js"></script>-->
         <script src="baby-steps.1.0.0.js"></script>
         <title>Baby Steps</title>
     </head>
@@ -19,12 +17,8 @@
         <div id="login">
             <div class="container">
                 <div class="row">
-                    <div class="col-3">
-                        <img src="https://elephantspokenhere.files.wordpress.com/2015/08/drawing-of-baby-elephant.png?w=240" alt="babyElephant" id="babyElephant">
-                    </div>
-                    <div class="col-6">
-                        <h1>Baby Steps</h1>
-                    </div><!--col-->
+                    <img src="https://elephantspokenhere.files.wordpress.com/2015/08/drawing-of-baby-elephant.png?w=240" alt="babyElephant" id="babyElephant">
+                    <h1>Baby Steps</h1>
                 </div><!--row-->
                 <div class="row">
                     <div id="login-box" class="col-8">
@@ -36,28 +30,11 @@
                             <div class="form-group">
                                 <label for="userPassLogin">Password:</label>
                                 <input type="password" class="form-control" id="userPassLogin" placeholder="ex.Password234" name="password">
-                                <p><a href="#" class="disabled">Forgot Password?</a></p>
                             </div>
                             <p><a href="#" id="register">Sign up for Baby Steps</a></p>
                             <button type="submit" id="login" class="btn btn-success" value="Log In">Login</button>
                          </form>
                     </div><!--login-box-->
-                    <!--modal-->
-                    <div class="modal fade" id="loginMessageModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>                   
-                                </div><!--modal-header-->
-                                <div class="modal-body">
-                                    <div id="errors"></div>
-                                </div><!--modal-body-->
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div><!--modal-footer-->
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
                 </div><!--row-->
             </div><!--container-->
         </div><!--login-->
@@ -88,7 +65,7 @@
                         <div class="form-group row">
                             <label for="email" class="col-2 col-form-label">Email</label>
                             <div class="col-10">
-                                <input class="form-control" type="email" placeholder="Your email address will be your username" id="userEmail">
+                                <input class="form-control" type="email" placeholder="bobtest@babysteps.com" id="userEmail">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -119,7 +96,7 @@
         <div id="dashboard" class="gradient">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
+                    <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                             <span class="sr-only">Toggle navigation</span>
@@ -132,7 +109,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="dashboard">Dashboard<span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">Dashboard</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#" id="logout">Logout</a></li>
@@ -154,6 +131,7 @@
                             </span>
                             <!--Link to see all entries-->
                             <p><a href="#" id="narrLink" aria-hidden="true" data-toggle="modal" data-target="#allNarrModal">See all logged entries</a></p>
+                            <!--modal-->
                             <div class="modal fade" id="allNarrModal" tabindex="-1" role="dialog" aria-labelledby="allNarrModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -219,6 +197,7 @@
                             </span>
                             <!--Link to see all entries-->
                             <p><a href="#" id="weightLink" aria-hidden="true" data-toggle="modal" data-target="#allWeightModal">See all logged entries</a></p>
+                            <!--modal-->
                             <div class="modal fade" id="allWeightModal" tabindex="-1" role="dialog" aria-labelledby="allWeightModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -282,6 +261,7 @@
                             </span>
                             <!--Link to see all entries-->
                             <p><a href="#" id="lengthLink" aria-hidden="true" data-toggle="modal" data-target="#allLengthModal">See all logged entries</a></p>
+                            <!--modal-->
                             <div class="modal fade" id="allLengthModal" tabindex="-1" role="dialog" aria-labelledby="allLengthModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -345,6 +325,7 @@
                             </span>
                             <!--Link to see all entries-->
                             <p><a href="#" id="headCirLink" aria-hidden="true" data-toggle="modal" data-target="#allHeadCirModal">See all logged entries</a></p>
+                            <!--modal-->
                             <div class="modal fade" id="allHeadCirModal" tabindex="-1" role="dialog" aria-labelledby="allHeadCirModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.ObjectId;
 
 const LengthSchema = mongoose.Schema({
@@ -7,6 +7,6 @@ const LengthSchema = mongoose.Schema({
     content: String
 });
 
-const Length = mongoose.model('Length', LengthSchema);
+const Length = mongoose.model("Length", LengthSchema);
 
 module.exports = Length; 

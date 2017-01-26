@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.ObjectId;
 
 const WeightSchema = mongoose.Schema({
@@ -7,6 +7,6 @@ const WeightSchema = mongoose.Schema({
     content: String
 });
 
-const Weight = mongoose.model('Weight', WeightSchema);
+const Weight = mongoose.model("Weight", WeightSchema);
 
 module.exports = Weight; 

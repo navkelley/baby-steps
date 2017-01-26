@@ -54,10 +54,6 @@ h1,
 h4 {
   font-family: 'Fontdiner Swanky', cursive;
 }
-a.disabled {
-  pointer-events: none;
-  cursor: default;
-}
 #narrLink,
 #weightLink,
 #lengthLink,
