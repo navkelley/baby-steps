@@ -54,6 +54,24 @@
 	    //to hold user id
 	    var currentUser = void 0;
 	
+	    var lastNarrRecordId = void 0;
+	
+	    var deleteRecord = function deleteRecord() {
+	        var dataType = $(".delete").parent().parent().attr("data-type");
+	        if (dataType === "narrative") {
+	            deleteNarrativeRecord();
+	        }
+	        if (dataType === "weight") {
+	            deleteWeightRecord();
+	        }
+	        if (dataType === "length") {
+	            deleteLengthRecord();
+	        }
+	        if (dataType === "headCir") {
+	            deleteHeadCirRecord();
+	        }
+	    };
+	
 	    var lastNarr = function lastNarr(search) {
 	        $.ajax({
 	            type: "GET",
@@ -66,6 +84,8 @@
 	                var lastRecord = moment(records[records.length - 1].date).format("MMM Do YYYY") + "<br>";
 	                lastRecord += records[records.length - 1].title + "<br>";
 	                lastRecord += records[records.length - 1].content + "<br>";
+	                lastRecord += "<div class='hidden' data-id='" + records[records.length - 1]._id + "'</div>";
+	                console.log("last:", lastRecord);
 	                $("#narrative-entry").html(lastRecord);
 	            }
 	        });
@@ -82,6 +102,7 @@
 	            success: function success(records) {
 	                var lastRecord = moment(records[records.length - 1].date).format("MMM Do YYYY") + "<br>";
 	                lastRecord += records[records.length - 1].content + "<br>";
+	                lastRecord += "<div class='hidden' data-id='" + records[records.length - 1]._id + "'></div>";
 	                $("#weight-entry").html(lastRecord);
 	            }
 	        });
@@ -98,6 +119,7 @@
 	            success: function success(records) {
 	                var lastRecord = moment(records[records.length - 1].date).format("MMM Do YYYY") + "<br>";
 	                lastRecord += records[records.length - 1].content + "<br>";
+	                lastRecord += "<div class='hidden' data-id='" + records[records.length - 1]._id + "'></div>";
 	                $("#length-entry").html(lastRecord);
 	            }
 	        });
@@ -114,9 +136,16 @@
 	            success: function success(records) {
 	                var lastRecord = moment(records[records.length - 1].date).format("MMM Do YYYY") + "<br>";
 	                lastRecord += records[records.length - 1].content + "<br>";
+	                lastRecord += "<div class='hidden' data-id='" + records[records.length - 1]._id + "'></div>";
 	                $("#headCir-entry").html(lastRecord);
 	            }
 	        });
+	    };
+	
+	    var removeLastDisplay = function removeLastDisplay() {
+	        var recordId = $(".hidden").data("id");
+	        console.log("to remove:", recordId);
+	        console.log("wanted:", lastNarrRecordId);
 	    };
 	
 	    var getNarratives = function getNarratives(search) {
@@ -135,12 +164,29 @@
 	
 	    var showNarrs = function showNarrs(data) {
 	        var entries = void 0;
-	        for (var _narratives in data) {
-	            console.log(data);
-	            var formatDate = moment(data[_narratives].date).format("MMM Do YYYY");
-	            entries = "<tr data='" + data[_narratives]._id + "'><td>" + formatDate + "<td>" + data[_narratives].title + "</td>" + "<td>" + data[_narratives].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
+	        for (var narrative in data) {
+	            var formatDate = moment(data[narrative].date).format("MMM Do YYYY");
+	            entries = "<tr data-type='narrative' data='" + data[narrative]._id + "'><td>" + formatDate + "<td>" + data[narrative].title + "</td>" + "<td>" + data[narrative].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
 	            $("#allNarrs-table").append(entries);
 	        }
+	    };
+	
+	    var deleteNarrativeRecord = function deleteNarrativeRecord(record) {
+	        var id = $(".delete").parent().parent().attr("data");
+	        console.log("selected record:", id);
+	        $.ajax({
+	            type: "DELETE",
+	            url: "/dashboard/narratives/" + id,
+	            contentType: "application/json",
+	            error: function error() {
+	                $("#narrMessage").html("<p class='error'>Record could not be deleted.</p>");
+	            },
+	            success: function success(res) {
+	                removeLastDisplay();
+	                console.log("success", res);
+	                $("#narrMessage").html("<p class='success'>Record was successfully deleted.</p>");
+	            }
+	        });
 	    };
 	
 	    var getWeight = function getWeight(search) {
@@ -161,7 +207,7 @@
 	        var entries = void 0;
 	        for (var weight in data) {
 	            var formatDate = moment(data[weight].date).format("MMM Do YYYY");
-	            entries = "<tr data='" + data[narratives]._id + "'><td>" + formatDate + "<td>" + data[weight].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
+	            entries = "<tr data-type='weight' data='" + data[weight]._id + "'><td>" + formatDate + "</td><td>" + data[weight].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
 	            $("#allWeight-table").append(entries);
 	        }
 	    };
@@ -184,7 +230,7 @@
 	        var entries = void 0;
 	        for (var length in data) {
 	            var formatDate = moment(data[length].date).format("MMM Do YYYY");
-	            entries = "<tr data='" + data[narratives]._id + "'><td>" + formatDate + "<td>" + data[length].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
+	            entries = "<tr data-type='length' data='" + data[length]._id + "'><td>" + formatDate + "<td>" + data[length].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
 	            $("#allLength-table").append(entries);
 	        }
 	    };
@@ -207,7 +253,7 @@
 	        var entries = void 0;
 	        for (var headCir in data) {
 	            var formatDate = moment(data[headCir].date).format("MMM Do YYYY");
-	            entries = "<tr data='" + data[narratives]._id + "'><td>" + formatDate + "<td>" + data[headCir].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
+	            entries = "<tr data-type='headCir' data='" + data[headCir]._id + "'><td>" + formatDate + "<td>" + data[headCir].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
 	            $("#allHeadCir-table").append(entries);
 	        }
 	    };
@@ -468,8 +514,10 @@
 	    });
 	
 	    $(document).on("click", ".delete", function (e) {
+	        e.preventDefault();
 	        var id = $(this).parent().parent().attr("data");
-	        console.log(id);
+	        console.log("record that was clicked:", id);
+	        deleteRecord();
 	        $(this).parent().parent().remove();
 	    });
 	

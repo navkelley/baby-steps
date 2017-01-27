@@ -60,4 +60,13 @@ h4 {
 #headCirLink {
   color: white;
 }
+.error {
+  color: red;
+}
+.success {
+  color: green;
+}
+.hidden {
+  display: none;
+}
 /*# sourceMappingURL=baby-steps.1.0.0.css.map */
