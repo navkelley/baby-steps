@@ -159,7 +159,7 @@ $(document).ready(function() {
         let entries;
         for(let headCir in data) {
             let formatDate = moment(data[headCir].date).format("MMM Do YYYY");
-            entries = "<tr><td>" + formatDate + "<td>" + data[headCir].content + "</td></tr>";
+            entries = "<tr><td>" + formatDate + "<td>" + data[headCir].content + "</td><td><i class='fa fa-trash' aria-hidden='true'></i></td></tr>";
             $("#allHeadCir-table").append(entries);
         }
     };
