@@ -244,8 +244,6 @@ describe('dashboard measurements for weight', (done) => {
                 res.body[0].userId.should.be.a('string');
                 res.body[0].content.should.be.a('string');
                 res.body[0].date.should.be.a('string');
-                res.body[1].content.should.equal('14lbs 3oz');
-                res.body[2].content.should.equal('15lbs 6oz');
                 done();
             });
     });
