@@ -135,10 +135,10 @@
 	
 	    var showNarrs = function showNarrs(data) {
 	        var entries = void 0;
-	        for (var narratives in data) {
+	        for (var _narratives in data) {
 	            console.log(data);
-	            var formatDate = moment(data[narratives].date).format("MMM Do YYYY");
-	            entries = "<tr data='" + data[narratives]._id + "'><td>" + formatDate + "<td>" + data[narratives].title + "</td>" + "<td>" + data[narratives].content + "</td>" + "<td><button type='button' class='delete'><i class='fa fa-trash' aria-hidden='true'></i></button></td></tr>";
+	            var formatDate = moment(data[_narratives].date).format("MMM Do YYYY");
+	            entries = "<tr data='" + data[_narratives]._id + "'><td>" + formatDate + "<td>" + data[_narratives].title + "</td>" + "<td>" + data[_narratives].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
 	            $("#allNarrs-table").append(entries);
 	        }
 	    };
@@ -161,7 +161,7 @@
 	        var entries = void 0;
 	        for (var weight in data) {
 	            var formatDate = moment(data[weight].date).format("MMM Do YYYY");
-	            entries = "<tr><td>" + formatDate + "<td>" + data[weight].content + "</td><td><i class='fa fa-trash' aria-hidden='true'></i></td></tr>";
+	            entries = "<tr data='" + data[narratives]._id + "'><td>" + formatDate + "<td>" + data[weight].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
 	            $("#allWeight-table").append(entries);
 	        }
 	    };
@@ -184,7 +184,7 @@
 	        var entries = void 0;
 	        for (var length in data) {
 	            var formatDate = moment(data[length].date).format("MMM Do YYYY");
-	            entries = "<tr><td>" + formatDate + "<td>" + data[length].content + "</td><td><i class='fa fa-trash' aria-hidden='true'></i></td></tr>";
+	            entries = "<tr data='" + data[narratives]._id + "'><td>" + formatDate + "<td>" + data[length].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
 	            $("#allLength-table").append(entries);
 	        }
 	    };
@@ -207,7 +207,7 @@
 	        var entries = void 0;
 	        for (var headCir in data) {
 	            var formatDate = moment(data[headCir].date).format("MMM Do YYYY");
-	            entries = "<tr><td>" + formatDate + "<td>" + data[headCir].content + "</td><td><i class='fa fa-trash' aria-hidden='true'></i></td></tr>";
+	            entries = "<tr data='" + data[narratives]._id + "'><td>" + formatDate + "<td>" + data[headCir].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
 	            $("#allHeadCir-table").append(entries);
 	        }
 	    };
