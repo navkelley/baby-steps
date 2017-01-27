@@ -339,7 +339,7 @@
 	                $("#narrEntry").append("<p>Could not submit log. Please try again.</p>");
 	            },
 	            success: function success(record) {
-	                $("input[type=date]")[0].value = "";
+	                $("#narrDate")[0].value = "";
 	                $("#narrTitle").val("");
 	                $("#narrInput").val("");
 	                $("#narrModal").modal("toggle");
@@ -369,7 +369,7 @@
 	                $("#weightEntry").append("<p>Could not submit log. Please try again.</p>");
 	            },
 	            success: function success(record) {
-	                $("input[type=date]")[0].value = "";
+	                $("#weightDate")[0].value = "";
 	                $("#wLbs").val("");
 	                $("#wOz").val("");
 	                $("#weightModal").modal("toggle");
@@ -397,7 +397,7 @@
 	                $("#lengthEntry").append("<p>Could not submit log. Please try again.</p>");
 	            },
 	            success: function success(record) {
-	                $("input[type=date]")[0].value = "";
+	                $("#lengthDate")[0].value = "";
 	                $("#lengthInput").val("");
 	                $("#lengthModal").modal("toggle");
 	                var displayLengthRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
@@ -424,7 +424,7 @@
 	                $("#headCirEntry").append("<p>Could not submit log. Please try again.</p>");
 	            },
 	            success: function success(record) {
-	                $("input[type=date]")[0].value = "";
+	                $("#headCirDate")[0].value = "";
 	                $("#headCirInput").val("");
 	                $("#headCirModal").modal("toggle");
 	                var displayHeadCirRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
