@@ -88,9 +88,11 @@ $(document).ready(function() {
     const showNarrs = (data) => {
         let entries;
         for(let narratives in data) {
+            console.log(data);
             let formatDate = moment(data[narratives].date).format("MMM Do YYYY");
-            entries = "<tr><td>" + formatDate + "<td>" + data[narratives].title + "</td>" +
-                "<td>" + data[narratives].content + "</td></tr>";
+            entries = "<tr data='" + data[narratives]._id + "'><td>" + formatDate + "<td>" + data[narratives].title + "</td>" +
+                "<td>" + data[narratives].content + "</td>" +
+                "<td><button type='button' class='delete'><i class='fa fa-trash' aria-hidden='true'></i></button></td></tr>";
             $("#allNarrs-table").append(entries);
         }
     };
@@ -113,7 +115,8 @@ $(document).ready(function() {
         let entries;
         for(let weight in data) {
             let formatDate = moment(data[weight].date).format("MMM Do YYYY");
-            entries = "<tr><td>" + formatDate + "<td>" + data[weight].content + "</td></tr>";
+            entries = "<tr><td>" + formatDate + "<td>" + data[weight].content + 
+                "</td><td><i class='fa fa-trash' aria-hidden='true'></i></td></tr>";
             $("#allWeight-table").append(entries);
         }
     };
@@ -136,7 +139,8 @@ $(document).ready(function() {
         let entries;
         for(let length in data) {
             let formatDate = moment(data[length].date).format("MMM Do YYYY");
-            entries = "<tr><td>" + formatDate + "<td>" + data[length].content + "</td></tr>";
+            entries = "<tr><td>" + formatDate + "<td>" + data[length].content + 
+                "</td><td><i class='fa fa-trash' aria-hidden='true'></i></td></tr>";
             $("#allLength-table").append(entries);
         }
     };
@@ -159,7 +163,8 @@ $(document).ready(function() {
         let entries;
         for(let headCir in data) {
             let formatDate = moment(data[headCir].date).format("MMM Do YYYY");
-            entries = "<tr><td>" + formatDate + "<td>" + data[headCir].content + "</td><td><i class='fa fa-trash' aria-hidden='true'></i></td></tr>";
+            entries = "<tr><td>" + formatDate + "<td>" + data[headCir].content + 
+                "</td><td><i class='fa fa-trash' aria-hidden='true'></i></td></tr>";
             $("#allHeadCir-table").append(entries);
         }
     };
@@ -419,6 +424,12 @@ $(document).ready(function() {
     $("#headCirClose").on("click", () => {
         $("#allHeadCir-table").empty(); 
     });
+
+    $(document).on("click", ".delete", function(e) {
+        var id = $(this).parent().parent().attr("data");
+        console.log(id);
+        $(this).parent().parent().remove(); 
+    })//for future use
 
     $("#register").on("click", () => {
         $("#dashboard").hide();
