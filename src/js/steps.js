@@ -6,12 +6,6 @@ $(document).ready(function() {
     //to hold user id
     let currentUser; 
 
-    const resetForm = (form) => {
-        $(form).find("input[type=text], textarea").val("");
-        $(form).find("input[type=number").val("");
-        $("input[type=date]")[0].value = "";
-    };
-
     const lastNarr = (search) => {
         $.ajax({
             type: "GET",
@@ -299,7 +293,9 @@ $(document).ready(function() {
                 $("#narrEntry").append("<p>Could not submit log. Please try again.</p>");
             },
             success: (record) => {
-                resetForm("#narrForm");
+                $("input[type=date]")[0].value = "";
+                $("#narrTitle").val("");
+                $("#narrInput").val("");
                 $("#narrModal").modal("toggle");
                 let displayNarrative = moment(record.date).format("MMM Do YYYY") + "<br>";
                 displayNarrative += record.title + "<br>";
@@ -327,7 +323,9 @@ $(document).ready(function() {
                 $("#weightEntry").append("<p>Could not submit log. Please try again.</p>");
             },
             success: (record) => {
-                resetForm("#weightForm");
+                $("input[type=date]")[0].value = "";
+                $("#wLbs").val("");
+                $("#wOz").val("");
                 $("#weightModal").modal("toggle"); 
                 let displayWeightRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
                 displayWeightRecord += record.content + "<br>";
@@ -353,7 +351,8 @@ $(document).ready(function() {
                 $("#lengthEntry").append("<p>Could not submit log. Please try again.</p>");
             },
             success: (record) => {
-                resetForm("#lengthForm");
+                $("input[type=date]")[0].value = "";
+                $("#lengthInput").val("");
                 $("#lengthModal").modal("toggle"); 
                 let displayLengthRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
                 displayLengthRecord += record.content + "<br>"
@@ -379,7 +378,8 @@ $(document).ready(function() {
                 $("#headCirEntry").append("<p>Could not submit log. Please try again.</p>");
             },
             success: (record) => {
-                resetForm("#headCirForm");
+                $("input[type=date]")[0].value = "";
+                $("#headCirInput").val("");
                 $("#headCirModal").modal("toggle");
                 let displayHeadCirRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
                 displayHeadCirRecord += record.content + "<br>";
