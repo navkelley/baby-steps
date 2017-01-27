@@ -474,10 +474,22 @@ $(document).ready(function() {
 
     $(document).on("click", ".delete", function(e) {
         e.preventDefault();
-        let id = $(this).parent().parent().attr("data");
+        let button = $(this);
+        let tr = button.closest("tr");
+        let id = tr.attr("data");
+        console.log("record that was clicked", id); 
+        const reject = () => {
+            $("#narrMessage").html("<p class='error'>Record could not be deleted.");
+        };
+        const resolve = () => {
+            tr.remove(); 
+            $("#narrMessage").html("<p class='success'>Record was successfully deleted.");
+        };
+        deleteRecord().then(resolve, reject);
+        /*let id = $(this).parent().parent().attr("data");
         console.log("record that was clicked:", id);
         deleteRecord(); 
-        $(this).parent().parent().remove();  
+        $(this).parent().parent().remove();*/ 
     });
 
     $("#register").on("click", () => {

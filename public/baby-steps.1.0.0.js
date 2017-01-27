@@ -515,10 +515,22 @@
 	
 	    $(document).on("click", ".delete", function (e) {
 	        e.preventDefault();
-	        var id = $(this).parent().parent().attr("data");
+	        var button = $(this);
+	        var tr = button.closest("tr");
+	        var id = tr.attr("data");
+	        console.log("record that was clicked", id);
+	        var reject = function reject() {
+	            $("#narrMessage").html("<p class='error'>Record could not be deleted.");
+	        };
+	        var resolve = function resolve() {
+	            tr.remove();
+	            $("#narrMessage").html("<p class='success'>Record was successfully deleted.");
+	        };
+	        deleteRecord().then(resolve, reject);
+	        /*let id = $(this).parent().parent().attr("data");
 	        console.log("record that was clicked:", id);
-	        deleteRecord();
-	        $(this).parent().parent().remove();
+	        deleteRecord(); 
+	        $(this).parent().parent().remove();*/
 	    });
 	
 	    $("#register").on("click", function () {
