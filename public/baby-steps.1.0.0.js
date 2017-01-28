@@ -172,20 +172,14 @@
 	    };
 	
 	    var deleteNarrativeRecord = function deleteNarrativeRecord(record) {
-	        var id = $(".delete").parent().parent().attr("data");
+	        var td = $(".delete").parent();
+	        var tr = td.closest("tr");
+	        var id = tr.attr("data");
 	        console.log("selected record:", id);
-	        $.ajax({
+	        return $.ajax({
 	            type: "DELETE",
 	            url: "/dashboard/narratives/" + id,
-	            contentType: "application/json",
-	            error: function error() {
-	                $("#narrMessage").html("<p class='error'>Record could not be deleted.</p>");
-	            },
-	            success: function success(res) {
-	                removeLastDisplay();
-	                console.log("success", res);
-	                $("#narrMessage").html("<p class='success'>Record was successfully deleted.</p>");
-	            }
+	            contentType: "application/json"
 	        });
 	    };
 	

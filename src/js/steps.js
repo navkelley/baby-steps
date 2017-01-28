@@ -126,20 +126,14 @@ $(document).ready(function() {
     };
 
     const deleteNarrativeRecord = (record) => {
-        let id = $(".delete").parent().parent().attr("data");
+        let td = $(".delete").parent();
+        let tr = td.closest("tr");
+        let id = tr.attr("data");
         console.log("selected record:", id);
-        $.ajax({
+        return $.ajax({
             type: "DELETE",
             url: "/dashboard/narratives/" + id,
             contentType: "application/json",
-            error: () => {
-                $("#narrMessage").html("<p class='error'>Record could not be deleted.</p>");
-            },
-            success: (res) => {
-                removeLastDisplay(); 
-                console.log("success", res);
-                $("#narrMessage").html("<p class='success'>Record was successfully deleted.</p>"); 
-            }
         });
     };
 
