@@ -31,14 +31,17 @@ $(document).ready(function() {
             contentType: "application/json",
             error: () => {
                 $("#narrative-entry").html("<p>There was an error with last entry.</p>");
-            },
+            }, 
             success: (records) => {
-                let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'</p>"; 
-                lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
-                lastRecord += "<p>" + records[records.length-1].title + "</p>";
-                lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
-                console.log("last:", lastRecord);
-                $("#narrative-entry").html(lastRecord);
+                if (typeof records[records.length] == "undefined") {
+                    $("#narrative-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+                }
+                else {
+                    let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'</p>"; 
+                    lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
+                    lastRecord += "<p>" + records[records.length-1].title + "</p>";
+                    $("#narrative-entry").html(lastRecord);
+                }
             }
         });
     };
@@ -52,10 +55,16 @@ $(document).ready(function() {
                 $("#weight-entry").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
-                let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'</p>"; 
-                lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
-                lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
-                $("#weight-entry").html(lastRecord);
+                console.log(records);
+                if (typeof records[records.length] == "undefined") {
+                    $("#weight-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+                }
+                else {
+                    let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'</p>"; 
+                    lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
+                    lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
+                    $("#weight-entry").html(lastRecord);
+                }
             }
         });
     };
@@ -69,10 +78,15 @@ $(document).ready(function() {
                 $("#length-entry").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
-                let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'</p>";
-                lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
-                lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
-                $("#length-entry").html(lastRecord);
+                if (typeof records[records.length] == "undefined") {
+                    $("#length-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+                }
+                else {
+                    let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'</p>";
+                    lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
+                    lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
+                    $("#length-entry").html(lastRecord);
+                }
             }
         });
     };
@@ -86,10 +100,15 @@ $(document).ready(function() {
                 $("#headCir-entry").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
-                let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'</p>";
-                lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
-                lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
-                $("#headCir-entry").html(lastRecord);
+                if (typeof records[records.length] == "undefined") {
+                    $("#headCir-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+                }
+                else {
+                    let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'</p>";
+                    lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
+                    lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
+                    $("#headCir-entry").html(lastRecord);
+                }
             }
         });
     };
@@ -130,7 +149,6 @@ $(document).ready(function() {
         let td = $(".delete").parent();
         let tr = td.closest("tr");
         let id = tr.attr("data");
-        console.log("selected record:", id);
         return $.ajax({
             type: "DELETE",
             url: "/dashboard/narratives/" + id,
@@ -167,7 +185,6 @@ $(document).ready(function() {
         let td = $(".delete").parent();
         let tr = td.closest("tr");
         let id = tr.attr("data");
-        console.log("selected record:", id);
         return $.ajax({
             type: "DELETE",
             url: "/dashboard/weight/" + id,
@@ -204,7 +221,6 @@ $(document).ready(function() {
         let td = $(".delete").parent();
         let tr = td.closest("tr");
         let id = tr.attr("data");
-        console.log("selected record:", id);
         return $.ajax({
             type: "DELETE",
             url: "/dashboard/length/" + id,
@@ -241,7 +257,6 @@ $(document).ready(function() {
         let td = $(".delete").parent();
         let tr = td.closest("tr");
         let id = tr.attr("data");
-        console.log("selected record:", id);
         return $.ajax({
             type: "DELETE",
             url: "/dashboard/headCir/" + id,
