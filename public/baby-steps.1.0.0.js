@@ -512,6 +512,7 @@
 	        var button = $(this);
 	        var tr = button.closest("tr");
 	        var id = tr.attr("data");
+<<<<<<< HEAD
 	        var recordId = $(".hidden").data("id");
 	        var error = "<p class='error'>Record could not be deleted.</p>";
 	        var resolve = function resolve() {
@@ -529,6 +530,21 @@
 	            }
 	        };
 	        deleteRecord().then(resolve, reject);
+=======
+	        console.log("record that was clicked", id);
+	        var reject = function reject() {
+	            $("#narrMessage").html("<p class='error'>Record could not be deleted.");
+	        };
+	        var resolve = function resolve() {
+	            tr.remove();
+	            $("#narrMessage").html("<p class='success'>Record was successfully deleted.");
+	        };
+	        deleteRecord().then(resolve, reject);
+	        /*let id = $(this).parent().parent().attr("data");
+	        console.log("record that was clicked:", id);
+	        deleteRecord(); 
+	        $(this).parent().parent().remove();*/
+>>>>>>> ab713dc0a4bf25ed22ac1c83b9a81954ac9d3726
 	    });
 	
 	    $("#register").on("click", function () {
