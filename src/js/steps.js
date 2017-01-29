@@ -33,7 +33,7 @@ $(document).ready(function() {
                 $("#narrative-entry").html("<p>There was an error with last entry.</p>");
             }, 
             success: (records) => {
-                if (typeof records[records.length] == "undefined") {
+                if (typeof records[records.length-1] == "undefined") {
                     $("#narrative-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
                 }
                 else {
@@ -55,7 +55,7 @@ $(document).ready(function() {
                 $("#weight-entry").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
-                if (typeof records[records.length] == "undefined") {
+                if (typeof records[records.length-1] == "undefined") {
                     $("#weight-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
                 }
                 else {
@@ -77,7 +77,7 @@ $(document).ready(function() {
                 $("#length-entry").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
-                if (typeof records[records.length] == "undefined") {
+                if (typeof records[records.length-1] == "undefined") {
                     $("#length-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
                 }
                 else {
@@ -99,7 +99,7 @@ $(document).ready(function() {
                 $("#headCir-entry").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
-                if (typeof records[records.length] == "undefined") {
+                if (typeof records[records.length-1] == "undefined") {
                     $("#headCir-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
                 }
                 else {
@@ -528,9 +528,7 @@ $(document).ready(function() {
         let recordId = $(".hidden").data("id");
         const resolve = () => {
             remove();
-            tr.remove(); 
-            $("modal").toggle(); 
-            $(".message").empty();   
+            tr.remove();    
         };
         const reject = () => {
             $(".message").html("<p class='error'>Record could not be deleted.</p>");

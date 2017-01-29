@@ -81,7 +81,7 @@
 	                $("#narrative-entry").html("<p>There was an error with last entry.</p>");
 	            },
 	            success: function success(records) {
-	                if (typeof records[records.length] == "undefined") {
+	                if (typeof records[records.length - 1] == "undefined") {
 	                    $("#narrative-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
 	                } else {
 	                    var lastRecord = "<div><p class='hidden' data-id='" + records[records.length - 1]._id + "'</p>";
@@ -102,7 +102,7 @@
 	                $("#weight-entry").html("<p>There was an error with last entry.</p>");
 	            },
 	            success: function success(records) {
-	                if (typeof records[records.length] == "undefined") {
+	                if (typeof records[records.length - 1] == "undefined") {
 	                    $("#weight-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
 	                } else {
 	                    var lastRecord = "<div><p class='hidden' data-id='" + records[records.length - 1]._id + "'</p>";
@@ -123,7 +123,7 @@
 	                $("#length-entry").html("<p>There was an error with last entry.</p>");
 	            },
 	            success: function success(records) {
-	                if (typeof records[records.length] == "undefined") {
+	                if (typeof records[records.length - 1] == "undefined") {
 	                    $("#length-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
 	                } else {
 	                    var lastRecord = "<div><p class='hidden' data-id='" + records[records.length - 1]._id + "'</p>";
@@ -144,7 +144,7 @@
 	                $("#headCir-entry").html("<p>There was an error with last entry.</p>");
 	            },
 	            success: function success(records) {
-	                if (typeof records[records.length] == "undefined") {
+	                if (typeof records[records.length - 1] == "undefined") {
 	                    $("#headCir-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
 	                } else {
 	                    var lastRecord = "<div><p class='hidden' data-id='" + records[records.length - 1]._id + "'</p>";
@@ -564,8 +564,6 @@
 	        var resolve = function resolve() {
 	            remove();
 	            tr.remove();
-	            $("modal").toggle();
-	            $(".message").empty();
 	        };
 	        var reject = function reject() {
 	            $(".message").html("<p class='error'>Record could not be deleted.</p>");
