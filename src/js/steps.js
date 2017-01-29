@@ -55,7 +55,6 @@ $(document).ready(function() {
                 $("#weight-entry").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
-                console.log(records);
                 if (typeof records[records.length] == "undefined") {
                     $("#weight-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
                 }
@@ -360,7 +359,7 @@ $(document).ready(function() {
                 password: password
             }),
             error: () => {
-                $("#accountMessage").append("<p id='aMessage'>Account could not be created.</p>")
+                $("#accountMessage").append("<p id='aMessage'>Account could not be created.</p>");
             },
             success: (user) => {
                 currentUser = user._id; 
@@ -394,7 +393,7 @@ $(document).ready(function() {
                 $("#narrTitle").val("");
                 $("#narrInput").val("");
                 $("#narrModal").modal("toggle");
-                let displayNarrative = "<div><p class='hidden' data-id='" + record._id + "</p>"
+                let displayNarrative = "<div><p class='hidden' data-id='" + record._id + "</p>";
                 displayNarrative += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayNarrative += "<p>" + record.title + "</p>";
                 displayNarrative += "<p>" + record.content + "</p></div>";
@@ -425,7 +424,7 @@ $(document).ready(function() {
                 $("#wLbs").val("");
                 $("#wOz").val("");
                 $("#weightModal").modal("toggle"); 
-                let displayWeightRecord = "<div><p class='hidden' data-id='" + record._id + "</p>"
+                let displayWeightRecord = "<div><p class='hidden' data-id='" + record._id + "</p>";
                 displayWeightRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayWeightRecord += "<p>" + record.content + "</p></div>";
                 $("#weight-entry").html(displayWeightRecord);
@@ -453,7 +452,7 @@ $(document).ready(function() {
                 $("#lengthDate")[0].value = "";
                 $("#lengthInput").val("");
                 $("#lengthModal").modal("toggle"); 
-                let displayLengthRecord = "<div><p class='hidden' data-id='" + record._id + "</p>"
+                let displayLengthRecord = "<div><p class='hidden' data-id='" + record._id + "</p>";
                 displayLengthRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayLengthRecord += "<p>" + record.content + "</p></div>";
                 $("#length-entry").html(displayLengthRecord);
@@ -481,7 +480,7 @@ $(document).ready(function() {
                 $("#headCirDate")[0].value = "";
                 $("#headCirInput").val("");
                 $("#headCirModal").modal("toggle");
-                let displayHeadCirRecord = "<div><p class='hidden' data-id='" + record._id + "</p>"
+                let displayHeadCirRecord = "<div><p class='hidden' data-id='" + record._id + "</p>";
                 displayHeadCirRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayHeadCirRecord += "<p>" + record.content + "</p></div>";
                 $("#headCir-entry").html(displayHeadCirRecord);

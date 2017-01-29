@@ -102,7 +102,6 @@
 	                $("#weight-entry").html("<p>There was an error with last entry.</p>");
 	            },
 	            success: function success(records) {
-	                console.log(records);
 	                if (typeof records[records.length] == "undefined") {
 	                    $("#weight-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
 	                } else {
