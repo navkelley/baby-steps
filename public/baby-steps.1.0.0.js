@@ -82,11 +82,12 @@
 	            },
 	            success: function success(records) {
 	                if (typeof records[records.length - 1] == "undefined") {
-	                    $("#narrative-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+	                    $("#narrEmpty").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
 	                } else {
-	                    var lastRecord = "<div><p class='hidden' data-id='" + records[records.length - 1]._id + "'</p>";
+	                    var lastRecord = "<div><p class='hidden' data-id='" + records[records.length - 1]._id + "'></p>";
 	                    lastRecord += "<p>" + moment(records[records.length - 1].date).format("MMM Do YYYY") + "</p>";
 	                    lastRecord += "<p>" + records[records.length - 1].title + "</p>";
+	                    lastRecord += "<p>" + records[records.length - 1].content + "</p>";
 	                    $("#narrative-entry").html(lastRecord);
 	                }
 	            }
@@ -105,7 +106,7 @@
 	                if (typeof records[records.length - 1] == "undefined") {
 	                    $("#weight-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
 	                } else {
-	                    var lastRecord = "<div><p class='hidden' data-id='" + records[records.length - 1]._id + "'</p>";
+	                    var lastRecord = "<div><p class='hidden' data-id='" + records[records.length - 1]._id + "'></p>";
 	                    lastRecord += "<p>" + moment(records[records.length - 1].date).format("MMM Do YYYY") + "</p>";
 	                    lastRecord += "<p>" + records[records.length - 1].content + "</p></div>";
 	                    $("#weight-entry").html(lastRecord);
@@ -126,7 +127,7 @@
 	                if (typeof records[records.length - 1] == "undefined") {
 	                    $("#length-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
 	                } else {
-	                    var lastRecord = "<div><p class='hidden' data-id='" + records[records.length - 1]._id + "'</p>";
+	                    var lastRecord = "<div><p class='hidden' data-id='" + records[records.length - 1]._id + "'></p>";
 	                    lastRecord += "<p>" + moment(records[records.length - 1].date).format("MMM Do YYYY") + "</p>";
 	                    lastRecord += "<p>" + records[records.length - 1].content + "</p></div>";
 	                    $("#length-entry").html(lastRecord);
@@ -147,7 +148,7 @@
 	                if (typeof records[records.length - 1] == "undefined") {
 	                    $("#headCir-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
 	                } else {
-	                    var lastRecord = "<div><p class='hidden' data-id='" + records[records.length - 1]._id + "'</p>";
+	                    var lastRecord = "<div><p class='hidden' data-id='" + records[records.length - 1]._id + "'></p>";
 	                    lastRecord += "<p>" + moment(records[records.length - 1].date).format("MMM Do YYYY") + "</p>";
 	                    lastRecord += "<p>" + records[records.length - 1].content + "</p></div>";
 	                    $("#headCir-entry").html(lastRecord);
@@ -428,7 +429,7 @@
 	                $("#narrTitle").val("");
 	                $("#narrInput").val("");
 	                $("#narrModal").modal("toggle");
-	                var displayNarrative = "<div><p class='hidden' data-id='" + record._id + "</p>";
+	                var displayNarrative = "<div><p class='hidden' data-id='" + record._id + "'></p>";
 	                displayNarrative += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
 	                displayNarrative += "<p>" + record.title + "</p>";
 	                displayNarrative += "<p>" + record.content + "</p></div>";
@@ -459,7 +460,7 @@
 	                $("#wLbs").val("");
 	                $("#wOz").val("");
 	                $("#weightModal").modal("toggle");
-	                var displayWeightRecord = "<div><p class='hidden' data-id='" + record._id + "</p>";
+	                var displayWeightRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
 	                displayWeightRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
 	                displayWeightRecord += "<p>" + record.content + "</p></div>";
 	                $("#weight-entry").html(displayWeightRecord);
@@ -487,7 +488,7 @@
 	                $("#lengthDate")[0].value = "";
 	                $("#lengthInput").val("");
 	                $("#lengthModal").modal("toggle");
-	                var displayLengthRecord = "<div><p class='hidden' data-id='" + record._id + "</p>";
+	                var displayLengthRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
 	                displayLengthRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
 	                displayLengthRecord += "<p>" + record.content + "</p></div>";
 	                $("#length-entry").html(displayLengthRecord);
@@ -515,7 +516,7 @@
 	                $("#headCirDate")[0].value = "";
 	                $("#headCirInput").val("");
 	                $("#headCirModal").modal("toggle");
-	                var displayHeadCirRecord = "<div><p class='hidden' data-id='" + record._id + "</p>";
+	                var displayHeadCirRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
 	                displayHeadCirRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
 	                displayHeadCirRecord += "<p>" + record.content + "</p></div>";
 	                $("#headCir-entry").html(displayHeadCirRecord);
