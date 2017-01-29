@@ -8,7 +8,7 @@ You will only need to create a user profile in order to utilize the application.
 
 ```
 Username: test-baby-steps
-Password: password test
+Password: password-test
 ```
 
 ### Installing
@@ -52,6 +52,7 @@ The tests included in this application are to ensure that components are functio
 
 ## Development Roadmap
 
+* Fix known bug-delete DB record deletes all displays
 * Add edit button so each entry can be corrected-if needed
 * Create a forum page for users to ask questions or share stories
 * Create a milestones page for users to earn achievement/milestone badges
