@@ -54,21 +54,19 @@
 	    //to hold user id
 	    var currentUser = void 0;
 	
-	    var lastNarrRecordId = void 0;
-	
 	    var deleteRecord = function deleteRecord() {
 	        var dataType = $(".delete").parent().parent().attr("data-type");
 	        if (dataType === "narrative") {
-	            deleteNarrativeRecord();
+	            return deleteNarrativeRecord();
 	        }
 	        if (dataType === "weight") {
-	            deleteWeightRecord();
+	            return deleteWeightRecord();
 	        }
 	        if (dataType === "length") {
-	            deleteLengthRecord();
+	            return deleteLengthRecord();
 	        }
 	        if (dataType === "headCir") {
-	            deleteHeadCirRecord();
+	            return deleteHeadCirRecord();
 	        }
 	    };
 	
@@ -81,10 +79,10 @@
 	                $("#narrative-entry").html("<p>There was an error with last entry.</p>");
 	            },
 	            success: function success(records) {
-	                var lastRecord = moment(records[records.length - 1].date).format("MMM Do YYYY") + "<br>";
-	                lastRecord += records[records.length - 1].title + "<br>";
-	                lastRecord += records[records.length - 1].content + "<br>";
-	                lastRecord += "<div class='hidden' data-id='" + records[records.length - 1]._id + "'</div>";
+	                var lastRecord = "<div><p class='hidden' data-id='" + records[records.length - 1]._id + "'</p>";
+	                lastRecord += "<p>" + moment(records[records.length - 1].date).format("MMM Do YYYY") + "</p>";
+	                lastRecord += "<p>" + records[records.length - 1].title + "</p>";
+	                lastRecord += "<p>" + records[records.length - 1].content + "</p></div>";
 	                console.log("last:", lastRecord);
 	                $("#narrative-entry").html(lastRecord);
 	            }
@@ -100,9 +98,9 @@
 	                $("#weight-entry").html("<p>There was an error with last entry.</p>");
 	            },
 	            success: function success(records) {
-	                var lastRecord = moment(records[records.length - 1].date).format("MMM Do YYYY") + "<br>";
-	                lastRecord += records[records.length - 1].content + "<br>";
-	                lastRecord += "<div class='hidden' data-id='" + records[records.length - 1]._id + "'></div>";
+	                var lastRecord = "<p>" + moment(records[records.length - 1].date).format("MMM Do YYYY") + "<br></p>";
+	                lastRecord += "<p>" + records[records.length - 1].content + "<br></p>";
+	                lastRecord += "<p class='hidden' data-id='" + records[records.length - 1]._id + "'></p>";
 	                $("#weight-entry").html(lastRecord);
 	            }
 	        });
@@ -142,10 +140,11 @@
 	        });
 	    };
 	
-	    var removeLastDisplay = function removeLastDisplay() {
-	        var recordId = $(".hidden").data("id");
-	        console.log("to remove:", recordId);
-	        console.log("wanted:", lastNarrRecordId);
+	    var getLastEntry = function getLastEntry() {
+	        lastNarr();
+	        lastWeight();
+	        lastLength();
+	        lastHeadCir();
 	    };
 	
 	    var getNarratives = function getNarratives(search) {
@@ -166,7 +165,7 @@
 	        var entries = void 0;
 	        for (var narrative in data) {
 	            var formatDate = moment(data[narrative].date).format("MMM Do YYYY");
-	            entries = "<tr data-type='narrative' data='" + data[narrative]._id + "'><td>" + formatDate + "<td>" + data[narrative].title + "</td>" + "<td>" + data[narrative].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
+	            entries = "<tr data-type='narrative' data='" + data[narrative]._id + "'><td>" + formatDate + "</td><td>" + data[narrative].title + "</td>" + "<td>" + data[narrative].content + "</td>" + "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
 	            $("#allNarrs-table").append(entries);
 	        }
 	    };
@@ -275,10 +274,7 @@
 	            },
 	            success: function success(user) {
 	                currentUser = user._id;
-	                lastNarr();
-	                lastWeight();
-	                lastLength();
-	                lastHeadCir();
+	                getLastEntry();
 	            }
 	        });
 	    };
@@ -384,9 +380,10 @@
 	                $("#narrTitle").val("");
 	                $("#narrInput").val("");
 	                $("#narrModal").modal("toggle");
-	                var displayNarrative = moment(record.date).format("MMM Do YYYY") + "<br>";
-	                displayNarrative += record.title + "<br>";
-	                displayNarrative += record.content + "<br>";
+	                var displayNarrative = "<div><p class='hidden' data-id='" + record._id + "</p>";
+	                displayNarrative += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
+	                displayNarrative += "<p>" + record.title + "</p>";
+	                displayNarrative += "<p>" + record.content + "</p></div>";
 	                $("#narrative-entry").html(displayNarrative);
 	            }
 	        });
@@ -414,8 +411,9 @@
 	                $("#wLbs").val("");
 	                $("#wOz").val("");
 	                $("#weightModal").modal("toggle");
-	                var displayWeightRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
-	                displayWeightRecord += record.content + "<br>";
+	                var displayWeightRecord = "<div><p class='hidden' data-id='" + record._id + "</p>";
+	                displayWeightRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
+	                displayWeightRecord += "<p>" + record.content + "</p></div>";
 	                $("#weight-entry").html(displayWeightRecord);
 	            }
 	        });
@@ -441,8 +439,9 @@
 	                $("#lengthDate")[0].value = "";
 	                $("#lengthInput").val("");
 	                $("#lengthModal").modal("toggle");
-	                var displayLengthRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
-	                displayLengthRecord += record.content + "<br>";
+	                var displayLengthRecord = "<div><p class='hidden' data-id='" + record._id + "</p>";
+	                displayLengthRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
+	                displayLengthRecord += "<p>" + record.content + "</p></div>";
 	                $("#length-entry").html(displayLengthRecord);
 	            }
 	        });
@@ -468,8 +467,9 @@
 	                $("#headCirDate")[0].value = "";
 	                $("#headCirInput").val("");
 	                $("#headCirModal").modal("toggle");
-	                var displayHeadCirRecord = moment(record.date).format("MMM Do YYYY") + "<br>";
-	                displayHeadCirRecord += record.content + "<br>";
+	                var displayHeadCirRecord = "<div><p class='hidden' data-id='" + record._id + "</p>";
+	                displayHeadCirRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
+	                displayHeadCirRecord += "<p>" + record.content + "</p></div>";
 	                $("#headCir-entry").html(displayHeadCirRecord);
 	            }
 	        });
@@ -509,10 +509,26 @@
 	
 	    $(document).on("click", ".delete", function (e) {
 	        e.preventDefault();
-	        var id = $(this).parent().parent().attr("data");
-	        console.log("record that was clicked:", id);
-	        deleteRecord();
-	        $(this).parent().parent().remove();
+	        var button = $(this);
+	        var tr = button.closest("tr");
+	        var id = tr.attr("data");
+	        var recordId = $(".hidden").data("id");
+	        var error = "<p class='error'>Record could not be deleted.</p>";
+	        var resolve = function resolve() {
+	            remove();
+	            tr.remove();
+	            $("modal").toggle();
+	            $(".message").empty();
+	        };
+	        var reject = function reject() {
+	            $(".message").html(error);
+	        };
+	        var remove = function remove() {
+	            if (id === recordId) {
+	                $(".hidden").closest("div").empty();
+	            }
+	        };
+	        deleteRecord().then(resolve, reject);
 	    });
 	
 	    $("#register").on("click", function () {
