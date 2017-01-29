@@ -7,7 +7,9 @@ $(document).ready(function() {
     let currentUser; 
 
     const deleteRecord = () => {
-        let dataType = $(".delete").parent().parent().attr("data-type");
+        let td = $(".delete").parent();
+        let tr = td.closest("tr");
+        let dataType = tr.attr("data-type");
         if (dataType === "narrative") { 
             return deleteNarrativeRecord(); 
         }
@@ -50,9 +52,9 @@ $(document).ready(function() {
                 $("#weight-entry").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
-                let lastRecord = "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "<br></p>";
-                lastRecord += "<p>" + records[records.length-1].content + "<br></p>";
-                lastRecord += "<p class='hidden' data-id='" + records[records.length-1]._id + "'></p>";
+                let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'</p>"; 
+                lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
+                lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
                 $("#weight-entry").html(lastRecord);
             }
         });
@@ -67,9 +69,9 @@ $(document).ready(function() {
                 $("#length-entry").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
-                let lastRecord = moment(records[records.length-1].date).format("MMM Do YYYY") + "<br>";
-                lastRecord += records[records.length-1].content + "<br>";
-                lastRecord += "<div class='hidden' data-id='" + records[records.length-1]._id + "'></div>";
+                let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'</p>";
+                lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
+                lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
                 $("#length-entry").html(lastRecord);
             }
         });
@@ -84,9 +86,9 @@ $(document).ready(function() {
                 $("#headCir-entry").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
-                let lastRecord = moment(records[records.length-1].date).format("MMM Do YYYY") + "<br>";
-                lastRecord += records[records.length-1].content + "<br>";
-                lastRecord += "<div class='hidden' data-id='" + records[records.length-1]._id + "'></div>";
+                let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'</p>";
+                lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
+                lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
                 $("#headCir-entry").html(lastRecord);
             }
         });
@@ -154,10 +156,23 @@ $(document).ready(function() {
         let entries;
         for(let weight in data) {
             let formatDate = moment(data[weight].date).format("MMM Do YYYY");
-            entries = "<tr data-type='weight' data='" + data[weight]._id + "'><td>" + formatDate + "</td><td>" + data[weight].content + "</td>" +
+            entries = "<tr data-type='weight' data='" + data[weight]._id + "'><td>" + formatDate + "</td>" +
+                "<td>" + data[weight].content + "</td>" +
                 "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
             $("#allWeight-table").append(entries);
         }
+    };
+
+    const deleteWeightRecord = (record) => {
+        let td = $(".delete").parent();
+        let tr = td.closest("tr");
+        let id = tr.attr("data");
+        console.log("selected record:", id);
+        return $.ajax({
+            type: "DELETE",
+            url: "/dashboard/weight/" + id,
+            contentType: "application/json",
+        });
     };
 
     const getLength = (search) => {
@@ -178,11 +193,23 @@ $(document).ready(function() {
         let entries;
         for(let length in data) {
             let formatDate = moment(data[length].date).format("MMM Do YYYY");
-            entries = "<tr data-type='length' data='" + data[length]._id + "'><td>" + formatDate + 
-                "<td>" + data[length].content + "</td>"+ 
+            entries = "<tr data-type='length' data='" + data[length]._id + "'><td>" + formatDate + "</td>" +
+                "<td>" + data[length].content + "</td>" +
                 "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
             $("#allLength-table").append(entries);
         }
+    };
+
+    const deleteLengthRecord = (record) => {
+        let td = $(".delete").parent();
+        let tr = td.closest("tr");
+        let id = tr.attr("data");
+        console.log("selected record:", id);
+        return $.ajax({
+            type: "DELETE",
+            url: "/dashboard/length/" + id,
+            contentType: "application/json",
+        });
     };
 
     const getHeadCir = (search) => {
@@ -203,10 +230,23 @@ $(document).ready(function() {
         let entries;
         for(let headCir in data) {
             let formatDate = moment(data[headCir].date).format("MMM Do YYYY");
-            entries = "<tr data-type='headCir' data='" + data[headCir]._id + "'><td>" + formatDate + "<td>" + data[headCir].content + "</td>" + 
+            entries = "<tr data-type='headCir' data='" + data[headCir]._id + "'><td>" + formatDate + "</td>" +
+                "<td>" + data[headCir].content + "</td>" +
                 "<td><i type='button' class='fa fa-trash delete' aria-hidden='true'></i></td></tr>";
             $("#allHeadCir-table").append(entries);
         }
+    };
+
+    const deleteHeadCirRecord = (record) => {
+        let td = $(".delete").parent();
+        let tr = td.closest("tr");
+        let id = tr.attr("data");
+        console.log("selected record:", id);
+        return $.ajax({
+            type: "DELETE",
+            url: "/dashboard/headCir/" + id,
+            contentType: "application/json",
+        });
     };
 
     const checkPassword = (password) => {
@@ -370,7 +410,7 @@ $(document).ready(function() {
                 $("#wLbs").val("");
                 $("#wOz").val("");
                 $("#weightModal").modal("toggle"); 
-                let displayWeightRecord = "<div><p class='hidden' data-id='" + record._id + "</p>";
+                let displayWeightRecord = "<div><p class='hidden' data-id='" + record._id + "</p>"
                 displayWeightRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayWeightRecord += "<p>" + record.content + "</p></div>";
                 $("#weight-entry").html(displayWeightRecord);
@@ -400,7 +440,7 @@ $(document).ready(function() {
                 $("#lengthModal").modal("toggle"); 
                 let displayLengthRecord = "<div><p class='hidden' data-id='" + record._id + "</p>"
                 displayLengthRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
-                displayLengthRecord += "<p>" + record.content + "</p></div>"
+                displayLengthRecord += "<p>" + record.content + "</p></div>";
                 $("#length-entry").html(displayLengthRecord);
             },
         }); 
@@ -427,7 +467,7 @@ $(document).ready(function() {
                 $("#headCirInput").val("");
                 $("#headCirModal").modal("toggle");
                 let displayHeadCirRecord = "<div><p class='hidden' data-id='" + record._id + "</p>"
-                displayHeadCirRecord +="<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
+                displayHeadCirRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayHeadCirRecord += "<p>" + record.content + "</p></div>";
                 $("#headCir-entry").html(displayHeadCirRecord);
             },
@@ -472,7 +512,6 @@ $(document).ready(function() {
         let tr = button.closest("tr");
         let id = tr.attr("data");
         let recordId = $(".hidden").data("id");
-        let error = "<p class='error'>Record could not be deleted.</p>";
         const resolve = () => {
             remove();
             tr.remove(); 
@@ -480,7 +519,7 @@ $(document).ready(function() {
             $(".message").empty();   
         };
         const reject = () => {
-            $(".message").html(error);
+            $(".message").html("<p class='error'>Record could not be deleted.</p>");
         };
         const remove = () => {
             if (id === recordId) {
