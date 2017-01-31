@@ -1,4 +1,4 @@
-# Welcome to Baby Steps! 
+# Welcome to Baby Steps! [![Build Status](https://travis-ci.org/navkelley/baby-steps.svg?branch=master)](https://travis-ci.org/navkelley/baby-steps)
 
 Baby Steps is a project that demonstrates the utilization of server-side logic with a minimal viable client interface. In this case the user will request information from a variety of endpoints to return specified information, some cases include user login, getting measurements or narrative logs. The requests will return the specified data object or objects, which will then be parsed and displayed in the corresponding elements. User information will never be returned as a security measure. You can try the demo [here](https://evening-hollows-59256.herokuapp.com/).
 
