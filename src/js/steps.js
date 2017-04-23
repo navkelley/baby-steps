@@ -288,13 +288,11 @@ $(document).ready(function() {
             },
             success:(user) => {
                 currentUser = user._id;
+                console.log(currentUser);
                 getLastEntry();
             },
         });
     };
-
-    $("#dashboard").hide();
-    $("#sign-up").hide();
 
     $("#login").submit(function(e) {
         e.preventDefault();

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="login">
+            <div class="container">
+                <div class="row">
+                    <img src="https://elephantspokenhere.files.wordpress.com/2015/08/drawing-of-baby-elephant.png?w=240" alt="babyElephant" id="babyElephant">
+                    <h1>Baby Steps</h1>
+                    <p>Welcome to Baby Steps! This application is designed to track infant weight, length, and head circumference with the added bonus of logging journal entries-called narratives. You can either create an account or demo the applicaton using these credientials.</p>
+                    <div id="credientials">
+                        <p>Username: test-baby-steps<br>Password: password-test</p>
+                    </div><!--credientials-->
+                </div><!--row-->
+                <div class="row">
+                    <div id="login-box" class="col-8">
+                        <form id="login" action="/login" method="post">
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" class="form-control" id="username" name="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="userPassLogin">Password:</label>
+                                <input type="password" class="form-control" id="userPassLogin" placeholder="ex.Password234" name="password">
+                            </div>
+                            <p><a href="#" id="register">Sign up for Baby Steps</a></p>
+                            <button type="submit" id="login" class="btn btn-success" value="Log In">Login</button>
+                         </form>
+                    </div><!--login-box-->
+                </div><!--row-->
+            </div><!--container-->
+        </div><!--login-->
+</body>
+</html>
