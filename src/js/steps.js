@@ -6,6 +6,14 @@ $(document).ready(function() {
     //to hold user id
     let currentUser; 
 
+    //toggle all record modals
+    $(".records-modal").click(function() {
+        let link = $(this);
+        let type = link.attr("data-target");
+        console.log(type);
+        $(type).toggle();
+    });
+
     const deleteRecord = () => {
         let td = $(".delete").parent();
         let tr = td.closest("tr");

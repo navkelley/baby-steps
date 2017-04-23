@@ -5,14 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
         <title>Baby Steps</title>
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css">
-        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
         <link rel="stylesheet" href="baby-steps.1.0.0.min.css">
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+        <script src="https://use.fontawesome.com/8709dcd092.js"></script>
         <script src="baby-steps.1.0.0.js"></script>
     </head>
     <body>
-        <div class="container">
+        <div class="content">
             <header class="item-a">
                 <div id="logo-head">
                     <p>Baby Steps</p>
@@ -35,7 +34,7 @@
                 </section>
             </div><!--navbar-left-->
             <section id="main-content" class="wrapper item-b">
-                <h1>Dashboard</h1>
+                <h1>Vitals</h1>
                 <div id="instructions">
                     <p>To create an entry click on the <i class="fa fa-plus-circle"></i> and the entry form will appear. Once the entry form is filled out, click submit. Upon submit the last entry will appear in it's appropriate category. To view all entries within a category select "See all logged entries."</p>
                 </div><!--instructions-->
@@ -46,10 +45,10 @@
                         <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#weightModal"></i>
                     </span>
                     <!--Link to see all entries-->
-                    <p><a href="#" id="weightLink" aria-hidden="true" data-toggle="modal" data-target="#allWeightModal">See all logged entries</a></p>
+                    <a href="#" class="records-modal" id="weightLink" data-target="#allWeightModal">See all logged entries</a>
                     <!--modal-->
-                    <div class="modal fade" id="allWeightModal" tabindex="-1" role="dialog" aria-labelledby="allWeightModalLabel">
-                        <div class="modal-dialog" role="document">
+                    <div class="modal" id="allWeightModal">
+                        <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -111,10 +110,10 @@
                         <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#lengthModal"></i>
                     </span>
                     <!--Link to see all entries-->
-                    <p><a href="#" id="lengthLink" aria-hidden="true" data-toggle="modal" data-target="#allLengthModal">See all logged entries</a></p>
+                    <a href="#" class="records-modal" id="lengthLink" data-target="#allLengthModal">See all logged entries</a>
                     <!--modal-->
-                    <div class="modal fade" id="allLengthModal" tabindex="-1" role="dialog" aria-labelledby="allLengthModalLabel">
-                        <div class="modal-dialog" role="document">
+                    <div class="modal" id="allLengthModal">
+                        <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -145,9 +144,9 @@
                     </div><!-- /.modal -->
                     <div id="length-entry"></div>
                     <!-- Modal -->
-                    <div class="modal fade" id="lengthModal" tabindex="-1" role="dialog" aria-labelledby="lengthModalLabel">
+                    <div class="modal" id="lengthModal">
                         <form id="lengthForm">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -176,14 +175,14 @@
                         <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#headCirModal"></i>
                     </span>
                     <!--Link to see all entries-->
-                    <p><a href="#" id="headCirLink" aria-hidden="true" data-toggle="modal" data-target="#allHeadCirModal">See all logged entries</a></p>
+                    <a href="#" class="records-modal" id="headCirLink" data-target="#allHeadCirModal">See all logged entries</a>
                     <!--modal-->
-                    <div class="modal fade" id="allHeadCirModal" tabindex="-1" role="dialog" aria-labelledby="allHeadCirModalLabel">
-                        <div class="modal-dialog" role="document">
+                    <div class="modal" id="allHeadCirModal">
+                        <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="allHeadCirModalLabel">All Length Entries</h4>
+                                        <h4 class="modal-title" id="allHeadCirModalLabel">All Head Circumference Entries</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div id="allHeadCir-entries">
@@ -255,6 +254,6 @@
                     <p>&copy; 2017 All Rights Reserved.</p>
                 </div>
             </footer>
-        </div><!--container-->
+        </div><!--content-->
     </body>
 </html>

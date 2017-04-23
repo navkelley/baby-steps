@@ -27,7 +27,7 @@ form {
   max-width: 960px;
   margin: 0 1rem;
 }
-.container {
+.content {
   display: grid;
   align-items: center;
   grid-template-columns: 20% auto;
@@ -157,5 +157,9 @@ footer {
 }
 .copyright p {
   margin: 0;
+}
+/*////////// MODALS //////////*/
+.modal {
+  display: none;
 }
 /*# sourceMappingURL=baby-steps.1.0.0.css.map */
