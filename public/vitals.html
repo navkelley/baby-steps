@@ -1,297 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-            <div id="dashboard">
-            <div class="page-header">
-                <div class="container">
-                    <h1>Dashboard</h1>
-                    <div id="instructions">
-                        <p>To create an entry click on the <i class="fa fa-plus-circle"></i> and the entry form will appear. Once the entry form is filled out, click submit. Upon submit the last entry will appear in it's appropriate category. To view all entries within a category select "See all logged entries."</p>
-                    </div><!--instructions-->
-                </div><!--container-->
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-xs-12">
-                        <div id="narrative">
-                            <span class="modal-trigger">
-                                <h4>Last Logged Narrative</h4>
-                                <!-- Button trigger modal -->
-                                <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#narrModal"></i>
-                            </span>
-                            <!--Link to see all entries-->
-                            <p><a href="#" id="narrLink" aria-hidden="true" data-toggle="modal" data-target="#allNarrModal">See all logged entries</a></p>
-                            <!--modal-->
-                            <div class="modal fade" id="allNarrModal" tabindex="-1" role="dialog" aria-labelledby="allNarrModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="narrModalLabel">All Narrative Entries</h4>
+    <head>  
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <title>Baby Steps</title>
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+        <link rel="stylesheet" href="baby-steps.1.0.0.min.css">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+        <script src="baby-steps.1.0.0.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <header class="item-a">
+                <div id="logo-head">
+                    <p>Baby Steps</p>
+                </div>
+            </header>
+            <div class="navbar-left item-c">
+                <ul>
+                    <a href="index.html"><li>Home</li></a>
+                    <a href="vitals.html"><li>Vitals</li></a>
+                    <a href="journal.html"><li>Journal</li></a>
+                    <a href="#"><li>Contact Us</li></a>
+                </ul>
+                <section id="sign-up">
+                    <div class="buttons">
+                        <p>Sign Up or Log In Today!</p>
+                        <a href="signup.html"><button type="button">Sign Up</button></a>
+                        <a href="login.html"><button type="button">Log In</button></a>
+                        <a href="demo.html"><button type="button">Demo</button></a>
+                    </div>
+                </section>
+            </div><!--navbar-left-->
+            <section id="main-content" class="wrapper item-b">
+                <h1>Dashboard</h1>
+                <div id="instructions">
+                    <p>To create an entry click on the <i class="fa fa-plus-circle"></i> and the entry form will appear. Once the entry form is filled out, click submit. Upon submit the last entry will appear in it's appropriate category. To view all entries within a category select "See all logged entries."</p>
+                </div><!--instructions-->
+                <div id="weight">
+                    <span class="modal-trigger">
+                        <h4>Weight</h4>
+                        <!-- Button trigger modal -->
+                        <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#weightModal"></i>
+                    </span>
+                    <!--Link to see all entries-->
+                    <p><a href="#" id="weightLink" aria-hidden="true" data-toggle="modal" data-target="#allWeightModal">See all logged entries</a></p>
+                    <!--modal-->
+                    <div class="modal fade" id="allWeightModal" tabindex="-1" role="dialog" aria-labelledby="allWeightModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="allWeightModalLabel">All Weight Entries</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="allWeight-entries">
+                                        <table class="table">
+                                            <thead class="thead-inverse">
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Weight</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="allWeight-table">
+                                            </tbody>
+                                        </table>
+                                        <div id="weightMessage">
+                                            <p class="message"></p>
                                         </div>
-                                        <div class="modal-body">
-                                            <div id="allNarrative-entries">
-                                                <table class="table">
-                                                    <thead class="thead-inverse">
-                                                        <tr>
-                                                            <th>Date</th>
-                                                            <th>Title</th>
-                                                            <th>Content</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="allNarrs-table">
-                                                    </tbody>
-                                                </table>
-                                                <div id="narrMessage">
-                                                    <p class="message"></p>
-                                                </div>
-                                            </div><!--narrative-entries table-->
-                                        </div><!--modal-body-->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal" id="narrClose">Close</button>
+                                    </div><!--weight-entries table-->
+                                </div><!--modal-body-->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" id="weightClose">Close</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                    <div id="weight-entry"></div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="weightModal" tabindex="-1" role="dialog" aria-labelledby="weightModalLabel">
+                        <form id="weightForm">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="weightModalLabel">Weight Entry</h4>
+                                    </div>
+                                    <div class="modal-body" id="weightEntry">
+                                        <p>Enter baby's weight here. Weight can be measured by you or your doctor.</p>
+                                        <label for="weight-log-date">Date:</label>
+                                        <input type="date" class="datePicker" id="weightDate" required><br>
+                                        <label for="weightMeasure">Enter Weight:</label>
+                                        <p><input id="wLbs" type="number" min="1"> lbs <input id="wOz" type="number" min="0" max="16" required> oz</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-success">Save changes</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </form><!-- weight form -->
+                    </div><!-- /.modal -->
+                </div><!-- /.weight -->
+                <div id="length">
+                    <span class="modal-trigger">
+                        <h4>Length</h4>
+                        <!-- Button trigger modal -->
+                        <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#lengthModal"></i>
+                    </span>
+                    <!--Link to see all entries-->
+                    <p><a href="#" id="lengthLink" aria-hidden="true" data-toggle="modal" data-target="#allLengthModal">See all logged entries</a></p>
+                    <!--modal-->
+                    <div class="modal fade" id="allLengthModal" tabindex="-1" role="dialog" aria-labelledby="allLengthModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="allLengthModalLabel">All Length Entries</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="allLength-entries">
+                                        <table class="table">
+                                            <thead class="thead-inverse">
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Length</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="allLength-table">
+                                            </tbody>
+                                        </table>
+                                        <div id="lengthMessage">
+                                            <p class="message"></p>
                                         </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-                            <div id="narrative-entry">
-                                <p id="narrEmpty"></p>
-                            </div>
-                            <!-- Modal form entry-->
-                            <div class="modal fade" id="narrModal" tabindex="-1" role="dialog" aria-labelledby="narrModalLabel">
-                                <form id="narrForm">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="narrModalLabel">Narrative Entry</h4>
-                                            </div>
-                                            <div class="modal-body" id="narrEntry">
-                                                <p>A place for you to write down anything about baby or you! Enter in any thoughts, comments or concerns for reference here:</p>
-                                                <label for="narrative-title">Title of Narrative:</label>
-                                                <input type="text" placeholder="Fun activity, bad day, etc" id="narrTitle" required><br>
-                                                <label for="narrative-log-date">Date</label>
-                                                <input type="date" class="datePicker" id="narrDate" required>
-                                                <textarea id="narrInput" cols="70" placeholder="Add any thoughts, comments, concerns about your baby here" required></textarea>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button id="narrSubmit" type="submit" class="btn btn-success">Save changes</button>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </form><!-- narrative form-->
-                            </div><!-- /.modal -->
-                        </div><!-- /.narrative -->
-                    </div><!-- /.col -->
-                    <div class="col-lg-3 col-md-6 col-xs-12">
-                        <div id="weight">
-                            <span class="modal-trigger">
-                                <h4>Weight</h4>
-                                <!-- Button trigger modal -->
-                                <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#weightModal"></i>
-                            </span>
-                            <!--Link to see all entries-->
-                            <p><a href="#" id="weightLink" aria-hidden="true" data-toggle="modal" data-target="#allWeightModal">See all logged entries</a></p>
-                            <!--modal-->
-                            <div class="modal fade" id="allWeightModal" tabindex="-1" role="dialog" aria-labelledby="allWeightModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="allWeightModalLabel">All Weight Entries</h4>
+                                    </div><!--length-entries table-->
+                                </div><!--modal-body-->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" id="lengthClose">Close</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                    <div id="length-entry"></div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="lengthModal" tabindex="-1" role="dialog" aria-labelledby="lengthModalLabel">
+                        <form id="lengthForm">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="lengthModalLabel">Length Entry</h4>
+                                    </div>
+                                    <div class="modal-body" id="lengthEntry">
+                                        <p>Enter baby's length here. Length can be measured by you or your doctor.</p>
+                                        <label for="length-log-date">Date:</label>
+                                        <input id="lengthDate" type="date" class="datePicker" required><br>
+                                        <label for="lengthMeasure">Enter Length:</label>
+                                        <p><input type="number" min="1" id="lengthInput" required> inches</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-success">Save changes</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </form><!-- length form -->
+                    </div><!-- /.modal -->
+                </div><!-- /.length -->
+                <div id="headCir">
+                    <span class="modal-trigger">
+                        <h4>Head Circumference</h4>
+                        <!-- Button trigger modal -->
+                        <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#headCirModal"></i>
+                    </span>
+                    <!--Link to see all entries-->
+                    <p><a href="#" id="headCirLink" aria-hidden="true" data-toggle="modal" data-target="#allHeadCirModal">See all logged entries</a></p>
+                    <!--modal-->
+                    <div class="modal fade" id="allHeadCirModal" tabindex="-1" role="dialog" aria-labelledby="allHeadCirModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="allHeadCirModalLabel">All Length Entries</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="allHeadCir-entries">
+                                        <table class="table">
+                                            <thead class="thead-inverse">
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Head Circumference</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="allHeadCir-table">
+                                            </tbody>
+                                        </table>
+                                        <div id="headCirMessage">
+                                            <p class="message"></p>
                                         </div>
-                                        <div class="modal-body">
-                                            <div id="allWeight-entries">
-                                                <table class="table">
-                                                    <thead class="thead-inverse">
-                                                        <tr>
-                                                            <th>Date</th>
-                                                            <th>Weight</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="allWeight-table">
-                                                    </tbody>
-                                                </table>
-                                                <div id="weightMessage">
-                                                    <p class="message"></p>
-                                                </div>
-                                            </div><!--weight-entries table-->
-                                        </div><!--modal-body-->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal" id="weightClose">Close</button>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-                            <div id="weight-entry"></div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="weightModal" tabindex="-1" role="dialog" aria-labelledby="weightModalLabel">
-                                <form id="weightForm">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="weightModalLabel">Weight Entry</h4>
-                                            </div>
-                                            <div class="modal-body" id="weightEntry">
-                                                <p>Enter baby's weight here. Weight can be measured by you or your doctor.</p>
-                                                <label for="weight-log-date">Date:</label>
-                                                <input type="date" class="datePicker" id="weightDate" required><br>
-                                                <label for="weightMeasure">Enter Weight:</label>
-                                                <p><input id="wLbs" type="number" min="1"> lbs <input id="wOz" type="number" min="0" max="16" required> oz</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-success">Save changes</button>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </form><!-- weight form -->
-                            </div><!-- /.modal -->
-                        </div><!-- /.weight -->
-                    </div><!-- /. col -->
-                    <div class="col-lg-3 col-md-6 col-xs-12">
-                        <div id="length">
-                            <span class="modal-trigger">
-                                <h4>Length</h4>
-                                <!-- Button trigger modal -->
-                                <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#lengthModal"></i>
-                            </span>
-                            <!--Link to see all entries-->
-                            <p><a href="#" id="lengthLink" aria-hidden="true" data-toggle="modal" data-target="#allLengthModal">See all logged entries</a></p>
-                            <!--modal-->
-                            <div class="modal fade" id="allLengthModal" tabindex="-1" role="dialog" aria-labelledby="allLengthModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="allLengthModalLabel">All Length Entries</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div id="allLength-entries">
-                                                <table class="table">
-                                                    <thead class="thead-inverse">
-                                                        <tr>
-                                                            <th>Date</th>
-                                                            <th>Length</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="allLength-table">
-                                                    </tbody>
-                                                </table>
-                                                <div id="lengthMessage">
-                                                    <p class="message"></p>
-                                                </div>
-                                            </div><!--length-entries table-->
-                                        </div><!--modal-body-->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal" id="lengthClose">Close</button>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-                            <div id="length-entry"></div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="lengthModal" tabindex="-1" role="dialog" aria-labelledby="lengthModalLabel">
-                                <form id="lengthForm">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="lengthModalLabel">Length Entry</h4>
-                                            </div>
-                                            <div class="modal-body" id="lengthEntry">
-                                                <p>Enter baby's length here. Length can be measured by you or your doctor.</p>
-                                                <label for="length-log-date">Date:</label>
-                                                <input id="lengthDate" type="date" class="datePicker" required><br>
-                                                <label for="lengthMeasure">Enter Length:</label>
-                                                <p><input type="number" min="1" id="lengthInput" required> inches</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-success">Save changes</button>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </form><!-- length form -->
-                            </div><!-- /.modal -->
-                        </div><!-- /.length -->
-                    </div><!-- /.col -->
-                    <div class="col-lg-3 col-md-6 col-xs-12">
-                        <div id="headCir">
-                            <span class="modal-trigger">
-                                <h4>Head Circumference</h4>
-                                <!-- Button trigger modal -->
-                                <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#headCirModal"></i>
-                            </span>
-                            <!--Link to see all entries-->
-                            <p><a href="#" id="headCirLink" aria-hidden="true" data-toggle="modal" data-target="#allHeadCirModal">See all logged entries</a></p>
-                            <!--modal-->
-                            <div class="modal fade" id="allHeadCirModal" tabindex="-1" role="dialog" aria-labelledby="allHeadCirModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="allHeadCirModalLabel">All Length Entries</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div id="allHeadCir-entries">
-                                                <table class="table">
-                                                    <thead class="thead-inverse">
-                                                        <tr>
-                                                            <th>Date</th>
-                                                            <th>Head Circumference</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="allHeadCir-table">
-                                                    </tbody>
-                                                </table>
-                                                <div id="headCirMessage">
-                                                    <p class="message"></p>
-                                                </div>
-                                            </div><!--headCir-entries table-->
-                                        </div><!--modal-body-->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal" id="headCirClose">Close</button>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-                            <div id="headCir-entry"></div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="headCirModal" tabindex="-1" role="dialog" aria-labelledby="headCirModalLabel">
-                                <form id="headCirForm">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="headCirModalLabel">Head Circumference Entry</h4>
-                                            </div>
-                                            <div class="modal-body" id="headCirEntry">
-                                                <p>Enter baby's head circumference here. The head circumference can be measured by you or your doctor.</p>
-                                                <label for="head-circum-log-date">Date:</label>
-                                                <input type="date" class="datePicker" id="headCirDate" required><br>
-                                                <label for="headCirMeasure">Enter Head Circumference:</label> 
-                                                <p><input id="headCirInput" type="number" min="1" required> inches</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-success">Save changes</button>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </form><!-- Head Circum. form -->
-                            </div><!-- /.modal -->
-                        </div><!-- /.headCir -->
-                    </div><!-- /. col -->
-                </div><!-- /. row-->
-            </div><!-- /.container-->
-        </div><!--dashboard-->
-</body>
+                                    </div><!--headCir-entries table-->
+                                </div><!--modal-body-->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" id="headCirClose">Close</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                    <div id="headCir-entry"></div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="headCirModal" tabindex="-1" role="dialog" aria-labelledby="headCirModalLabel">
+                        <form id="headCirForm">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="headCirModalLabel">Head Circumference Entry</h4>
+                                    </div>
+                                    <div class="modal-body" id="headCirEntry">
+                                        <p>Enter baby's head circumference here. The head circumference can be measured by you or your doctor.</p>
+                                        <label for="head-circum-log-date">Date:</label>
+                                        <input type="date" class="datePicker" id="headCirDate" required><br>
+                                        <label for="headCirMeasure">Enter Head Circumference:</label> 
+                                        <p><input id="headCirInput" type="number" min="1" required> inches</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-success">Save changes</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </form><!-- Head Circum. form -->
+                    </div><!-- /.modal -->
+                </div><!-- /.headCir -->
+            </section><!--main-content-->
+            <footer class="item-d">
+                <div id="social">
+                    <a class="twit" href="#twit" title="Twitter">
+                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414">
+                            <path d="M16 3.038c-.59.26-1.22.437-1.885.517.677-.407 1.198-1.05 1.443-1.816-.634.37-1.337.64-2.085.79-.598-.64-1.45-1.04-2.396-1.04-1.812 0-3.282 1.47-3.282 3.28 0 .26.03.51.085.75-2.728-.13-5.147-1.44-6.766-3.42C.83 2.58.67 3.14.67 3.75c0 1.14.58 2.143 1.46 2.732-.538-.017-1.045-.165-1.487-.41v.04c0 1.59 1.13 2.918 2.633 3.22-.276.074-.566.114-.865.114-.21 0-.41-.02-.61-.058.42 1.304 1.63 2.253 3.07 2.28-1.12.88-2.54 1.404-4.07 1.404-.26 0-.52-.015-.78-.045 1.46.93 3.18 1.474 5.04 1.474 6.04 0 9.34-5 9.34-9.33 0-.14 0-.28-.01-.42.64-.46 1.2-1.04 1.64-1.7z" fill-rule="nonzero"/>
+                        </svg>
+                    </a>
+                    <a class="ghub" href="#ghub" title="Github">
+                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414">
+                            <path d="M8 0C3.58 0 0 3.582 0 8c0 3.535 2.292 6.533 5.47 7.59.4.075.547-.172.547-.385 0-.19-.007-.693-.01-1.36-2.226.483-2.695-1.073-2.695-1.073-.364-.924-.89-1.17-.89-1.17-.725-.496.056-.486.056-.486.803.056 1.225.824 1.225.824.714 1.223 1.873.87 2.33.665.072-.517.278-.87.507-1.07-1.777-.2-3.644-.888-3.644-3.953 0-.873.31-1.587.823-2.147-.09-.202-.36-1.015.07-2.117 0 0 .67-.215 2.2.82.64-.178 1.32-.266 2-.27.68.004 1.36.092 2 .27 1.52-1.035 2.19-.82 2.19-.82.43 1.102.16 1.915.08 2.117.51.56.82 1.274.82 2.147 0 3.073-1.87 3.75-3.65 3.947.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.14.46.55.38C13.71 14.53 16 11.53 16 8c0-4.418-3.582-8-8-8"/>
+                        </svg>
+                    </a> 
+                </div>
+                <div class="address">
+                    <p>Designed and Programmed by Nicole V. Kelley</p>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2017 All Rights Reserved.</p>
+                </div>
+            </footer>
+        </div><!--container-->
+    </body>
 </html>
