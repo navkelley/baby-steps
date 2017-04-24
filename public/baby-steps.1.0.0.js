@@ -318,9 +318,9 @@
 	        var pass1 = $("#password").val();
 	        var pass2 = $("#verifyPassword").val();
 	        if (pass1 === pass2) {
-	            $("#passwordMessage").html("<p>Passwords Match!</p>");
+	            console.log("matching");
 	        } else {
-	            $("#passwordMessage").html("<p>Passwords Do Not Match!</p>");
+	            console.log("not matching");
 	        } //need to rethink
 	    };
 	
@@ -389,7 +389,7 @@
 	    });
 	
 	    $("#sign-up").submit(function (e) {
-	        e.preventDefault();
+	        //e.preventDefault();
 	        checkPassword();
 	        var firstName = $("#firstName").val();
 	        var lastName = $("#lastName").val();
@@ -421,6 +421,7 @@
 	                $("#dashboard").show();*/
 	            }
 	        });
+	        e.preventDefault();
 	    });
 	
 	    $("#narrForm").submit(function (e) {

@@ -282,10 +282,10 @@ $(document).ready(function() {
         let pass1 = $("#password").val();
         let pass2 = $("#verifyPassword").val();
         if (pass1 === pass2) {
-            $("#passwordMessage").html("<p>Passwords Match!</p>");
+            console.log("matching");
         }
         else {
-            $("#passwordMessage").html("<p>Passwords Do Not Match!</p>");
+            console.log("not matching");
         }//need to rethink
     };
 
@@ -354,7 +354,7 @@ $(document).ready(function() {
     });
 
     $("#sign-up").submit(function(e) {
-        e.preventDefault();
+        //e.preventDefault();
         checkPassword();
         let firstName = $("#firstName").val();
         let lastName = $("#lastName").val();
@@ -386,6 +386,7 @@ $(document).ready(function() {
                 $("#dashboard").show();*/
             } 
         });
+        e.preventDefault();
     });
 
     $("#narrForm").submit(function(e) {
