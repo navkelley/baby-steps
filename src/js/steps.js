@@ -14,6 +14,13 @@ $(document).ready(function() {
         $(type).toggle();
     });
 
+    $(".close").click(function() {
+        let close = $(this);
+        let modal = close.attr("data-target");
+        console.log(modal);
+        $(modal).toggle();
+    })
+
     const deleteRecord = () => {
         let td = $(".delete").parent();
         let tr = td.closest("tr");
@@ -38,7 +45,7 @@ $(document).ready(function() {
             url: "/dashboard/narratives/" + currentUser,
             contentType: "application/json",
             error: () => {
-                $("#narrative-entry").html("<p>There was an error with last entry.</p>");
+                $("#narrative-data").html("<p>There was an error with last entry.</p>");
             }, 
             success: (records) => {
                 if (typeof records[records.length-1] == "undefined") {
@@ -49,7 +56,7 @@ $(document).ready(function() {
                     lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
                     lastRecord += "<p>" + records[records.length-1].title + "</p>";
                     lastRecord += "<p>" + records[records.length-1].content + "</p>";
-                    $("#narrative-entry").html(lastRecord);
+                    $("#narrative-data").html(lastRecord);
                 }
             }
         });
@@ -61,17 +68,17 @@ $(document).ready(function() {
             url: "/dashboard/weight/" + currentUser,
             contentType: "application/json",
             error: () => {
-                $("#weight-entry").html("<p>There was an error with last entry.</p>");
+                $("#weight-data").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
                 if (typeof records[records.length-1] == "undefined") {
-                    $("#weight-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+                    $("#weight-data").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
                 }
                 else {
                     let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>"; 
                     lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
                     lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
-                    $("#weight-entry").html(lastRecord);
+                    $("#weight-data").html(lastRecord);
                 }
             }
         });
@@ -83,17 +90,17 @@ $(document).ready(function() {
             url: "/dashboard/length/" + currentUser,
             contentType: "application/json",
             error: () => {
-                $("#length-entry").html("<p>There was an error with last entry.</p>");
+                $("#length-data").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
                 if (typeof records[records.length-1] == "undefined") {
-                    $("#length-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+                    $("#length-data").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
                 }
                 else {
                     let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>";
                     lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
                     lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
-                    $("#length-entry").html(lastRecord);
+                    $("#length-data").html(lastRecord);
                 }
             }
         });
@@ -105,17 +112,17 @@ $(document).ready(function() {
             url: "/dashboard/headCir/" + currentUser,
             contentType: "application/json",
             error: () => {
-                $("#headCir-entry").html("<p>There was an error with last entry.</p>");
+                $("#headCir-data").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
                 if (typeof records[records.length-1] == "undefined") {
-                    $("#headCir-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+                    $("#headCir-data").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
                 }
                 else {
                     let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>";
                     lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
                     lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
-                    $("#headCir-entry").html(lastRecord);
+                    $("#headCir-data").html(lastRecord);
                 }
             }
         });

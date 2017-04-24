@@ -5,11 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
         <title>Baby Steps</title>
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="baby-steps.1.0.0.min.css">
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-        <script src="https://use.fontawesome.com/8709dcd092.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="baby-steps.1.0.0.js"></script>
     </head>
     <body>
@@ -37,20 +34,22 @@
             </div><!--navbar-left-->
             <section id="main-content" class="wrapper item-b">
                 <h1>Journal</h1>
+                <div id="instructions">
+                    <p>To create an journal entry enter in the information below. 
+                        Once the entry form is filled out, click submit. 
+                        Upon submit the last entry will appear. 
+                        To view all journal entries select "See all logged entries."
+                    </p>
+                </div><!--instructions-->
                 <div id="narrative">
-                    <span class="modal-trigger">
-                        <h4>Last Logged Narrative</h4>
-                        <!-- Button trigger modal -->
-                        <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="modal" data-target="#narrModal"></i>
-                    </span>
                     <!--Link to see all entries-->
-                    <p><a href="#" id="narrLink" aria-hidden="true" data-toggle="modal" data-target="#allNarrModal">See all logged entries</a></p>
+                    <p><a href="#" class="records-modal" id="narrLink" data-target="#allNarrModal">See all logged entries</a></p>
                     <!--modal-->
-                    <div class="modal fade" id="allNarrModal" tabindex="-1" role="dialog" aria-labelledby="allNarrModalLabel">
-                        <div class="modal-dialog" role="document">
+                    <div class="modal" id="allNarrModal">
+                        <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <button type="button" class="close" data-target="#allNarrModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="narrModalLabel">All Narrative Entries</h4>
                                 </div>
                                 <div class="modal-body">
@@ -72,39 +71,27 @@
                                     </div><!--narrative-entries table-->
                                 </div><!--modal-body-->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal" id="narrClose">Close</button>
+                                    <button type="button" class="close" data-target="#allNarrModal">Close</button>
                                 </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
-                    <div id="narrative-entry">
+                    <div id="narrative-data">
                         <p id="narrEmpty"></p>
                     </div>
-                    <!-- Modal form entry-->
-                    <div class="modal fade" id="narrModal" tabindex="-1" role="dialog" aria-labelledby="narrModalLabel">
+                    <!--entry-->
+                    <div class="entry" id="narrEntry">
                         <form id="narrForm">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="narrModalLabel">Narrative Entry</h4>
-                                    </div>
-                                    <div class="modal-body" id="narrEntry">
-                                        <p>A place for you to write down anything about baby or you! Enter in any thoughts, comments or concerns for reference here:</p>
-                                        <label for="narrative-title">Title of Narrative:</label>
-                                        <input type="text" placeholder="Fun activity, bad day, etc" id="narrTitle" required><br>
-                                        <label for="narrative-log-date">Date</label>
-                                        <input type="date" class="datePicker" id="narrDate" required>
-                                        <textarea id="narrInput" cols="70" placeholder="Add any thoughts, comments, concerns about your baby here" required></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button id="narrSubmit" type="submit" class="btn btn-success">Save changes</button>
-                                    </div>
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
+                            <p>A place for you to write down anything about baby or you! Enter in any thoughts, comments or concerns for reference here:</p>
+                            <label for="narrative-title">Title of Narrative:</label>
+                            <input type="text" placeholder="Fun activity, bad day, etc" id="narrTitle" required>
+                            <label for="narrative-log-date">Date</label>
+                            <input type="date" class="datePicker" id="narrDate" required>
+                            <textarea id="narrInput" cols="70" placeholder="Add any thoughts, comments, concerns about your baby here" required></textarea>
+                            <button type="button" class="erase">Erase data</button>
+                            <button type="submit" class="save">Save changes</button>
                         </form><!-- narrative form-->
-                    </div><!-- /.modal -->
+                    </div><!-- /.entry -->
                 </div><!-- /.narrative -->
             </section><!--main-content-->
             <footer class="item-d">
