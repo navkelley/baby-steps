@@ -44,31 +44,29 @@
                 <div id="weight">
                     <h4>Weight</h4>
                     <!--Link to see all entries-->
-                    <a href="#" class="records-modal" id="weightLink" data-target="#allWeightModal">See all logged entries</a>
+                    <a href="#" class="records-modal" data-target="#allWeightModal">See all logged entries</a>
                     <!--modal-->
                     <div class="modal" id="allWeightModal">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-target="#allWeightModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="allWeightModalLabel">All Weight Entries</h4>
+                                        <h4 class="modal-title">All Weight Entries</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <div id="allWeight-entries">
-                                        <table class="table">
-                                            <thead class="thead-inverse">
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>Weight</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="allWeight-table">
-                                            </tbody>
-                                        </table>
-                                        <div id="weightMessage">
-                                            <p class="message"></p>
-                                        </div>
-                                    </div><!--weight-entries table-->
+                                    <table class="table">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Weight</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="allWeight-table">
+                                        </tbody>
+                                    </table>
+                                    <div id="weightMessage">
+                                        <p class="message"></p>
+                                    </div>
                                 </div><!--modal-body-->
                                 <div class="modal-footer">
                                     <button type="button" class="close" data-target="#allWeightModal" aria-label="Close">Close</button>
@@ -76,9 +74,10 @@
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
+                    <!--last entry show-->
                     <div id="weight-data"></div>
                     <!-- Data Entry -->
-                    <div class="entry" id="weightEntry">
+                    <div class="entry">
                         <form id="weightForm">
                             <p>Enter baby's weight here. Weight can be measured by you or your doctor.</p>
                             <label for="weight-log-date">Date:</label>
@@ -93,31 +92,29 @@
                 <div id="length">
                     <h4>Length</h4>
                     <!--Link to see all entries-->
-                    <a href="#" class="records-modal" id="lengthLink" data-target="#allLengthModal">See all logged entries</a>
+                    <a href="#" class="records-modal" data-target="#allLengthModal">See all logged entries</a>
                     <!--modal-->
                     <div class="modal" id="allLengthModal">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-target="#allLengthModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="allLengthModalLabel">All Length Entries</h4>
+                                        <h4 class="modal-title">All Length Entries</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <div id="allLength-entries">
-                                        <table class="table">
-                                            <thead class="thead-inverse">
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>Length</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="allLength-table">
-                                            </tbody>
-                                        </table>
-                                        <div id="lengthMessage">
-                                            <p class="message"></p>
-                                        </div>
-                                    </div><!--length-entries table-->
+                                    <table class="table">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Length</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="allLength-table">
+                                        </tbody>
+                                    </table>
+                                    <div id="lengthMessage">
+                                        <p class="message"></p>
+                                    </div>
                                 </div><!--modal-body-->
                                 <div class="modal-footer">
                                     <button type="button" class="close" data-target="#allLengthModal">Close</button>
@@ -125,8 +122,10 @@
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
+                    <!--last entry show-->
                     <div id="length-data"></div>
-                    <div class="entry" id="lengthEntry">
+                    <!--data entry-->
+                    <div class="entry">
                         <form id="lengthForm">
                             <p>Enter baby's length here. Length can be measured by you or your doctor.</p>
                             <label for="length-log-date">Date:</label>
@@ -140,31 +139,29 @@
                 </div><!-- /.length -->
                 <div id="headCir">
                     <!--Link to see all entries-->
-                    <a href="#" class="records-modal" id="headCirLink" data-target="#allHeadCirModal">See all logged entries</a>
+                    <a href="#" class="records-modal" data-target="#allHeadCirModal">See all logged entries</a>
                     <!--modal-->
                     <div class="modal" id="allHeadCirModal">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-target="#allHeadCirModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="allHeadCirModalLabel">All Head Circumference Entries</h4>
+                                        <h4 class="modal-title">All Head Circumference Entries</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <div id="allHeadCir-entries">
-                                        <table class="table">
-                                            <thead class="thead-inverse">
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>Head Circumference</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="allHeadCir-table">
-                                            </tbody>
-                                        </table>
-                                        <div id="headCirMessage">
-                                            <p class="message"></p>
-                                        </div>
-                                    </div><!--headCir-entries table-->
+                                    <table class="table">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Head Circumference</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="allHeadCir-table">
+                                        </tbody>
+                                    </table>
+                                    <div id="headCirMessage">
+                                        <p class="message"></p>
+                                    </div>
                                 </div><!--modal-body-->
                                 <div class="modal-footer">
                                     <button type="button" class="close" data-target="#allHeadCirModal">Close</button>
@@ -172,9 +169,10 @@
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
+                    <!--last entry show-->
                     <div id="headCir-data"></div>
-                    <!-- Modal -->
-                    <div class="entry" id="headCirEntry">
+                    <!-- data entry -->
+                    <div class="entry">
                         <form id="headCirForm">
                             <p>Enter baby's head circumference here. The head circumference can be measured by you or your doctor.</p>
                             <label for="head-circum-log-date">Date:</label>
