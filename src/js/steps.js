@@ -6,26 +6,25 @@ $(document).ready(function() {
     //to hold user id
     let currentUser; 
 
-    //toggle all record modals
-    $(".records-modal").click(function() {
-        let link = $(this);
-        let type = link.attr("data-target");
-        console.log(type);
-        $(type).toggle();
-    });
-
-    $(".close").click(function() {
-        let close = $(this);
-        let modal = close.attr("data-target");
-        console.log(modal);
-        $(modal).toggle();
-    })
-
     const deleteRecord = () => {
         let td = $(".delete").parent();
         let tr = td.closest("tr");
         let dataType = tr.attr("data-type");
-        if (dataType === "narrative") { 
+        switch(dataType) {
+            case "narrative":
+                deleteNarrativeRecord();
+                break;
+            case "weight":
+                deleteWeightRecord();
+                break;
+            case "length":
+                deleteLengthRecord();
+                break;
+            case "headCir":
+                deleteHeadCirRecord();
+                break;
+        }
+        /*if (dataType === "narrative") { 
             return deleteNarrativeRecord(); 
         }
         if (dataType === "weight") {
@@ -36,7 +35,7 @@ $(document).ready(function() {
         }
         if (dataType === "headCir") {
             return deleteHeadCirRecord(); 
-        }
+        }*/
     };
 
     const lastNarr = (search) => {
@@ -287,7 +286,7 @@ $(document).ready(function() {
         }
         else {
             $("#passwordMessage").html("<p>Passwords Do Not Match!</p>");
-        }
+        }//need to rethink
     };
 
     const getUserId = (username) => {
@@ -303,7 +302,9 @@ $(document).ready(function() {
             },
             success:(user) => {
                 currentUser = user._id;
+                sessionStorage.setItem('user', user._id);
                 console.log(currentUser);
+                console.log(sessionStorage);
                 getLastEntry();
             },
         });
@@ -322,16 +323,14 @@ $(document).ready(function() {
                 password: password 
             }),
             error: () => {
-                $("#login-box").append("<p>Could not login. Please try again.</p>");
-                $("#sign-up").hide();
-                $("#dashboard").hide();
-                $("#login").show(); 
+                $("#login-box").append("<p>Could not login. Please try again.</p>"); 
             },
             success: (user) => {
-                getUserId(username);   
-                $("#login").hide();
+                getUserId(username);  
+                //TODO: need to figure out how to allow access to pages after 
+                /*$("#login").hide();
                 $("#sign-up").hide();
-                $("#dashboard").show();
+                $("#dashboard").show();*/
             },
         }); 
     });
@@ -346,9 +345,10 @@ $(document).ready(function() {
             },
             success: () => { 
                 delete window.currentUser;
-                $("#dashboard").hide();
+                //TODO: redirect to home page 
+                /*$("#dashboard").hide();
                 $("#sign-up").hide(); 
-                $("#login").show(); 
+                $("#login").show();*/
             }
         });
     });
@@ -377,9 +377,13 @@ $(document).ready(function() {
             },
             success: (user) => {
                 currentUser = user._id; 
-                $("#sign-up").hide();
+                //sessionStorage.setItem('user', user._id);
+                console.log(currentUser);
+                //console.log(sessionStorage);
+                //TODO: need to figure out how to allow access to pages after 
+                /*$("#sign-up").hide();
                 $("#login").hide(); 
-                $("#dashboard").show();
+                $("#dashboard").show();*/
             } 
         });
     });
@@ -406,7 +410,6 @@ $(document).ready(function() {
                 $("#narrDate")[0].value = "";
                 $("#narrTitle").val("");
                 $("#narrInput").val("");
-                $("#narrModal").modal("toggle");
                 let displayNarrative = "<div><p class='hidden' data-id='" + record._id + "'></p>";
                 displayNarrative += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayNarrative += "<p>" + record.title + "</p>";
@@ -437,7 +440,6 @@ $(document).ready(function() {
                 $("#weightDate")[0].value = "";
                 $("#wLbs").val("");
                 $("#wOz").val("");
-                $("#weightModal").modal("toggle"); 
                 let displayWeightRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
                 displayWeightRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayWeightRecord += "<p>" + record.content + "</p></div>";
@@ -464,8 +466,7 @@ $(document).ready(function() {
             },
             success: (record) => {
                 $("#lengthDate")[0].value = "";
-                $("#lengthInput").val("");
-                $("#lengthModal").modal("toggle"); 
+                $("#lengthInput").val(""); 
                 let displayLengthRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
                 displayLengthRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayLengthRecord += "<p>" + record.content + "</p></div>";
@@ -493,7 +494,6 @@ $(document).ready(function() {
             success: (record) => {
                 $("#headCirDate")[0].value = "";
                 $("#headCirInput").val("");
-                $("#headCirModal").modal("toggle");
                 let displayHeadCirRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
                 displayHeadCirRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayHeadCirRecord += "<p>" + record.content + "</p></div>";
@@ -502,36 +502,32 @@ $(document).ready(function() {
         });
     });
 
-    $("#narrLink").on("click", () => {
-        getNarratives(); 
+    //toggle all record modals
+    $(".records-modal").click(function() {
+        let link = $(this);
+        let type = link.attr("data-target");
+        $(type).toggle();
+        switch(type) {
+            case "#allWeightModal":
+                getWeight();
+                break;
+            case "#allLengthModal":
+                getLength();
+                break;
+            case "#allHeadCirModal":
+                getHeadCir();
+                break;
+            case "#allNarrModal":
+                getNarratives();
+                break;
+        }
     });
 
-    $("#narrClose").on("click", () => {
-        $("#allNarrs-table").empty(); 
-    });
-
-    $("#weightLink").on("click", () => {
-        getWeight(); 
-    });
-
-    $("#weightClose").on("click", () => {
-        $("#allWeight-table").empty(); 
-    });
-
-    $("#lengthLink").on("click", () => {
-        getLength(); 
-    });
-
-    $("#lengthClose").on("click", () => {
-        $("#allLength-table").empty(); 
-    });
-
-    $("#headCirLink").on("click", () => {
-        getHeadCir(); 
-    });
-
-    $("#headCirClose").on("click", () => {
-        $("#allHeadCir-table").empty(); 
+    $(".close").click(function() {
+        let close = $(this);
+        let modal = close.attr("data-target");
+        $(modal).toggle();
+        $("tbody").empty();
     });
 
     $(document).on("click", ".delete", function(e) {
@@ -555,9 +551,9 @@ $(document).ready(function() {
         deleteRecord().then(resolve, reject);    
     });
 
-    $("#register").on("click", () => {
+    /*$("#register").on("click", () => {
         $("#dashboard").hide();
         $("#login").hide();
         $("#sign-up").show(); 
-    });
+    });*/
 });

@@ -54,37 +54,36 @@
 	    //to hold user id
 	    var currentUser = void 0;
 	
-	    //toggle all record modals
-	    $(".records-modal").click(function () {
-	        var link = $(this);
-	        var type = link.attr("data-target");
-	        console.log(type);
-	        $(type).toggle();
-	    });
-	
-	    $(".close").click(function () {
-	        var close = $(this);
-	        var modal = close.attr("data-target");
-	        console.log(modal);
-	        $(modal).toggle();
-	    });
-	
 	    var deleteRecord = function deleteRecord() {
 	        var td = $(".delete").parent();
 	        var tr = td.closest("tr");
 	        var dataType = tr.attr("data-type");
-	        if (dataType === "narrative") {
-	            return deleteNarrativeRecord();
+	        switch (dataType) {
+	            case "narrative":
+	                deleteNarrativeRecord();
+	                break;
+	            case "weight":
+	                deleteWeightRecord();
+	                break;
+	            case "length":
+	                deleteLengthRecord();
+	                break;
+	            case "headCir":
+	                deleteHeadCirRecord();
+	                break;
+	        }
+	        /*if (dataType === "narrative") { 
+	            return deleteNarrativeRecord(); 
 	        }
 	        if (dataType === "weight") {
 	            return deleteWeightRecord();
 	        }
 	        if (dataType === "length") {
-	            return deleteLengthRecord();
+	            return deleteLengthRecord(); 
 	        }
 	        if (dataType === "headCir") {
-	            return deleteHeadCirRecord();
-	        }
+	            return deleteHeadCirRecord(); 
+	        }*/
 	    };
 	
 	    var lastNarr = function lastNarr(search) {
@@ -322,7 +321,7 @@
 	            $("#passwordMessage").html("<p>Passwords Match!</p>");
 	        } else {
 	            $("#passwordMessage").html("<p>Passwords Do Not Match!</p>");
-	        }
+	        } //need to rethink
 	    };
 	
 	    var getUserId = function getUserId(username) {
@@ -338,7 +337,9 @@
 	            },
 	            success: function success(user) {
 	                currentUser = user._id;
+	                sessionStorage.setItem('user', user._id);
 	                console.log(currentUser);
+	                console.log(sessionStorage);
 	                getLastEntry();
 	            }
 	        });
@@ -358,15 +359,13 @@
 	            }),
 	            error: function error() {
 	                $("#login-box").append("<p>Could not login. Please try again.</p>");
-	                $("#sign-up").hide();
-	                $("#dashboard").hide();
-	                $("#login").show();
 	            },
 	            success: function success(user) {
 	                getUserId(username);
-	                $("#login").hide();
+	                //TODO: need to figure out how to allow access to pages after 
+	                /*$("#login").hide();
 	                $("#sign-up").hide();
-	                $("#dashboard").show();
+	                $("#dashboard").show();*/
 	            }
 	        });
 	    });
@@ -381,9 +380,10 @@
 	            },
 	            success: function success() {
 	                delete window.currentUser;
-	                $("#dashboard").hide();
-	                $("#sign-up").hide();
-	                $("#login").show();
+	                //TODO: redirect to home page 
+	                /*$("#dashboard").hide();
+	                $("#sign-up").hide(); 
+	                $("#login").show();*/
 	            }
 	        });
 	    });
@@ -412,9 +412,13 @@
 	            },
 	            success: function success(user) {
 	                currentUser = user._id;
-	                $("#sign-up").hide();
-	                $("#login").hide();
-	                $("#dashboard").show();
+	                //sessionStorage.setItem('user', user._id);
+	                console.log(currentUser);
+	                //console.log(sessionStorage);
+	                //TODO: need to figure out how to allow access to pages after 
+	                /*$("#sign-up").hide();
+	                $("#login").hide(); 
+	                $("#dashboard").show();*/
 	            }
 	        });
 	    });
@@ -441,7 +445,6 @@
 	                $("#narrDate")[0].value = "";
 	                $("#narrTitle").val("");
 	                $("#narrInput").val("");
-	                $("#narrModal").modal("toggle");
 	                var displayNarrative = "<div><p class='hidden' data-id='" + record._id + "'></p>";
 	                displayNarrative += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
 	                displayNarrative += "<p>" + record.title + "</p>";
@@ -472,7 +475,6 @@
 	                $("#weightDate")[0].value = "";
 	                $("#wLbs").val("");
 	                $("#wOz").val("");
-	                $("#weightModal").modal("toggle");
 	                var displayWeightRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
 	                displayWeightRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
 	                displayWeightRecord += "<p>" + record.content + "</p></div>";
@@ -500,7 +502,6 @@
 	            success: function success(record) {
 	                $("#lengthDate")[0].value = "";
 	                $("#lengthInput").val("");
-	                $("#lengthModal").modal("toggle");
 	                var displayLengthRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
 	                displayLengthRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
 	                displayLengthRecord += "<p>" + record.content + "</p></div>";
@@ -528,7 +529,6 @@
 	            success: function success(record) {
 	                $("#headCirDate")[0].value = "";
 	                $("#headCirInput").val("");
-	                $("#headCirModal").modal("toggle");
 	                var displayHeadCirRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
 	                displayHeadCirRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
 	                displayHeadCirRecord += "<p>" + record.content + "</p></div>";
@@ -537,36 +537,32 @@
 	        });
 	    });
 	
-	    $("#narrLink").on("click", function () {
-	        getNarratives();
+	    //toggle all record modals
+	    $(".records-modal").click(function () {
+	        var link = $(this);
+	        var type = link.attr("data-target");
+	        $(type).toggle();
+	        switch (type) {
+	            case "#allWeightModal":
+	                getWeight();
+	                break;
+	            case "#allLengthModal":
+	                getLength();
+	                break;
+	            case "#allHeadCirModal":
+	                getHeadCir();
+	                break;
+	            case "#allNarrModal":
+	                getNarratives();
+	                break;
+	        }
 	    });
 	
-	    $("#narrClose").on("click", function () {
-	        $("#allNarrs-table").empty();
-	    });
-	
-	    $("#weightLink").on("click", function () {
-	        getWeight();
-	    });
-	
-	    $("#weightClose").on("click", function () {
-	        $("#allWeight-table").empty();
-	    });
-	
-	    $("#lengthLink").on("click", function () {
-	        getLength();
-	    });
-	
-	    $("#lengthClose").on("click", function () {
-	        $("#allLength-table").empty();
-	    });
-	
-	    $("#headCirLink").on("click", function () {
-	        getHeadCir();
-	    });
-	
-	    $("#headCirClose").on("click", function () {
-	        $("#allHeadCir-table").empty();
+	    $(".close").click(function () {
+	        var close = $(this);
+	        var modal = close.attr("data-target");
+	        $(modal).toggle();
+	        $("tbody").empty();
 	    });
 	
 	    $(document).on("click", ".delete", function (e) {
@@ -590,11 +586,11 @@
 	        deleteRecord().then(resolve, reject);
 	    });
 	
-	    $("#register").on("click", function () {
+	    /*$("#register").on("click", () => {
 	        $("#dashboard").hide();
 	        $("#login").hide();
-	        $("#sign-up").show();
-	    });
+	        $("#sign-up").show(); 
+	    });*/
 	});
 
 /***/ },
