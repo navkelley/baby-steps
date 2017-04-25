@@ -48,7 +48,7 @@ $(document).ready(function() {
             }, 
             success: (records) => {
                 if (typeof records[records.length-1] == "undefined") {
-                    $("#narrative-data").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+                    $("#narrative-data").html("<p>You do not have any entries in this category yet. Let's change that!</p>");
                 }
                 else {
                     let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>"; 
