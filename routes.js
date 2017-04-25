@@ -6,12 +6,11 @@ const config = require('./config');
 const router = express.Router();
 const path = require('path');
 const jsonParser = bodyParser.json();
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const passport = require('passport');
-const session = require('express-session');
-const flash = require('connect-flash');
-const expressValidator = require('express-validator');
 const LocalStrategy = require('passport-local').Strategy;
+const isEmail = require('validator');
+
 const Narrative = require('./src/models/narrative');
 const Weight = require('./src/models/weight');
 const Length = require('./src/models/length');
@@ -28,82 +27,69 @@ router.get('/', (req,res) => {
     res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
-router.get('/', ensureAuthenticated, (req, res) => {
-   res.redirect('/');
-});
-
-function ensureAuthenticated(req, res, next) {
-  if(req.isAuthenticated()){
-    return next();
-  } else {
-    res.redirect(401, '/');
-  }
-}
-
 router.post('/register', (req, res) => {
-  let name = req.body.name;
-  let email = req.body.email;
-  let username = req.body.username;
-  let password = req.body.password;
-  let verifypassword = req.body.verifypassword;
+    const { name, email, username, password } = req.body;
 
-  //validation
-  req.checkBody('name', 'Name is required').notEmpty();
-  req.checkBody('email', 'Email is required').notEmpty();
-  req.checkBody('email', 'Email is not valid').isEmail();
-  req.checkBody('username', 'Username is required').notEmpty();
-  req.checkBody('password', 'Password is required').notEmpty();
+    //validation
+    if (email.length === 0) { return res.status(400).json({ error: 'Email is required' }); }  
+    else if (!isEmail(email)) { return res.status(400).json({ message: 'Email is not valid.' }); }
+    else if (username.length === 0) { return res.status(400).json({ error: 'Username is required' }); }
+    else if (password.length === 0) { return res.status(400).json({ error: 'A password is required' }); }
 
-  let errors = req.validationErrors();
+    User.findOne({ email })
+        .then(auth => {
+        if (auth) { return res.status(422).json({ success: false, error: 'Email already in use.' }); }
 
-  if(errors) {
-    res.json(errors);
-  } else {
-    let newUser = new User({
-      name: name,
-      email: email,
-      username: username,
-      password: password
-    });
-    User.createUser(newUser, (err, user) => {
-      if(err) throw err;
-        res.json(user);
-    });
-  }
-});
+        const newUser = new User({ email, password, username, name });
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.getUserByUsername(username, (err, user) => {
-      if(err) throw err;
-      if(!user){
-        return done(null, false, {message: 'Unknown User'});
-      }
-      User.comparePassword(password, user.password, (err, isMatch) => {
-        if(err) throw err;
-        if(isMatch) {
-          return done(null, user);
-        } else {
-          return done( null, false, {message: 'Invalid password'});
+        newUser.save()
+            .then(user => {
+                return res.status(201).json({
+                    success: true,
+                    message: 'Registration Successful!',
+                    user: setUserInfo(user)
+                });
+            })
+            .catch(err => {
+                let error;
+                if (err.code === 11000) {
+                    error = 'Duplicate email, please provide another one.';
+                }
+                res.status(422).json({
+                    success: false,
+                    message: error || err
+                });
+            });
+        })
+}); 
+
+const localLogin = new LocalStrategy((username, password, done) => {
+    User.findOne({ username })
+        .then(user => {
+        if (!user) { return done(null, false, { error: 'Login unsuccessful. Please try again!' }); }
+        user.comparePassword(password, (err, isMatch) => {
+        if (err) {
+            return done(err);
         }
-      });
-    });
-  }));
-
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
-  });
-
-  passport.deserializeUser((id, done) => {
-    User.getUserbyId(id, (err, user) => {
-      done(err, user);
-    });
-  });
-
-router.post('/login',
-  passport.authenticate('local', {successRedirect:'/', failureRedirect:'/', failureFlash: true}),
-  function(req, res) {
+        else if (!isMatch) {
+            return done(null, false, { error: 'Password did not match. Please try again!' });
+        }
+        return done(null, user);
+        });
+    })
+    .catch(err => done(err));
 });
+
+passport.use(localLogin);
+const requireLogin = passport.authenticate('local', { session: false });
+
+const login = (req, res, next) => {
+    const user = req.user._id;
+    res.send({ success: true, user });
+    return next();
+};
+
+router.post('/login', requireLogin, login);
 
 router.post('/getUserId', (req, res) => {
     User.getUserByUsername(req.body.username, (err, user) => {
@@ -116,12 +102,6 @@ router.post('/getUserId', (req, res) => {
     });
 });
 
-router.get('/logout', (req, res) => {
-   req.logout();
-   req.flash('sucess_msg', 'You are logged out');
-   res.redirect('/');
-});
- 
 router.get('/dashboard/narratives/:userId', (req, res) => {
         Narrative.find({userId: req.params.userId}, (err, narratives) => {
             if(err) {
@@ -135,10 +115,10 @@ router.get('/dashboard/narratives/:userId', (req, res) => {
 
     .post('/dashboard/narratives', (req, res) => {
 		Narrative.create({
-          userId: req.body.userId,
+            userId: req.body.userId,
         	title: req.body.title,
-          date: req.body.date,
-          content: req.body.content
+            date: req.body.date,
+            content: req.body.content
         }, (err, narrative) => {
         	if (err) {
             	return res.status(500).json({
@@ -151,7 +131,7 @@ router.get('/dashboard/narratives/:userId', (req, res) => {
 
 router.put('/dashboard/narratives/:id',(req, res) => {
     	Narrative.update(
-          {_id: req.params.id},
+            {_id: req.params.id},
 	        {title: req.body.title, content: req.body.content},
 	        {upsert: true}, (err, narrative) => {
 	        if (err) {
@@ -169,7 +149,7 @@ router.put('/dashboard/narratives/:id',(req, res) => {
 	        if (err) {
 	            return res.status(500).json({
                     message: 'Internal Server Error'
-              });
+                });
 	        }
 	        res.status(200).json(narrative);
 	    }); 
@@ -337,4 +317,4 @@ router.use('*', (req, res) => {
     });
 }); 
 
-module.exports = router; 
+module.exports = router;

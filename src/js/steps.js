@@ -289,26 +289,6 @@ $(document).ready(function() {
         }//need to rethink
     };
 
-    const getUserId = (username) => {
-        $.ajax({
-            type: "POST",
-            url: "/getUserId",
-            contentType: "application/json",
-            data: JSON.stringify({
-                username: username
-            }),
-            error: (error) => {
-                console.log(err)
-            },
-            success:(user) => {
-                let id = JSON.stringify(user._id);
-                sessionStorage.setItem('user', user._id);
-                currentUser = JSON.parse(sessionStorage.getItem('user'));
-                getLastEntry();
-            },
-        });
-    };
-
     $("#login").submit(function(e) {
         e.preventDefault();
         let username = $("#username").val();
@@ -326,26 +306,20 @@ $(document).ready(function() {
                 return;
             },
             success: (user) => {
-                getUserId(username);  
-                window.location.assign("/vitals.html");
+                let id = JSON.stringify(user);
+                sessionStorage.setItem('user', id);
+                currentUser = JSON.parse(sessionStorage.getItem('user'));
+                //window.location.assign("/vitals.html");
+                getLastEntry();
             },
         }); 
     });
 
     $("#logout").click(function(e) {
         e.preventDefault();
-        $.ajax({
-            type: "GET",
-            url: "/logout",
-            error: (error) => {
-                alert("Please try to logout again.");
-            },
-            success: () => { 
-                delete window.currentUser;
-                sessionStorage.clear();
-                window.location.assign("/index.html");
-            }
-        });
+        delete window.currentUser;
+        sessionStorage.clear();
+        window.location.assign("/index.html");
     });
 
     $("#signup").submit(function(e) {

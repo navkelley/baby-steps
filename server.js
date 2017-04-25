@@ -6,11 +6,9 @@ const config = require('./config');
 const path = require('path');
 const router = require('./routes');
 const jsonParser = bodyParser.json();
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const passport = require('passport');
 const session = require('express-session');
-const flash = require('connect-flash');
-const expressValidator = require('express-validator');
 const LocalStrategy = require('passport-local').Strategy;
 const app = express(); 
 const Narrative = require('./src/models/narrative');
@@ -23,7 +21,6 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(flash());
 
 //Creating express session 
 app.use(session({
@@ -34,25 +31,6 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Express Validator
-app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
-      let namespace = param.split('.'), 
-      root    = namespace.shift(),
-      formParam = root;
-
-    while(namespace.length) {
-      formParam += '[' + namespace.shift() + ']';
-    }
-
-    return {
-      param : formParam,
-      msg   : msg,
-      value : value
-    };
-  }
-}));
 
 let currentUser; 
 
