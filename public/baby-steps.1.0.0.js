@@ -52,7 +52,7 @@
 	    var moment = __webpack_require__(1);
 	
 	    //to hold user id
-	    var currentUser = void 0;
+	    var currentUser = JSON.parse(sessionStorage.getItem('user'));
 	
 	    var deleteRecord = function deleteRecord() {
 	        var td = $(".delete").parent();
@@ -336,10 +336,8 @@
 	                console.log(err);
 	            },
 	            success: function success(user) {
-	                currentUser = user._id;
+	                var id = JSON.stringify(user._id);
 	                sessionStorage.setItem('user', user._id);
-	                console.log(currentUser);
-	                console.log(sessionStorage);
 	                getLastEntry();
 	            }
 	        });
@@ -362,10 +360,7 @@
 	            },
 	            success: function success(user) {
 	                getUserId(username);
-	                //TODO: need to figure out how to allow access to pages after 
-	                /*$("#login").hide();
-	                $("#sign-up").hide();
-	                $("#dashboard").show();*/
+	                window.location.assign("/vitals.html");
 	            }
 	        });
 	    });
@@ -380,10 +375,8 @@
 	            },
 	            success: function success() {
 	                delete window.currentUser;
-	                //TODO: redirect to home page 
-	                /*$("#dashboard").hide();
-	                $("#sign-up").hide(); 
-	                $("#login").show();*/
+	                sessionStorage.clear();
+	                window.location.assign("/index.html");
 	            }
 	        });
 	    });
@@ -411,14 +404,9 @@
 	                $("#accountMessage").append("<p id='aMessage'>Account could not be created.</p>");
 	            },
 	            success: function success(user) {
-	                currentUser = user._id;
-	                //sessionStorage.setItem('user', user._id);
-	                console.log(currentUser);
-	                //console.log(sessionStorage);
-	                //TODO: need to figure out how to allow access to pages after 
-	                /*$("#sign-up").hide();
-	                $("#login").hide(); 
-	                $("#dashboard").show();*/
+	                var id = JSON.stringify(user._id);
+	                sessionStorage.setItem('user', id);
+	                window.location.assign("/vitals.html");
 	            }
 	        });
 	    });
@@ -565,6 +553,7 @@
 	        $("tbody").empty();
 	    });
 	
+	    //remove record
 	    $(document).on("click", ".delete", function (e) {
 	        e.preventDefault();
 	        var button = $(this);
@@ -585,12 +574,6 @@
 	        };
 	        deleteRecord().then(resolve, reject);
 	    });
-	
-	    /*$("#register").on("click", () => {
-	        $("#dashboard").hide();
-	        $("#login").hide();
-	        $("#sign-up").show(); 
-	    });*/
 	});
 
 /***/ },

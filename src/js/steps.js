@@ -4,7 +4,7 @@ $(document).ready(function() {
     let moment = require("moment");
 
     //to hold user id
-    let currentUser; 
+    let currentUser = JSON.parse(sessionStorage.getItem('user'));
 
     const deleteRecord = () => {
         let td = $(".delete").parent();
@@ -301,10 +301,8 @@ $(document).ready(function() {
                 console.log(err)
             },
             success:(user) => {
-                currentUser = user._id;
+                let id = JSON.stringify(user._id);
                 sessionStorage.setItem('user', user._id);
-                console.log(currentUser);
-                console.log(sessionStorage);
                 getLastEntry();
             },
         });
@@ -327,10 +325,7 @@ $(document).ready(function() {
             },
             success: (user) => {
                 getUserId(username);  
-                //TODO: need to figure out how to allow access to pages after 
-                /*$("#login").hide();
-                $("#sign-up").hide();
-                $("#dashboard").show();*/
+                window.location.assign("/vitals.html");
             },
         }); 
     });
@@ -345,10 +340,8 @@ $(document).ready(function() {
             },
             success: () => { 
                 delete window.currentUser;
-                //TODO: redirect to home page 
-                /*$("#dashboard").hide();
-                $("#sign-up").hide(); 
-                $("#login").show();*/
+                sessionStorage.clear();
+                window.location.assign("/index.html");
             }
         });
     });
@@ -376,14 +369,9 @@ $(document).ready(function() {
                 $("#accountMessage").append("<p id='aMessage'>Account could not be created.</p>");
             },
             success: (user) => {
-                currentUser = user._id; 
-                //sessionStorage.setItem('user', user._id);
-                console.log(currentUser);
-                //console.log(sessionStorage);
-                //TODO: need to figure out how to allow access to pages after 
-                /*$("#sign-up").hide();
-                $("#login").hide(); 
-                $("#dashboard").show();*/
+                let id = JSON.stringify(user._id); 
+                sessionStorage.setItem('user', id);
+                window.location.assign("/vitals.html");
             } 
         });
     });
@@ -530,6 +518,7 @@ $(document).ready(function() {
         $("tbody").empty();
     });
 
+    //remove record
     $(document).on("click", ".delete", function(e) {
         e.preventDefault();
         let button = $(this);
@@ -550,10 +539,4 @@ $(document).ready(function() {
         };
         deleteRecord().then(resolve, reject);    
     });
-
-    /*$("#register").on("click", () => {
-        $("#dashboard").hide();
-        $("#login").hide();
-        $("#sign-up").show(); 
-    });*/
 });
