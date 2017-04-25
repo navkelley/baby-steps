@@ -388,8 +388,8 @@
 	        });
 	    });
 	
-	    $("#sign-up").submit(function (e) {
-	        //e.preventDefault();
+	    $("#signup").submit(function (e) {
+	        e.preventDefault();
 	        checkPassword();
 	        var firstName = $("#firstName").val();
 	        var lastName = $("#lastName").val();
@@ -421,7 +421,6 @@
 	                $("#dashboard").show();*/
 	            }
 	        });
-	        e.preventDefault();
 	    });
 	
 	    $("#narrForm").submit(function (e) {

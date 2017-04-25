@@ -353,8 +353,8 @@ $(document).ready(function() {
         });
     });
 
-    $("#sign-up").submit(function(e) {
-        //e.preventDefault();
+    $("#signup").submit(function(e) {
+        e.preventDefault();
         checkPassword();
         let firstName = $("#firstName").val();
         let lastName = $("#lastName").val();
@@ -386,7 +386,6 @@ $(document).ready(function() {
                 $("#dashboard").show();*/
             } 
         });
-        e.preventDefault();
     });
 
     $("#narrForm").submit(function(e) {
