@@ -306,11 +306,8 @@ $(document).ready(function() {
                 return;
             },
             success: (user) => {
-                let id = JSON.stringify(user);
-                sessionStorage.setItem('user', id);
-                currentUser = JSON.parse(sessionStorage.getItem('user'));
-                //window.location.assign("/vitals.html");
-                getLastEntry();
+                sessionStorage.setItem('user', user);
+                window.location.assign("/vitals.html");
             },
         }); 
     });
@@ -344,10 +341,8 @@ $(document).ready(function() {
             error: () => {
                 $("#accountMessage").append("<p id='aMessage'>Account could not be created.</p>");
             },
-            success: (user) => {
-                let id = JSON.stringify(user._id); 
-                sessionStorage.setItem('user', id);
-                currentUser = JSON.parse(sessionStorage.getItem('user'));
+            success: (user) => { 
+                sessionStorage.setItem('user', user);
                 window.location.assign("/vitals.html");
             } 
         });
@@ -516,8 +511,15 @@ $(document).ready(function() {
         };
         deleteRecord().then(resolve, reject);    
     });
+    
+    //on page load get last entry if user
+    if (sessionStorage.length === 1) {
+        currentUser = sessionStorage.getItem('user');
+        getLastEntry();
+    }
 
     //prompt user to signin if not on click to protected links
+    //get last entries if user is registered or logged in 
     $("li").click(function(e) {
         let link = $(this);
         let pagePath = link.attr("data-link");
@@ -525,5 +527,9 @@ $(document).ready(function() {
             $("#main-content").html("<p>Sorry, you have to be logged in or register to see records.</p>");
             e.preventDefault();
         }
+        else if (pagePath === "vitals" || "journal" && sessionStorage.length === 1) {
+            currentUser = sessionStorage.getItem('user');
+            getLastEntry();
+        };
     })
 });

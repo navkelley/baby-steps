@@ -47,7 +47,7 @@ router.post('/register', (req, res) => {
                 return res.status(201).json({
                     success: true,
                     message: 'Registration Successful!',
-                    user: setUserInfo(user)
+                    user: user._id
                 });
             })
             .catch(err => {
@@ -85,22 +85,11 @@ const requireLogin = passport.authenticate('local', { session: false });
 
 const login = (req, res, next) => {
     const user = req.user._id;
-    res.send({ success: true, user });
+    res.send(user);
     return next();
 };
 
 router.post('/login', requireLogin, login);
-
-router.post('/getUserId', (req, res) => {
-    User.getUserByUsername(req.body.username, (err, user) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.json(user);
-        }
-    });
-});
 
 router.get('/dashboard/narratives/:userId', (req, res) => {
         Narrative.find({userId: req.params.userId}, (err, narratives) => {

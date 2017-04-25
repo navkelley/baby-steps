@@ -341,11 +341,8 @@
 	                return;
 	            },
 	            success: function success(user) {
-	                var id = JSON.stringify(user);
-	                sessionStorage.setItem('user', id);
-	                currentUser = JSON.parse(sessionStorage.getItem('user'));
-	                //window.location.assign("/vitals.html");
-	                getLastEntry();
+	                sessionStorage.setItem('user', user);
+	                window.location.assign("/vitals.html");
 	            }
 	        });
 	    });
@@ -380,9 +377,7 @@
 	                $("#accountMessage").append("<p id='aMessage'>Account could not be created.</p>");
 	            },
 	            success: function success(user) {
-	                var id = JSON.stringify(user._id);
-	                sessionStorage.setItem('user', id);
-	                currentUser = JSON.parse(sessionStorage.getItem('user'));
+	                sessionStorage.setItem('user', user);
 	                window.location.assign("/vitals.html");
 	            }
 	        });
@@ -552,14 +547,24 @@
 	        deleteRecord().then(resolve, reject);
 	    });
 	
+	    //on page load get last entry if user
+	    if (sessionStorage.length === 1) {
+	        currentUser = sessionStorage.getItem('user');
+	        getLastEntry();
+	    }
+	
 	    //prompt user to signin if not on click to protected links
+	    //get last entries if user is registered or logged in 
 	    $("li").click(function (e) {
 	        var link = $(this);
 	        var pagePath = link.attr("data-link");
 	        if (pagePath === "vitals" || "journal" && sessionStorage.length === 0) {
 	            $("#main-content").html("<p>Sorry, you have to be logged in or register to see records.</p>");
 	            e.preventDefault();
-	        }
+	        } else if (pagePath === "vitals" || "journal" && sessionStorage.length === 1) {
+	            currentUser = sessionStorage.getItem('user');
+	            getLastEntry();
+	        };
 	    });
 	});
 
