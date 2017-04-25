@@ -338,6 +338,7 @@
 	            success: function success(user) {
 	                var id = JSON.stringify(user._id);
 	                sessionStorage.setItem('user', user._id);
+	                currentUser = JSON.parse(sessionStorage.getItem('user'));
 	                getLastEntry();
 	            }
 	        });
@@ -357,6 +358,7 @@
 	            }),
 	            error: function error() {
 	                $("#login-box").append("<p>Could not login. Please try again.</p>");
+	                return;
 	            },
 	            success: function success(user) {
 	                getUserId(username);
@@ -574,6 +576,16 @@
 	            }
 	        };
 	        deleteRecord().then(resolve, reject);
+	    });
+	
+	    //prompt user to signin if not on click to protected links
+	    $("li").click(function () {
+	        var link = $(this);
+	        var pagePath = link.attr("data-link");
+	        if (pagePath === "vitals" || "journal" && sessionStorage.length === 0) {
+	            alert("no user cannot access");
+	            return;
+	        } //make modal or html covering 
 	    });
 	});
 
