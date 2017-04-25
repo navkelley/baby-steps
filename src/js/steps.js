@@ -544,12 +544,12 @@ $(document).ready(function() {
     });
 
     //prompt user to signin if not on click to protected links
-    $("li").click(function() {
+    $("li").click(function(e) {
         let link = $(this);
         let pagePath = link.attr("data-link");
         if (pagePath === "vitals" || "journal" && sessionStorage.length === 0) {
-            alert("no user cannot access");
-            return;
-        }//make modal or html covering 
+            $("#main-content").html("<p>Sorry, you have to be logged in or register to see records.</p>");
+            e.preventDefault();
+        }
     })
 });
