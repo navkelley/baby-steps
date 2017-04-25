@@ -374,7 +374,7 @@ $(document).ready(function() {
                 displayNarrative += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayNarrative += "<p>" + record.title + "</p>";
                 displayNarrative += "<p>" + record.content + "</p></div>";
-                $("#narrative-entry").html(displayNarrative) 
+                $("#narrative-data").html(displayNarrative) 
             },
         }); 
     });
@@ -403,7 +403,7 @@ $(document).ready(function() {
                 let displayWeightRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
                 displayWeightRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayWeightRecord += "<p>" + record.content + "</p></div>";
-                $("#weight-entry").html(displayWeightRecord);
+                $("#weight-data").html(displayWeightRecord);
             },
         }); 
     });
@@ -430,7 +430,7 @@ $(document).ready(function() {
                 let displayLengthRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
                 displayLengthRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayLengthRecord += "<p>" + record.content + "</p></div>";
-                $("#length-entry").html(displayLengthRecord);
+                $("#length-data").html(displayLengthRecord);
             },
         }); 
     });
@@ -457,7 +457,7 @@ $(document).ready(function() {
                 let displayHeadCirRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
                 displayHeadCirRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayHeadCirRecord += "<p>" + record.content + "</p></div>";
-                $("#headCir-entry").html(displayHeadCirRecord);
+                $("#headCir-data").html(displayHeadCirRecord);
             },
         });
     });
