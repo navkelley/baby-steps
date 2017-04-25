@@ -51,8 +51,8 @@
 	    //import moment for date format
 	    var moment = __webpack_require__(1);
 	
-	    //to hold user id
-	    var currentUser = JSON.parse(sessionStorage.getItem('user'));
+	    //to hold user id for records after been parsed from session storage
+	    var currentUser = void 0;
 	
 	    var deleteRecord = function deleteRecord() {
 	        var td = $(".delete").parent();
@@ -406,6 +406,7 @@
 	            success: function success(user) {
 	                var id = JSON.stringify(user._id);
 	                sessionStorage.setItem('user', id);
+	                currentUser = JSON.parse(sessionStorage.getItem('user'));
 	                window.location.assign("/vitals.html");
 	            }
 	        });

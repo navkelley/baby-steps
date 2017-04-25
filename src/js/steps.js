@@ -3,8 +3,8 @@ $(document).ready(function() {
     //import moment for date format
     let moment = require("moment");
 
-    //to hold user id
-    let currentUser = JSON.parse(sessionStorage.getItem('user'));
+    //to hold user id for records after been parsed from session storage
+    let currentUser;
 
     const deleteRecord = () => {
         let td = $(".delete").parent();
@@ -371,6 +371,7 @@ $(document).ready(function() {
             success: (user) => {
                 let id = JSON.stringify(user._id); 
                 sessionStorage.setItem('user', id);
+                currentUser = JSON.parse(sessionStorage.getItem('user'))
                 window.location.assign("/vitals.html");
             } 
         });
