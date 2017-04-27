@@ -9,7 +9,6 @@ const jsonParser = bodyParser.json();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const isEmail = require('validator');
 
 const Narrative = require('./src/models/narrative');
 const Weight = require('./src/models/weight');
@@ -32,7 +31,6 @@ router.post('/register', (req, res) => {
 
     //validation
     if (email.length === 0) { return res.status(400).json({ error: 'Email is required' }); }  
-    else if (!isEmail(email)) { return res.status(400).json({ message: 'Email is not valid.' }); }
     else if (username.length === 0) { return res.status(400).json({ error: 'Username is required' }); }
     else if (password.length === 0) { return res.status(400).json({ error: 'A password is required' }); }
 
