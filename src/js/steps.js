@@ -342,7 +342,7 @@ $(document).ready(function() {
                 $("#accountMessage").append("<p id='aMessage'>Account could not be created.</p>");
             },
             success: (user) => { 
-                sessionStorage.setItem('user', user);
+                sessionStorage.setItem('user', user.user);
                 window.location.assign("/vitals.html");
             } 
         });
