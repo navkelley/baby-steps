@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.ObjectId;
-const bcrypt = require("bcrypt");
-const hash = require("bcrypt").hash;
-const compare = require("bcrypt").compare;
+const bcrypt = require("bcryptjs");
+const hash = require("bcryptjs").hash;
+const compare = require("bcryptjs").compare;
 
 const UserSchema = new mongoose.Schema({
     username: {type: String, unique: true, required: true, trim: true, index: true},
