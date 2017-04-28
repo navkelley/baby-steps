@@ -113,8 +113,8 @@ header {
   box-shadow: 5px 5px #aaa;
 }
 /*////////// USER/NO-USER //////////*/
-.disabled {
-  cursor: not-allowed;
+.protected {
+  display: none;
 }
 /*////////// SIGN/LOGIN BUTTONS //////////*/
 #accounts {

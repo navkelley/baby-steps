@@ -550,6 +550,7 @@
 	    //on page load get last entry if user
 	    if (sessionStorage.length === 1) {
 	        currentUser = sessionStorage.getItem('user');
+	        $(".protected").toggle();
 	        getLastEntry();
 	    }
 	
@@ -558,11 +559,9 @@
 	    $("li").click(function (e) {
 	        var link = $(this);
 	        var pagePath = link.data("link");
-	        if (pagePath === "vitals" || "journal" && sessionStorage.length === 0) {
-	            e.preventDefault();
-	        } else if (pagePath === "vitals" || "journal" && sessionStorage.length === 1) {
+	        if (pagePath === "vitals" || "journal" && sessionStorage.length === 1) {
 	            currentUser = sessionStorage.getItem('user');
-	            $(link).removeClass("disabled");
+	            $(".protected").toggle();
 	            getLastEntry();
 	        }
 	    });
