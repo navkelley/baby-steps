@@ -558,7 +558,6 @@
 	    $("li").click(function (e) {
 	        var link = $(this);
 	        var pagePath = link.data("link");
-	        console.log(pagePath);
 	        if (pagePath === "vitals" || "journal" && sessionStorage.length === 0) {
 	            e.preventDefault();
 	        } else if (pagePath === "vitals" || "journal" && sessionStorage.length === 1) {

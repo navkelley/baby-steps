@@ -523,7 +523,6 @@ $(document).ready(function() {
     $("li").click(function(e) {
         let link = $(this);
         let pagePath = link.data("link");
-        console.log(pagePath);
         if (pagePath === "vitals" || "journal" && sessionStorage.length === 0) {
             e.preventDefault();
         }
