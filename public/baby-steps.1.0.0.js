@@ -557,15 +557,13 @@
 	    //get last entries if user is registered or logged in 
 	    $("li").click(function (e) {
 	        var link = $(this);
-	        var pagePath = link.attr("data-link");
+	        var pagePath = link.data("link");
+	        console.log(pagePath);
 	        if (pagePath === "vitals" || "journal" && sessionStorage.length === 0) {
-	            $(".notLoggedIn").show();
-	            $(".isLoggedIn").hide();
 	            e.preventDefault();
 	        } else if (pagePath === "vitals" || "journal" && sessionStorage.length === 1) {
 	            currentUser = sessionStorage.getItem('user');
-	            $(".notLoggedIn").hide();
-	            $(".isLoggedIn").show();
+	            $(link).removeClass("disabled");
 	            getLastEntry();
 	        }
 	    });

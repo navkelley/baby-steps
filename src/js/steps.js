@@ -522,16 +522,14 @@ $(document).ready(function() {
     //get last entries if user is registered or logged in 
     $("li").click(function(e) {
         let link = $(this);
-        let pagePath = link.attr("data-link");
+        let pagePath = link.data("link");
+        console.log(pagePath);
         if (pagePath === "vitals" || "journal" && sessionStorage.length === 0) {
-            $(".notLoggedIn").show();
-            $(".isLoggedIn").hide();
             e.preventDefault();
         }
         else if (pagePath === "vitals" || "journal" && sessionStorage.length === 1) {
             currentUser = sessionStorage.getItem('user');
-            $(".notLoggedIn").hide();
-            $(".isLoggedIn").show();
+            $(link).removeClass("disabled");
             getLastEntry();
         }
     });

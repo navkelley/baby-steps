@@ -112,7 +112,11 @@ header {
 .shadow {
   box-shadow: 5px 5px #aaa;
 }
-/*////////// Sign/Log Buttons //////////*/
+/*////////// USER/NO-USER //////////*/
+.disabled {
+  cursor: not-allowed;
+}
+/*////////// SIGN/LOGIN BUTTONS //////////*/
 #accounts {
   font-family: 'EB Garamond', serif;
   text-align: center;
