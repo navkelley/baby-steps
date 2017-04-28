@@ -559,12 +559,20 @@
 	        var link = $(this);
 	        var pagePath = link.attr("data-link");
 	        if (pagePath === "vitals" || "journal" && sessionStorage.length === 0) {
-	            $("#main-content").html("<p>Sorry, you have to be logged in or register to see records.</p>");
+	            $(".notLoggedIn").show();
+	            $(".isLoggedIn").hide();
 	            e.preventDefault();
 	        } else if (pagePath === "vitals" || "journal" && sessionStorage.length === 1) {
 	            currentUser = sessionStorage.getItem('user');
+	            $(".notLoggedIn").hide();
+	            $(".isLoggedIn").show();
 	            getLastEntry();
-	        };
+	        }
+	    });
+	    //show mobile nav 
+	    $(".icon").click(function () {
+	        $(".navbar-left ul").toggle();
+	        $(".navbar-left #accounts").toggle();
 	    });
 	});
 

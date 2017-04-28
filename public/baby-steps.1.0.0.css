@@ -65,6 +65,9 @@ form {
   text-decoration: none;
   color: #4D5F68;
 }
+.navbar-left .icon {
+  display: none;
+}
 /*////////// HEADER //////////*/
 header {
   background-color: #6EBFBD;
@@ -161,5 +164,58 @@ footer {
 /*////////// MODALS //////////*/
 .modal {
   display: none;
+}
+/*////////// MEDIA QUERIES //////////*/
+@media screen and (max-width: 635px) {
+  .navbar-left {
+    margin-right: 0;
+    background-color: transparent;
+  }
+  .navbar-left ul,
+  .navbar-left #accounts {
+    display: none;
+    margin-top: 0;
+    background-color: #6EBFBD;
+    position: absolute;
+    width: 100%;
+    font-size: 125%;
+  }
+  .navbar-left ul {
+    top: 5.6rem;
+  }
+  .navbar-left #accounts {
+    top: 12.3rem;
+    padding-bottom: 2%;
+  }
+  .navbar-left .icon {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.618rem;
+    font-size: 1.6rem;
+  }
+  .content {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: "header header" "main main" "footer footer";
+  }
+  .item-a {
+    grid-area: header;
+  }
+  .item-b {
+    grid-area: main;
+  }
+  .item-c {
+    grid-area: main;
+  }
+  .item-d {
+    grid-area: footer;
+  }
+  #social svg {
+    width: 4%;
+  }
 }
 /*# sourceMappingURL=baby-steps.1.0.0.css.map */

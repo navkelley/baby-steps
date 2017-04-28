@@ -17,12 +17,13 @@
                 </div>
             </header>
             <div class="navbar-left item-c">
+                <a href="javascript:void(0);" class="icon">&#9776;</a>
                 <ul>
                     <a href="index.html"><li>Home</li></a>
                     <a href="vitals.html"><li data-link="vitals">Vitals</li></a>
                     <a href="journal.html"><li data-link="journal">Journal</li></a>
                     <a href="#"><li id="logout">Logout</li></a>
-                    <a href="#"><li>Contact Us</li></a>
+                    <!--<a href="#"><li>Contact Us</li></a>-->
                 </ul>
                 <section id="accounts">
                     <div class="buttons">
@@ -35,157 +36,160 @@
             </div><!--navbar-left-->
             <section id="main-content" class="wrapper item-b">
                 <h1>Vitals</h1>
-                <div id="instructions">
-                    <p>To create an entry enter in the data below. 
-                        Once the entry form is filled out, click submit. 
-                        Upon submit the last entry will appear in it's appropriate category. 
-                        To view all entries within a category select "See all logged entries."
-                    </p>
-                </div><!--instructions-->
-                <div id="weight">
-                    <h4>Weight</h4>
-                    <!--Link to see all entries-->
-                    <a href="#" class="records-modal" data-target="#allWeightModal">See all logged entries</a>
-                    <!--modal-->
-                    <div class="modal" id="allWeightModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-target="#allWeightModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title">All Weight Entries</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Weight</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="allWeight-table">
-                                        </tbody>
-                                    </table>
-                                    <div id="weightMessage">
-                                        <p class="message"></p>
+                <p class="notLoggedIn">Sorry, you have to be logged in or register to see records.</p>
+                <div class="isLoggedIn">
+                    <div id="instructions">
+                        <p>To create an entry enter in the data below. 
+                            Once the entry form is filled out, click submit. 
+                            Upon submit the last entry will appear in it's appropriate category. 
+                            To view all entries within a category select "See all logged entries."
+                        </p>
+                    </div><!--instructions-->
+                    <div id="weight">
+                        <h4>Weight</h4>
+                        <!--Link to see all entries-->
+                        <a href="#" class="records-modal" data-target="#allWeightModal">See all logged entries</a>
+                        <!--modal-->
+                        <div class="modal" id="allWeightModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-target="#allWeightModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">All Weight Entries</h4>
                                     </div>
-                                </div><!--modal-body-->
-                                <div class="modal-footer">
-                                    <button type="button" class="close" data-target="#allWeightModal" aria-label="Close">Close</button>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
-                    <!--last entry show-->
-                    <div id="weight-data"></div>
-                    <!-- Data Entry -->
-                    <div class="entry">
-                        <form id="weightForm">
-                            <p>Enter baby's weight here. Weight can be measured by you or your doctor.</p>
-                            <label for="weight-log-date">Date:</label>
-                            <input type="date" class="datePicker" id="weightDate" required>
-                            <label for="weightMeasure">Enter Weight:</label>
-                            <p><input id="wLbs" type="number" min="1"> lbs <input id="wOz" type="number" min="0" max="16" required> oz</p>
-                            <button type="button" class="erase">Erase data</button>
-                            <button type="submit" class="save">Save changes</button>
-                        </form><!-- weight form -->
-                    </div><!--weight entry-->
-                </div><!-- /.weight -->
-                <div id="length">
-                    <h4>Length</h4>
-                    <!--Link to see all entries-->
-                    <a href="#" class="records-modal" data-target="#allLengthModal">See all logged entries</a>
-                    <!--modal-->
-                    <div class="modal" id="allLengthModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-target="#allLengthModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title">All Length Entries</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Length</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="allLength-table">
-                                        </tbody>
-                                    </table>
-                                    <div id="lengthMessage">
-                                        <p class="message"></p>
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Weight</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="allWeight-table">
+                                            </tbody>
+                                        </table>
+                                        <div id="weightMessage">
+                                            <p class="message"></p>
+                                        </div>
+                                    </div><!--modal-body-->
+                                    <div class="modal-footer">
+                                        <button type="button" class="close" data-target="#allWeightModal" aria-label="Close">Close</button>
                                     </div>
-                                </div><!--modal-body-->
-                                <div class="modal-footer">
-                                    <button type="button" class="close" data-target="#allLengthModal">Close</button>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
-                    <!--last entry show-->
-                    <div id="length-data"></div>
-                    <!--data entry-->
-                    <div class="entry">
-                        <form id="lengthForm">
-                            <p>Enter baby's length here. Length can be measured by you or your doctor.</p>
-                            <label for="length-log-date">Date:</label>
-                            <input id="lengthDate" type="date" class="datePicker" required>
-                            <label for="lengthMeasure">Enter Length:</label>
-                            <p><input type="number" min="1" id="lengthInput" required> inches</p>
-                            <button type="button" class="erase">Erase data</button>
-                            <button type="submit" class="save">Save changes</button>
-                        </form><!-- length form -->
-                    </div><!--entry-->
-                </div><!-- /.length -->
-                <div id="headCir">
-                    <h4>Head Circumference</h4>
-                    <!--Link to see all entries-->
-                    <a href="#" class="records-modal" data-target="#allHeadCirModal">See all logged entries</a>
-                    <!--modal-->
-                    <div class="modal" id="allHeadCirModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-target="#allHeadCirModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title">All Head Circumference Entries</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Head Circumference</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="allHeadCir-table">
-                                        </tbody>
-                                    </table>
-                                    <div id="headCirMessage">
-                                        <p class="message"></p>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                        <!--last entry show-->
+                        <div id="weight-data"></div>
+                        <!-- Data Entry -->
+                        <div class="entry">
+                            <form id="weightForm">
+                                <p>Enter baby's weight here. Weight can be measured by you or your doctor.</p>
+                                <label for="weight-log-date">Date:</label>
+                                <input type="date" class="datePicker" id="weightDate" required>
+                                <label for="weightMeasure">Enter Weight:</label>
+                                <p><input id="wLbs" type="number" min="1"> lbs <input id="wOz" type="number" min="0" max="16" required> oz</p>
+                                <button type="button" class="erase">Erase data</button>
+                                <button type="submit" class="save">Save changes</button>
+                            </form><!-- weight form -->
+                        </div><!--weight entry-->
+                    </div><!-- /.weight -->
+                    <div id="length">
+                        <h4>Length</h4>
+                        <!--Link to see all entries-->
+                        <a href="#" class="records-modal" data-target="#allLengthModal">See all logged entries</a>
+                        <!--modal-->
+                        <div class="modal" id="allLengthModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-target="#allLengthModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">All Length Entries</h4>
                                     </div>
-                                </div><!--modal-body-->
-                                <div class="modal-footer">
-                                    <button type="button" class="close" data-target="#allHeadCirModal">Close</button>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
-                    <!--last entry show-->
-                    <div id="headCir-data"></div>
-                    <!-- data entry -->
-                    <div class="entry">
-                        <form id="headCirForm">
-                            <p>Enter baby's head circumference here. The head circumference can be measured by you or your doctor.</p>
-                            <label for="head-circum-log-date">Date:</label>
-                            <input type="date" class="datePicker" id="headCirDate" required>
-                            <label for="headCirMeasure">Enter Head Circumference:</label> 
-                            <p><input id="headCirInput" type="number" min="1" required> inches</p>
-                            <button type="button" class="erase">Erase data</button>
-                            <button type="submit" class="save">Save changes</button>
-                        </form><!-- Head Circum. form -->
-                    </div><!-- /.entry -->
-                </div><!-- /.headCir -->
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Length</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="allLength-table">
+                                            </tbody>
+                                        </table>
+                                        <div id="lengthMessage">
+                                            <p class="message"></p>
+                                        </div>
+                                    </div><!--modal-body-->
+                                    <div class="modal-footer">
+                                        <button type="button" class="close" data-target="#allLengthModal">Close</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                        <!--last entry show-->
+                        <div id="length-data"></div>
+                        <!--data entry-->
+                        <div class="entry">
+                            <form id="lengthForm">
+                                <p>Enter baby's length here. Length can be measured by you or your doctor.</p>
+                                <label for="length-log-date">Date:</label>
+                                <input id="lengthDate" type="date" class="datePicker" required>
+                                <label for="lengthMeasure">Enter Length:</label>
+                                <p><input type="number" min="1" id="lengthInput" required> inches</p>
+                                <button type="button" class="erase">Erase data</button>
+                                <button type="submit" class="save">Save changes</button>
+                            </form><!-- length form -->
+                        </div><!--entry-->
+                    </div><!-- /.length -->
+                    <div id="headCir">
+                        <h4>Head Circumference</h4>
+                        <!--Link to see all entries-->
+                        <a href="#" class="records-modal" data-target="#allHeadCirModal">See all logged entries</a>
+                        <!--modal-->
+                        <div class="modal" id="allHeadCirModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-target="#allHeadCirModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">All Head Circumference Entries</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Head Circumference</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="allHeadCir-table">
+                                            </tbody>
+                                        </table>
+                                        <div id="headCirMessage">
+                                            <p class="message"></p>
+                                        </div>
+                                    </div><!--modal-body-->
+                                    <div class="modal-footer">
+                                        <button type="button" class="close" data-target="#allHeadCirModal">Close</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                        <!--last entry show-->
+                        <div id="headCir-data"></div>
+                        <!-- data entry -->
+                        <div class="entry">
+                            <form id="headCirForm">
+                                <p>Enter baby's head circumference here. The head circumference can be measured by you or your doctor.</p>
+                                <label for="head-circum-log-date">Date:</label>
+                                <input type="date" class="datePicker" id="headCirDate" required>
+                                <label for="headCirMeasure">Enter Head Circumference:</label> 
+                                <p><input id="headCirInput" type="number" min="1" required> inches</p>
+                                <button type="button" class="erase">Erase data</button>
+                                <button type="submit" class="save">Save changes</button>
+                            </form><!-- Head Circum. form -->
+                        </div><!-- /.entry -->
+                    </div><!-- /.headCir -->
+                </div><!--isloggedIn-->
             </section><!--main-content-->
             <footer class="item-d">
                 <div id="social">
