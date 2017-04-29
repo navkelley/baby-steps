@@ -26,6 +26,7 @@ form {
 .wrapper {
   max-width: 960px;
   margin: 0 1rem;
+  height: 100vh;
 }
 .content {
   display: grid;
@@ -115,6 +116,20 @@ header {
 /*////////// USER/NO-USER //////////*/
 .protected {
   display: none;
+}
+/*////////// SIGNUP/LOGIN FORM //////////*/
+.register-group,
+.login-group {
+  padding: 0.618rem;
+}
+.register-group label,
+.login-group label {
+  padding-right: 1.6rem;
+}
+.register-group input,
+.login-group input {
+  width: 40%;
+  border: 1px solid #999;
 }
 /*////////// SIGN/LOGIN BUTTONS //////////*/
 #accounts {
