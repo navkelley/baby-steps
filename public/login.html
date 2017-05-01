@@ -36,17 +36,24 @@
             </div>
             <section id="main-content" class="wrapper item-b">
                 <p>Welcome to Baby Steps! This application is designed to track infant weight, length, and head circumference with the added bonus of logging journal entries.</p>
-                <div id="login-box">
+                <img class="baby" src="http://i.imgur.com/qkgFZew.jpg" alt="baby girl in pink">
+                <div class="content-sample shadow">
                     <form id="login" action="/login" method="post">
                         <div class="login-group">
-                            <label for="username">Username:</label>
+                            <div class="label-group">
+                                <label for="username">Username:</label>
+                            </div>
                             <input type="text" id="username" name="username">
                         </div>
                         <div class="login-group">
-                            <label for="userPassLogin">Password:</label>
+                            <div class="label-group">
+                                <label for="userPassLogin">Password:</label>
+                            </div>
                             <input type="password" id="userPassLogin" placeholder="ex.Password234" name="password">
                         </div>
-                        <button type="submit" id="login" value="Log In">Login</button>
+                        <div class="login-group">
+                            <button type="submit" id="login" value="Log In">Login</button>
+                        </div>
                     </form>
                 </div><!--login-box-->
             </section>

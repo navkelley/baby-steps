@@ -18,8 +18,9 @@ form {
   max-width: 100%;
   /* FF, Safari, Chrome */
 }
-.baby-shoes {
+.baby {
   max-width: 50%;
+  margin-bottom: 1rem;
 }
 /*////////// FIXES //////////*/
 * {
