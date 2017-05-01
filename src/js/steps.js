@@ -51,7 +51,7 @@ $(document).ready(function() {
                     $("#narrative-data").html("<p>You do not have any entries in this category yet. Let's change that!</p>");
                 }
                 else {
-                    let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>"; 
+                    let lastRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>"; 
                     lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
                     lastRecord += "<p>" + records[records.length-1].title + "</p>";
                     lastRecord += "<p>" + records[records.length-1].content + "</p>";
@@ -74,7 +74,7 @@ $(document).ready(function() {
                     $("#weight-data").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
                 }
                 else {
-                    let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>"; 
+                    let lastRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>"; 
                     lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
                     lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
                     $("#weight-data").html(lastRecord);
@@ -96,7 +96,7 @@ $(document).ready(function() {
                     $("#length-data").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
                 }
                 else {
-                    let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>";
+                    let lastRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>";
                     lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
                     lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
                     $("#length-data").html(lastRecord);
@@ -118,7 +118,7 @@ $(document).ready(function() {
                     $("#headCir-data").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
                 }
                 else {
-                    let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>";
+                    let lastRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>";
                     lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
                     lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
                     $("#headCir-data").html(lastRecord);
@@ -370,7 +370,7 @@ $(document).ready(function() {
                 $("#narrDate")[0].value = "";
                 $("#narrTitle").val("");
                 $("#narrInput").val("");
-                let displayNarrative = "<div><p class='hidden' data-id='" + record._id + "'></p>";
+                let displayNarrative = "<div><p>Last Entry:</p><p class='hidden' data-id='" + record._id + "'></p>";
                 displayNarrative += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayNarrative += "<p>" + record.title + "</p>";
                 displayNarrative += "<p>" + record.content + "</p></div>";
@@ -400,7 +400,7 @@ $(document).ready(function() {
                 $("#weightDate")[0].value = "";
                 $("#wLbs").val("");
                 $("#wOz").val("");
-                let displayWeightRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
+                let displayWeightRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + record._id + "'></p>";
                 displayWeightRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayWeightRecord += "<p>" + record.content + "</p></div>";
                 $("#weight-data").html(displayWeightRecord);
@@ -427,7 +427,7 @@ $(document).ready(function() {
             success: (record) => {
                 $("#lengthDate")[0].value = "";
                 $("#lengthInput").val(""); 
-                let displayLengthRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
+                let displayLengthRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + record._id + "'></p>";
                 displayLengthRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayLengthRecord += "<p>" + record.content + "</p></div>";
                 $("#length-data").html(displayLengthRecord);
@@ -454,7 +454,7 @@ $(document).ready(function() {
             success: (record) => {
                 $("#headCirDate")[0].value = "";
                 $("#headCirInput").val("");
-                let displayHeadCirRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
+                let displayHeadCirRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + record._id + "'></p>";
                 displayHeadCirRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayHeadCirRecord += "<p>" + record.content + "</p></div>";
                 $("#headCir-data").html(displayHeadCirRecord);

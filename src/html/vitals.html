@@ -77,15 +77,26 @@
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
                     <!--last entry show-->
-                    <div id="weight-data"></div>
+                    <div id="weight-data" class="data"></div>
                     <!-- Data Entry -->
                     <div class="entry">
                         <form id="weightForm">
                             <p>Enter baby's weight here. Weight can be measured by you or your doctor.</p>
-                            <label for="weight-log-date">Date:</label>
-                            <input type="date" class="datePicker" id="weightDate" required>
-                            <label for="weightMeasure">Enter Weight:</label>
-                            <p><input id="wLbs" type="number" min="1"> lbs <input id="wOz" type="number" min="0" max="16" required> oz</p>
+                            <div class="records-group">
+                                <div class="records-label">
+                                    <label for="weight-log-date">Date:</label>
+                                </div>
+                                <input type="date" class="datePicker" id="weightDate" required>
+                            </div>
+                            <div class="records-group">
+                                <div class="records-label">
+                                    <label for="weightMeasure">Enter Weight:</label>
+                                </div>
+                                <input id="wLbs" type="number" min="1">
+                                <span>lbs</span>
+                                <input id="wOz" type="number" min="0" max="16" required>
+                                <span>oz</span>
+                            </div>
                             <button type="button" class="erase">Erase data</button>
                             <button type="submit" class="save">Save changes</button>
                         </form><!-- weight form -->
