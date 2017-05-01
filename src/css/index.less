@@ -16,6 +16,10 @@ img, video, audio, iframe, table, form {
   /* FF, Safari, Chrome */ 
 }
 
+.baby-shoes {
+  max-width: 50%;
+}
+
 /*////////// FIXES //////////*/
 * {
   box-sizing: border-box; 
@@ -25,7 +29,6 @@ img, video, audio, iframe, table, form {
 .wrapper {
   max-width: 960px;
   margin: 0 1rem;
-  height: 100vh;
 }
 
 .content {
@@ -132,13 +135,15 @@ header {
   padding: 0.618rem;
 }
 
-.register-group label, .login-group label {
-  padding-right: 1.6rem;
+.register-group input, .login-group input {
+  width: 50%;
+  border: 1px solid #999;
 }
 
-.register-group input, .login-group input {
-  width: 40%;
-  border: 1px solid #999;
+.label-group {
+  display: inline-block;
+  width: 20%;
+  text-align: left;
 }
 
 /*////////// SIGN/LOGIN BUTTONS //////////*/
@@ -146,6 +151,14 @@ header {
   font-family: 'EB Garamond', serif;
   text-align: center; 
   margin: 2.6rem 0;
+}
+
+#accounts button {
+  min-width: 50px;
+}
+
+#accounts p {
+  padding: 0.618rem;
 }
 
 button {
@@ -264,5 +277,12 @@ footer {
 
   #social svg {
     width: 4%; 
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  .buttons button {
+    display: block;
+    margin: 0.618rem auto;
   }
 }

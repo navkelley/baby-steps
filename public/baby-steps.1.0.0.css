@@ -18,6 +18,9 @@ form {
   max-width: 100%;
   /* FF, Safari, Chrome */
 }
+.baby-shoes {
+  max-width: 50%;
+}
 /*////////// FIXES //////////*/
 * {
   box-sizing: border-box;
@@ -26,7 +29,6 @@ form {
 .wrapper {
   max-width: 960px;
   margin: 0 1rem;
-  height: 100vh;
 }
 .content {
   display: grid;
@@ -122,20 +124,27 @@ header {
 .login-group {
   padding: 0.618rem;
 }
-.register-group label,
-.login-group label {
-  padding-right: 1.6rem;
-}
 .register-group input,
 .login-group input {
-  width: 40%;
+  width: 50%;
   border: 1px solid #999;
+}
+.label-group {
+  display: inline-block;
+  width: 20%;
+  text-align: left;
 }
 /*////////// SIGN/LOGIN BUTTONS //////////*/
 #accounts {
   font-family: 'EB Garamond', serif;
   text-align: center;
   margin: 2.6rem 0;
+}
+#accounts button {
+  min-width: 50px;
+}
+#accounts p {
+  padding: 0.618rem;
 }
 button {
   outline: none;
@@ -235,6 +244,12 @@ footer {
   }
   #social svg {
     width: 4%;
+  }
+}
+@media only screen and (max-width: 1020px) {
+  .buttons button {
+    display: block;
+    margin: 0.618rem auto;
   }
 }
 /*# sourceMappingURL=baby-steps.1.0.0.css.map */
