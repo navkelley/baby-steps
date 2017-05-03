@@ -46,9 +46,9 @@ The tests included in this application are to ensure that components are functio
 
 ##Sreenshots
 ![screenshot](images/baby-steps-home.jpeg)
-![screenshot](images/dashboard.jpg)
-![screenshot](images/entryForm.jpg)
-![screenshot](images/showAllModal.jpg)
+![screenshot](images/vital-demo.jpeg)
+![screenshot](images/baby-steps-journal.jpeg)
+![screenshot](images/all-entries-modal.jpeg)
 
 ## Development Roadmap
 
