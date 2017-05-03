@@ -44,7 +44,7 @@ mocha
 
 The tests included in this application are to ensure that components are functioning properly. Each test runs a before and after hook to pass along data to the DB it then runs async functions to ensure that data is being passed back and forth as required.  
 
-##Sreenshots
+## Sreenshots
 ![screenshot](images/baby-steps-home.jpeg)
 ![screenshot](images/vital-demo.jpeg)
 ![screenshot](images/baby-steps-journal.jpeg)
