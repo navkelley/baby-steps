@@ -60,30 +60,18 @@
 	        var dataType = tr.attr("data-type");
 	        switch (dataType) {
 	            case "narrative":
-	                deleteNarrativeRecord();
+	                return deleteNarrativeRecord();
 	                break;
 	            case "weight":
-	                deleteWeightRecord();
+	                return deleteWeightRecord();
 	                break;
 	            case "length":
-	                deleteLengthRecord();
+	                return deleteLengthRecord();
 	                break;
 	            case "headCir":
-	                deleteHeadCirRecord();
+	                return deleteHeadCirRecord();
 	                break;
 	        }
-	        /*if (dataType === "narrative") { 
-	            return deleteNarrativeRecord(); 
-	        }
-	        if (dataType === "weight") {
-	            return deleteWeightRecord();
-	        }
-	        if (dataType === "length") {
-	            return deleteLengthRecord(); 
-	        }
-	        if (dataType === "headCir") {
-	            return deleteHeadCirRecord(); 
-	        }*/
 	    };
 	
 	    var lastNarr = function lastNarr(search) {
@@ -118,7 +106,7 @@
 	            },
 	            success: function success(records) {
 	                if (typeof records[records.length - 1] == "undefined") {
-	                    $("#weight-data").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+	                    $("#weight-data").html("<p>You do not have any entries in this category yet, let's change that!</p>");
 	                } else {
 	                    var lastRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + records[records.length - 1]._id + "'></p>";
 	                    lastRecord += "<p>" + moment(records[records.length - 1].date).format("MMM Do YYYY") + "</p>";
@@ -139,7 +127,7 @@
 	            },
 	            success: function success(records) {
 	                if (typeof records[records.length - 1] == "undefined") {
-	                    $("#length-data").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+	                    $("#length-data").html("<p>You do not have any entries in this category yet, let's change that!</p>");
 	                } else {
 	                    var lastRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + records[records.length - 1]._id + "'></p>";
 	                    lastRecord += "<p>" + moment(records[records.length - 1].date).format("MMM Do YYYY") + "</p>";
@@ -160,7 +148,7 @@
 	            },
 	            success: function success(records) {
 	                if (typeof records[records.length - 1] == "undefined") {
-	                    $("#headCir-data").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+	                    $("#headCir-data").html("<p>You do not have any entries in this category yet, let's change that!</p>");
 	                } else {
 	                    var lastRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + records[records.length - 1]._id + "'></p>";
 	                    lastRecord += "<p>" + moment(records[records.length - 1].date).format("MMM Do YYYY") + "</p>";
@@ -502,6 +490,7 @@
 	        var link = $(this);
 	        var type = link.attr("data-target");
 	        $(type).toggle();
+	        $(".overlay").toggle();
 	        switch (type) {
 	            case "#allWeightModal":
 	                getWeight();
@@ -522,6 +511,7 @@
 	        var close = $(this);
 	        var modal = close.attr("data-target");
 	        $(modal).toggle();
+	        $(".overlay").toggle();
 	        $("tbody").empty();
 	    });
 	
@@ -541,7 +531,7 @@
 	        };
 	        var remove = function remove() {
 	            if (id === recordId) {
-	                $(".hidden").closest("div").empty();
+	                $(".data").empty();
 	            }
 	        };
 	        deleteRecord().then(resolve, reject);
@@ -568,7 +558,6 @@
 	    //show mobile nav 
 	    $(".icon").click(function () {
 	        $(".navbar-left ul").toggle();
-	        $(".navbar-left #accounts").toggle();
 	    });
 	});
 

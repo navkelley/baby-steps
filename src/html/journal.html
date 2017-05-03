@@ -7,10 +7,12 @@
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css">
         <link rel="stylesheet" href="baby-steps.1.0.0.min.css">
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://use.fontawesome.com/8709dcd092.js"></script>
         <script src="baby-steps.1.0.0.js"></script>
     </head>
     <body>
         <div class="content">
+            <div class="overlay item-b"></div>
             <header class="item-a">
                 <div id="logo-head">
                     <p>Baby Steps</p>
@@ -24,15 +26,13 @@
                     <a href="journal.html"><li data-link="journal" class="protected">Journal</li></a>
                     <a href="#"><li id="logout">Logout</li></a>
                     <!--<a href="#"><li>Contact Us</li></a>-->
-                </ul>
-                <section id="accounts">
-                    <div class="buttons">
+                    <div class="accounts">
                         <p>Sign Up or Log In Today!</p>
                         <a href="signup.html"><button type="button">Sign Up</button></a>
                         <a href="login.html"><button type="button">Log In</button></a>
                         <a href="demo.html"><button type="button">Demo</button></a>
                     </div>
-                </section>
+                </ul>
             </div><!--navbar-left-->
             <section id="main-content" class="wrapper item-b">
                 <h1>Journal</h1>
@@ -45,48 +45,53 @@
                 </div><!--instructions-->
                 <div id="narrative" class="content-sample shadow">
                     <!--Link to see all entries-->
-                    <p><a href="#" class="records-modal" data-target="#allNarrModal">See all logged entries</a></p>
+                    <a href="#" class="records-modal" data-target="#allNarrModal">See all logged entries</a>
                     <!--modal-->
                     <div class="modal" id="allNarrModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-target="#allNarrModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title">All Narrative Entries</h4>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-target="#allNarrModal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">All Narrative Entries</h4>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Title</th>
+                                            <th>Content</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="allNarrs-table">
+                                    </tbody>
+                                </table>
+                                <div id="narrMessage">
+                                    <p class="message"></p>
                                 </div>
-                                <div class="modal-body">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Title</th>
-                                                <th>Content</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="allNarrs-table">
-                                        </tbody>
-                                    </table>
-                                    <div id="narrMessage">
-                                        <p class="message"></p>
-                                    </div>
-                                </div><!--modal-body-->
-                                <div class="modal-footer">
-                                    <button type="button" class="close" data-target="#allNarrModal">Close</button>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
+                            </div><!--modal-body-->
+                        </div><!-- /.modal-content -->
                     </div><!-- /.modal -->
                     <!--last entry show-->
-                    <div id="narrative-data"></div>
+                    <div id="narrative-data" class="data"></div>
                     <!--entry-->
                     <div class="entry">
                         <form id="narrForm">
                             <p>A place for you to write down anything about baby or you! Enter in any thoughts, comments or concerns for reference here:</p>
-                            <label for="narrative-title">Title of Narrative:</label>
-                            <input type="text" placeholder="Fun activity, bad day, etc" id="narrTitle" required>
-                            <label for="narrative-log-date">Date</label>
-                            <input type="date" class="datePicker" id="narrDate" required>
-                            <textarea id="narrInput" cols="70" placeholder="Add any thoughts, comments, concerns about your baby here" required></textarea>
+                            <div class="records-group">
+                                <div class="records-label">
+                                    <label for="narrative-title">Title of Narrative:</label>
+                                </div>
+                                <input type="text" placeholder="Fun activity, bad day, etc" id="narrTitle" required>
+                            </div>
+                            <div class="records-group">
+                                <div class="records-label">
+                                    <label for="narrative-log-date">Date</label>
+                                </div>
+                                <input type="date" class="datePicker" id="narrDate" required>
+                            </div>
+                            <div class="records-group" id="journal-entry">
+                                <textarea id="narrInput" cols="70" placeholder="Add any thoughts, comments, concerns about your baby here" required></textarea>
+                            </div>
                             <button type="button" class="erase">Erase data</button>
                             <button type="submit" class="save">Save changes</button>
                         </form><!-- narrative form-->

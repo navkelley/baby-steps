@@ -52,7 +52,6 @@ form {
 }
 /*////////// NAVBAR //////////*/
 .navbar-left {
-  margin-right: 1rem;
   background-color: #6EBFBD;
   height: 100%;
 }
@@ -136,15 +135,15 @@ header {
   text-align: left;
 }
 /*////////// SIGN/LOGIN BUTTONS //////////*/
-#accounts {
+.accounts {
   font-family: 'EB Garamond', serif;
   text-align: center;
   margin: 2.6rem 0;
 }
-#accounts button {
+.accounts button {
   min-width: 50px;
 }
-#accounts p {
+.accounts p {
   padding: 0.618rem;
 }
 button {
@@ -193,6 +192,35 @@ footer {
 /*////////// MODALS //////////*/
 .modal {
   display: none;
+  background-color: white;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+  padding: 3em;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 4px;
+  z-index: 20;
+}
+.modal .close {
+  padding: 8px 12px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  text-decoration: none;
+  top: 0;
+  z-index: 1;
+  border-radius: 0 4px 0 0;
+  box-shadow: none;
+}
+.overlay {
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  display: none;
 }
 /*////////// VITALS //////////*/
 .hidden {
@@ -214,32 +242,45 @@ footer {
 .records-group {
   padding: 1rem;
   padding-bottom: 0.618rem;
+  display: inline-flex;
+}
+.records-group span {
+  padding: 0 4px;
 }
 .records-label {
   display: inline;
   margin-right: 0.618rem;
 }
+.entry form {
+  padding: 0 1rem 1rem;
+}
+.entry form p {
+  padding: 0;
+}
+#lengthForm .records-group {
+  margin: 0 4%;
+}
+.records-group textarea {
+  width: 100%;
+}
 /*////////// MEDIA QUERIES //////////*/
-@media screen and (max-width: 635px) {
+@media only screen and (max-width: 430px) {
+  .records-label {
+    display: block;
+  }
+}
+@media only screen and (max-width: 635px) {
   .navbar-left {
     margin-right: 0;
     background-color: transparent;
   }
-  .navbar-left ul,
-  .navbar-left #accounts {
+  .navbar-left ul {
     display: none;
     margin-top: 0;
     background-color: #6EBFBD;
     position: absolute;
     width: 100%;
     font-size: 125%;
-  }
-  .navbar-left ul {
-    top: 5.6rem;
-  }
-  .navbar-left #accounts {
-    top: 12.3rem;
-    padding-bottom: 2%;
   }
   .navbar-left .icon {
     display: inline-block;
@@ -272,10 +313,10 @@ footer {
     width: 4%;
   }
 }
-@media only screen and (max-width: 1020px) {
-  .buttons button {
+@media only screen and (max-width: 1050px) {
+  .records-group {
     display: block;
-    margin: 0.618rem auto;
+    text-align: left;
   }
 }
 /*# sourceMappingURL=baby-steps.1.0.0.css.map */
