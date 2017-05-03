@@ -56,7 +56,6 @@ The tests included in this application are to ensure that components are functio
 * Add edit button so each entry can be corrected-if needed
 * Create a forum page for users to ask questions or share stories
 * Create a milestones page for users to earn achievement/milestone badges
-* Upgrade UI with more non-text visuals 
 * Add ability for users to reset password
 
 ## Built With
