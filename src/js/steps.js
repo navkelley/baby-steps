@@ -3,24 +3,26 @@ $(document).ready(function() {
     //import moment for date format
     let moment = require("moment");
 
-    //to hold user id
-    let currentUser; 
+    //to hold user id for records after been parsed from session storage
+    let currentUser;
 
     const deleteRecord = () => {
         let td = $(".delete").parent();
         let tr = td.closest("tr");
         let dataType = tr.attr("data-type");
-        if (dataType === "narrative") { 
-            return deleteNarrativeRecord(); 
-        }
-        if (dataType === "weight") {
-            return deleteWeightRecord();
-        }
-        if (dataType === "length") {
-            return deleteLengthRecord(); 
-        }
-        if (dataType === "headCir") {
-            return deleteHeadCirRecord(); 
+        switch(dataType) {
+            case "narrative":
+                return deleteNarrativeRecord();
+                break;
+            case "weight":
+                return deleteWeightRecord();
+                break;
+            case "length":
+                return deleteLengthRecord();
+                break;
+            case "headCir":
+                return deleteHeadCirRecord();
+                break;
         }
     };
 
@@ -30,18 +32,18 @@ $(document).ready(function() {
             url: "/dashboard/narratives/" + currentUser,
             contentType: "application/json",
             error: () => {
-                $("#narrative-entry").html("<p>There was an error with last entry.</p>");
+                $("#narrative-data").html("<p>There was an error with last entry.</p>");
             }, 
             success: (records) => {
                 if (typeof records[records.length-1] == "undefined") {
-                    $("#narrEmpty").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+                    $("#narrative-data").html("<p>You do not have any entries in this category yet. Let's change that!</p>");
                 }
                 else {
-                    let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>"; 
+                    let lastRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>"; 
                     lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
                     lastRecord += "<p>" + records[records.length-1].title + "</p>";
                     lastRecord += "<p>" + records[records.length-1].content + "</p>";
-                    $("#narrative-entry").html(lastRecord);
+                    $("#narrative-data").html(lastRecord);
                 }
             }
         });
@@ -53,17 +55,17 @@ $(document).ready(function() {
             url: "/dashboard/weight/" + currentUser,
             contentType: "application/json",
             error: () => {
-                $("#weight-entry").html("<p>There was an error with last entry.</p>");
+                $("#weight-data").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
                 if (typeof records[records.length-1] == "undefined") {
-                    $("#weight-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+                    $("#weight-data").html("<p>You do not have any entries in this category yet, let's change that!</p>");
                 }
                 else {
-                    let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>"; 
+                    let lastRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>"; 
                     lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
                     lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
-                    $("#weight-entry").html(lastRecord);
+                    $("#weight-data").html(lastRecord);
                 }
             }
         });
@@ -75,17 +77,17 @@ $(document).ready(function() {
             url: "/dashboard/length/" + currentUser,
             contentType: "application/json",
             error: () => {
-                $("#length-entry").html("<p>There was an error with last entry.</p>");
+                $("#length-data").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
                 if (typeof records[records.length-1] == "undefined") {
-                    $("#length-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+                    $("#length-data").html("<p>You do not have any entries in this category yet, let's change that!</p>");
                 }
                 else {
-                    let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>";
+                    let lastRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>";
                     lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
                     lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
-                    $("#length-entry").html(lastRecord);
+                    $("#length-data").html(lastRecord);
                 }
             }
         });
@@ -97,17 +99,17 @@ $(document).ready(function() {
             url: "/dashboard/headCir/" + currentUser,
             contentType: "application/json",
             error: () => {
-                $("#headCir-entry").html("<p>There was an error with last entry.</p>");
+                $("#headCir-data").html("<p>There was an error with last entry.</p>");
             },
             success: (records) => {
                 if (typeof records[records.length-1] == "undefined") {
-                    $("#headCir-entry").html("<p>You do not have any entries in this category yet, to add one click <i class='fa fa-plus-circle'></i></p>");
+                    $("#headCir-data").html("<p>You do not have any entries in this category yet, let's change that!</p>");
                 }
                 else {
-                    let lastRecord = "<div><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>";
+                    let lastRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + records[records.length-1]._id + "'></p>";
                     lastRecord += "<p>" + moment(records[records.length-1].date).format("MMM Do YYYY") + "</p>";
                     lastRecord += "<p>" + records[records.length-1].content + "</p></div>";
-                    $("#headCir-entry").html(lastRecord);
+                    $("#headCir-data").html(lastRecord);
                 }
             }
         });
@@ -268,33 +270,12 @@ $(document).ready(function() {
         let pass1 = $("#password").val();
         let pass2 = $("#verifyPassword").val();
         if (pass1 === pass2) {
-            $("#passwordMessage").html("<p>Passwords Match!</p>");
+            console.log("matching");
         }
         else {
-            $("#passwordMessage").html("<p>Passwords Do Not Match!</p>");
-        }
+            console.log("not matching");
+        }//need to rethink
     };
-
-    const getUserId = (username) => {
-        $.ajax({
-            type: "POST",
-            url: "/getUserId",
-            contentType: "application/json",
-            data: JSON.stringify({
-                username: username
-            }),
-            error: (error) => {
-                console.log(err)
-            },
-            success:(user) => {
-                currentUser = user._id;
-                getLastEntry();
-            },
-        });
-    };
-
-    $("#dashboard").hide();
-    $("#sign-up").hide();
 
     $("#login").submit(function(e) {
         e.preventDefault();
@@ -309,38 +290,24 @@ $(document).ready(function() {
                 password: password 
             }),
             error: () => {
-                $("#login-box").append("<p>Could not login. Please try again.</p>");
-                $("#sign-up").hide();
-                $("#dashboard").hide();
-                $("#login").show(); 
+                $("#login-box").append("<p>Could not login. Please try again.</p>"); 
+                return;
             },
             success: (user) => {
-                getUserId(username);   
-                $("#login").hide();
-                $("#sign-up").hide();
-                $("#dashboard").show();
+                sessionStorage.setItem('user', user);
+                window.location.assign("/vitals.html");
             },
         }); 
     });
 
     $("#logout").click(function(e) {
         e.preventDefault();
-        $.ajax({
-            type: "GET",
-            url: "/logout",
-            error: (error) => {
-                alert("Please try to logout again.");
-            },
-            success: () => { 
-                delete window.currentUser;
-                $("#dashboard").hide();
-                $("#sign-up").hide(); 
-                $("#login").show(); 
-            }
-        });
+        delete window.currentUser;
+        sessionStorage.clear();
+        window.location.assign("/index.html");
     });
 
-    $("#sign-up").submit(function(e) {
+    $("#signup").submit(function(e) {
         e.preventDefault();
         checkPassword();
         let firstName = $("#firstName").val();
@@ -362,11 +329,9 @@ $(document).ready(function() {
             error: () => {
                 $("#accountMessage").append("<p id='aMessage'>Account could not be created.</p>");
             },
-            success: (user) => {
-                currentUser = user._id; 
-                $("#sign-up").hide();
-                $("#login").hide(); 
-                $("#dashboard").show();
+            success: (user) => { 
+                sessionStorage.setItem('user', user.user);
+                window.location.assign("/vitals.html");
             } 
         });
     });
@@ -393,12 +358,11 @@ $(document).ready(function() {
                 $("#narrDate")[0].value = "";
                 $("#narrTitle").val("");
                 $("#narrInput").val("");
-                $("#narrModal").modal("toggle");
-                let displayNarrative = "<div><p class='hidden' data-id='" + record._id + "'></p>";
+                let displayNarrative = "<div><p>Last Entry:</p><p class='hidden' data-id='" + record._id + "'></p>";
                 displayNarrative += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayNarrative += "<p>" + record.title + "</p>";
                 displayNarrative += "<p>" + record.content + "</p></div>";
-                $("#narrative-entry").html(displayNarrative) 
+                $("#narrative-data").html(displayNarrative) 
             },
         }); 
     });
@@ -424,11 +388,10 @@ $(document).ready(function() {
                 $("#weightDate")[0].value = "";
                 $("#wLbs").val("");
                 $("#wOz").val("");
-                $("#weightModal").modal("toggle"); 
-                let displayWeightRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
+                let displayWeightRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + record._id + "'></p>";
                 displayWeightRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayWeightRecord += "<p>" + record.content + "</p></div>";
-                $("#weight-entry").html(displayWeightRecord);
+                $("#weight-data").html(displayWeightRecord);
             },
         }); 
     });
@@ -451,12 +414,11 @@ $(document).ready(function() {
             },
             success: (record) => {
                 $("#lengthDate")[0].value = "";
-                $("#lengthInput").val("");
-                $("#lengthModal").modal("toggle"); 
-                let displayLengthRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
+                $("#lengthInput").val(""); 
+                let displayLengthRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + record._id + "'></p>";
                 displayLengthRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayLengthRecord += "<p>" + record.content + "</p></div>";
-                $("#length-entry").html(displayLengthRecord);
+                $("#length-data").html(displayLengthRecord);
             },
         }); 
     });
@@ -480,47 +442,45 @@ $(document).ready(function() {
             success: (record) => {
                 $("#headCirDate")[0].value = "";
                 $("#headCirInput").val("");
-                $("#headCirModal").modal("toggle");
-                let displayHeadCirRecord = "<div><p class='hidden' data-id='" + record._id + "'></p>";
+                let displayHeadCirRecord = "<div><p>Last Entry:</p><p class='hidden' data-id='" + record._id + "'></p>";
                 displayHeadCirRecord += "<p>" + moment(record.date).format("MMM Do YYYY") + "</p>";
                 displayHeadCirRecord += "<p>" + record.content + "</p></div>";
-                $("#headCir-entry").html(displayHeadCirRecord);
+                $("#headCir-data").html(displayHeadCirRecord);
             },
         });
     });
 
-    $("#narrLink").on("click", () => {
-        getNarratives(); 
+    //toggle all record modals
+    $(".records-modal").click(function() {
+        let link = $(this);
+        let type = link.attr("data-target");
+        $(type).toggle();
+        $(".overlay").toggle();
+        switch(type) {
+            case "#allWeightModal":
+                getWeight();
+                break;
+            case "#allLengthModal":
+                getLength();
+                break;
+            case "#allHeadCirModal":
+                getHeadCir();
+                break;
+            case "#allNarrModal":
+                getNarratives();
+                break;
+        }
     });
 
-    $("#narrClose").on("click", () => {
-        $("#allNarrs-table").empty(); 
+    $(".close").click(function() {
+        let close = $(this);
+        let modal = close.attr("data-target");
+        $(modal).toggle();
+        $(".overlay").toggle();
+        $("tbody").empty();
     });
 
-    $("#weightLink").on("click", () => {
-        getWeight(); 
-    });
-
-    $("#weightClose").on("click", () => {
-        $("#allWeight-table").empty(); 
-    });
-
-    $("#lengthLink").on("click", () => {
-        getLength(); 
-    });
-
-    $("#lengthClose").on("click", () => {
-        $("#allLength-table").empty(); 
-    });
-
-    $("#headCirLink").on("click", () => {
-        getHeadCir(); 
-    });
-
-    $("#headCirClose").on("click", () => {
-        $("#allHeadCir-table").empty(); 
-    });
-
+    //remove record
     $(document).on("click", ".delete", function(e) {
         e.preventDefault();
         let button = $(this);
@@ -536,15 +496,32 @@ $(document).ready(function() {
         };
         const remove = () => {
             if (id === recordId) {
-                $(".hidden").closest("div").empty(); 
+                $(".data").empty();
             }
         };
         deleteRecord().then(resolve, reject);    
     });
+    
+    //on page load get last entry if user
+    if (sessionStorage.length === 1) {
+        currentUser = sessionStorage.getItem('user');
+        $(".protected").toggle();
+        getLastEntry();
+    }
 
-    $("#register").on("click", () => {
-        $("#dashboard").hide();
-        $("#login").hide();
-        $("#sign-up").show(); 
+    //prompt user to signin if not on click to protected links
+    //get last entries if user is registered or logged in 
+    $("li").click(function(e) {
+        let link = $(this);
+        let pagePath = link.data("link");
+        if (pagePath === "vitals" || "journal" && sessionStorage.length === 1) {
+            currentUser = sessionStorage.getItem('user');
+            $(".protected").toggle();
+            getLastEntry();
+        }
+    });
+    //show mobile nav 
+    $(".icon").click(function() {
+        $(".navbar-left ul").toggle();
     });
 });

@@ -1,0 +1,18 @@
+{
+  "vars": {},
+  "css": [
+    "code.less",
+    "responsive-utilities.less",
+    "close.less",
+    "component-animations.less",
+    "modals.less"
+  ],
+  "js": [
+    "modal.js",
+    "tab.js",
+    "affix.js",
+    "collapse.js",
+    "transition.js"
+  ],
+  "customizerUrl": "http://getbootstrap.com/customize/?id=59067591b4743cadb4c42da2610a01e3"
+}

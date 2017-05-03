@@ -44,11 +44,11 @@ mocha
 
 The tests included in this application are to ensure that components are functioning properly. Each test runs a before and after hook to pass along data to the DB it then runs async functions to ensure that data is being passed back and forth as required.  
 
-##Sreenshots
-![screenshot](images/bslogin.jpg)
-![screenshot](images/dashboard.jpg)
-![screenshot](images/entryForm.jpg)
-![screenshot](images/showAllModal.jpg)
+## Sreenshots
+![screenshot](images/baby-steps-home.jpeg)
+![screenshot](images/vital-demo.jpeg)
+![screenshot](images/baby-steps-journal.jpeg)
+![screenshot](images/all-entries-modal.jpeg)
 
 ## Development Roadmap
 
@@ -56,7 +56,6 @@ The tests included in this application are to ensure that components are functio
 * Add edit button so each entry can be corrected-if needed
 * Create a forum page for users to ask questions or share stories
 * Create a milestones page for users to earn achievement/milestone badges
-* Upgrade UI with more non-text visuals 
 * Add ability for users to reset password
 
 ## Built With

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
         <title>Baby Steps</title>
@@ -33,28 +33,27 @@
                 </ul>
             </div>
             <section id="main-content" class="wrapper item-b">
-                <div class="intro">
-                    <img src="http://i.imgur.com/geRKsK4.png" alt="Elephant Picture">
-                    <h1>Welcome to Baby Steps!</h1>
-                    <h2>Baby Steps is a growth tracking website for parents, by parents.</h2>
-                </div>
+                <p>Welcome to Baby Steps! This application is designed to track infant weight, length, and head circumference with the added bonus of logging journal entries.</p>
+                <img class="baby" src="http://i.imgur.com/qkgFZew.jpg" alt="baby girl in pink">
                 <div class="content-sample shadow">
-                    <div class="sample-1">
-                        <img src="http://i.imgur.com/1n09wI0.png" alt="Baby Boy">
-                        <p>Baby Steps is a website used to keep track of your baby's vital growth data.</p>
-                    </div>
-                </div>
-                <div class="content-sample shadow">                
-                    <div class="sample-2">
-                        <img src="http://i.imgur.com/VIkceoZ.png" alt="Baby Girl">
-                        <p>Monitoring your baby's growth can be vital in determining if everything is growing normally. Keeping track of these measurements will help you in deciding if there are questions to bring up with your pediatrician. With Baby Steps, you can record and track your baby's weight, length, and head circumference for your own reference or for your doctors.</p>
-                    </div>
-                </div>
-                <div class="content-sample shadow">  
-                    <div class="sample 3">
-                        <img src="http://i.imgur.com/oa7AvyN.png" alt="journal">
-                        <p>You can even make journal entries to keep track of baby's important milestones or questions for the next check-up!</p>
-                </div>
+                    <form id="login" action="/login" method="post">
+                        <div class="login-group">
+                            <div class="label-group">
+                                <label for="username">Username:</label>
+                            </div>
+                            <input type="text" id="username" name="username">
+                        </div>
+                        <div class="login-group">
+                            <div class="label-group">
+                                <label for="userPassLogin">Password:</label>
+                            </div>
+                            <input type="password" id="userPassLogin" placeholder="ex.Password234" name="password">
+                        </div>
+                        <div class="login-group">
+                            <button type="submit" id="login" value="Log In">Login</button>
+                        </div>
+                    </form>
+                </div><!--login-box-->
             </section>
             <footer class="item-d">
                 <div id="social">
