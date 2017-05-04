@@ -1,5 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=EB+Garamond);
-@import url(http://fonts.googleapis.com/css?family=Clicker+Script);
+@import url('https://fonts.googleapis.com/css?family=Clicker+Script|EB+Garamond');
 /*////////// GLOBAL //////////*/
 body {
   color: #4D5F68;
@@ -60,9 +59,10 @@ form {
   list-style: none;
   padding-left: 0;
   text-transform: uppercase;
+  color: white;
 }
-.navbar-left li:hover {
-  background-color: white;
+.navbar-left li {
+  color: white;
 }
 .navbar-left a {
   text-decoration: none;
@@ -113,7 +113,7 @@ header {
   padding-bottom: 0;
 }
 .shadow {
-  box-shadow: 5px 5px #aaa;
+  box-shadow: 2px 2px 2px #aaa;
 }
 /*////////// USER/NO-USER //////////*/
 .protected {
@@ -123,6 +123,7 @@ header {
 .register-group,
 .login-group {
   padding: 0.618rem;
+  font-size: 1rem;
 }
 .register-group input,
 .login-group input {
@@ -141,7 +142,9 @@ header {
   margin: 2.6rem 0;
 }
 .accounts button {
-  min-width: 50px;
+  min-width: 70px;
+  display: block;
+  margin: 1rem auto;
 }
 .accounts p {
   padding: 0.618rem;
@@ -149,14 +152,16 @@ header {
 button {
   outline: none;
   border-radius: 4px;
-  padding: 0.3em;
+  padding: 0.4em;
   background: #DAFFEF;
   box-shadow: 0 2px 2px 0 #999;
   border: 1px solid;
   margin-left: 0.618rem;
+  text-transform: uppercase;
 }
 button:hover {
-  background-color: #AFE6E5;
+  background-color: white;
+  color: black;
 }
 button:active {
   background-color: #6EBFBD;
@@ -180,7 +185,7 @@ footer {
   text-align: center;
   padding: 0.618rem;
   font-size: 0.773rem;
-  background: #6EBFBD;
+  background-color: #ddd;
   border-top: 1px solid #000;
 }
 .address p {
@@ -263,6 +268,9 @@ footer {
 .records-group textarea {
   width: 100%;
 }
+.records-modal {
+  color: #4D5F68;
+}
 /*////////// MEDIA QUERIES //////////*/
 @media only screen and (max-width: 430px) {
   .records-label {
@@ -270,6 +278,9 @@ footer {
   }
 }
 @media only screen and (max-width: 635px) {
+  body {
+    font-size: 110%;
+  }
   .navbar-left {
     margin-right: 0;
     background-color: transparent;
@@ -280,7 +291,9 @@ footer {
     background-color: #6EBFBD;
     position: absolute;
     width: 100%;
-    font-size: 125%;
+  }
+  .navbar-left button {
+    display: inline;
   }
   .navbar-left .icon {
     display: inline-block;
@@ -289,6 +302,7 @@ footer {
     left: 0;
     padding: 0.618rem;
     font-size: 1.6rem;
+    color: white;
   }
   .content {
     display: grid;
@@ -311,6 +325,23 @@ footer {
   }
   #social svg {
     width: 4%;
+  }
+  .login-group input,
+  .register-group input {
+    width: 100%;
+  }
+  .label-group {
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 800px) {
+  img {
+    width: 75%;
+    max-width: 75%;
+  }
+  .home .content-sample {
+    background-color: white;
+    border: 1px solid #aaa;
   }
 }
 @media only screen and (max-width: 1050px) {

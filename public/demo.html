@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
         <title>Baby Steps</title>
-        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
         <link rel="stylesheet" href="baby-steps.1.0.0.min.css">
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="baby-steps.1.0.0.js"></script>
@@ -36,19 +36,24 @@
                 <p>Welcome to Baby Steps! This application is designed to track infant 
                     weight, length, and head circumference with the added bonus of 
                     logging journal entries. Use the following credientials to demo the 
-                    application.</p>
+                    application.
+                </p>
+                <img class="baby" src="http://i.imgur.com/VDHDkmw.jpg" alt="baby-hat">
                 <div id="credientials">
                     <p>Username: test-baby-steps<br>Password: password-test</p>
                 </div><!--credientials-->
-                <img class="baby" src="http://i.imgur.com/6xEEywf.jpg" alt="baby girl in pink">
                 <div class="content-sample shadow">
                     <form id="login" action="/login" method="post">
                         <div class="login-group">
-                            <label for="username">Username:</label>
+                            <div class="label-group">
+                                <label for="username">Username:</label>
+                            </div>
                             <input type="text" id="username" name="username">
                         </div>
                         <div class="login-group">
-                            <label for="userPassLogin">Password:</label>
+                            <div class="label-group">
+                                <label for="userPassLogin">Password:</label>
+                            </div>
                             <input type="password" id="userPassLogin" placeholder="ex.Password234" name="password">
                         </div>
                         <div class="login-group">

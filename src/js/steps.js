@@ -506,6 +506,7 @@ $(document).ready(function() {
     if (sessionStorage.length === 1) {
         currentUser = sessionStorage.getItem('user');
         $(".protected").toggle();
+        $(".accounts").toggle();
         getLastEntry();
     }
 
@@ -517,6 +518,7 @@ $(document).ready(function() {
         if (pagePath === "vitals" || "journal" && sessionStorage.length === 1) {
             currentUser = sessionStorage.getItem('user');
             $(".protected").toggle();
+            $(".accounts").toggle();
             getLastEntry();
         }
     });
